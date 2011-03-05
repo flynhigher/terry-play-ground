@@ -1,0 +1,5 @@
+DealNews|http://dealnews.com
+FatWallet|http://www.fatwallet.com/top-deals/|Doesn't support iframe
+SlickDeals|http://slickdeals.net
+XPBargains|http://xpbargains.com
+TechBargins|http://techbargains.com

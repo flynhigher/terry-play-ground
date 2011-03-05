@@ -1,0 +1,9 @@
+{% extends "site_base.html" %}
+{% block rtab_id %}id="product_tab"{% endblock %}
+{% block subnav %}
+	<form action="/product/search/" method="GET">
+	<input type="text" name="q" value="{{ query|escape }}" style="width:35%"></input>
+	<input type="submit" value="Search"></input>
+	<label for="q" style="font-size:80%">Enter amazon url, asin, upc, or keywords but don't mix them</label>
+	</form>
+{% endblock %}

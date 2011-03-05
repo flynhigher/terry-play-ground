@@ -1,0 +1,31 @@
+{% extends "product/product_base.html" %}
+{% block head_title %}{{pagename}}{% endblock %}
+
+{% block body %}
+{% if edit %}
+{% else %}
+<style>#body { width: 95% }</style>
+{% if message %}
+<p><b><font color='red'>{{message}}</font></b></p>
+{% endif %}
+<p><h1>{{pagename}}</h1></p>
+{% for site in sites %}
+<p>
+<b>{{forloop.counter}}. {{site.name}}</b> <a href="{{site.url}}" target="blank">open in new window</a><br />
+{% if site.message %}
+{{site.message}}<br />
+{% else %}
+<iframe src="{{site.url}}" height="400" width="100%">You need a Frames Capable browser to view this content.</iframe>
+{% endif %}
+</p>
+{% endfor %}
+<p>
+{% endif %}
+{% if user.is_authenticated %}
+<b>* Edit site list:</b><br />
+<form id="sitelist_form" method="POST">
+<textarea id="content" name="content" style="width: 600px; height: 200px">{{ file_content }}</textarea></p>
+<input type="submit" />
+</form>
+{% endif %}
+{% endblock %}

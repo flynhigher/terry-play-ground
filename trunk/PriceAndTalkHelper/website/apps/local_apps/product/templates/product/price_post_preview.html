@@ -1,0 +1,97 @@
+{% extends "product/product_base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load threadedcommentstags %}
+{% load extra_tagging_tags %}
+{% load product_tags %}
+
+{% block extra_head %}
+<!-- Load jQuery build -->
+<script type="text/javascript" src="{{ MEDIA_URL }}js/tiny_mce/jquery.tinymce.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+	$('#id_post').tinymce({
+		script_url : '{{ MEDIA_URL }}js/tiny_mce/tiny_mce.js',
+		// General options
+		theme : "advanced",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+		content_css : "/site_media/base.css",
+		hide : true
+	});
+	$('#id_post').hide();
+});
+function getContentById(id){
+  return document.getElementById(id).innerHTML;
+}
+ function toggleEdit(button) {
+	var id_subject_div = 'subject';
+	var id_subject = 'id_' + id_subject_div;
+	var id_subject_text = id_subject + '_text';
+	var id_post_div = 'post';
+	var id_post = 'id_' + id_post_div;
+	var id_post_text = id_post + '_text';
+
+	var subject_div = $("#" + id_subject_div);
+	var post_div = $("#" + id_post_div);
+	var subject = $("#" + id_subject);
+	var post = $("#" + id_post);
+	var post_text = $("#" + id_post_text); 
+
+	if(button.value == 'Edit') {
+		button.value = 'Preview';
+		subject_div.html("<input id='" + id_subject + "' name='subject' type='text' style='width:100%' value='" + subject.val() + "' />");
+		post_text.hide();
+		post.tinymce().show();
+	} else {
+		button.value = 'Edit';
+		post.tinymce().hide();
+		post.hide();
+		subject_div.html("<div id='" + id_subject_text + "_text'><b>" + subject.val() + "</b></div><input id='" + id_subject + "' name='subject' type='hidden' value='" + subject.val() + "' />");
+		post_text.html(post.html());
+		post_text.show();
+	}
+}
+</script>
+{% endblock %}
+
+{% block body %}
+<form class="post_price" id="post_price_form" name="post_price_form" action="/snapboard/boards/2/newpost/" method="POST">
+<div class="topic clearfix">
+	<p>
+	<div id="subject">
+	<b>
+	<div id="id_subject_text">{% price_post_subject price %}</div>
+	</b>
+	<input id='id_subject' name='subject' type='hidden' value='{% price_post_subject price %}' />	
+	</div>
+	<br />
+	{% if user.get_profile %}
+	{% if user.get_profile.nickname %}
+	{{ user.get_profile.nickname }}
+	{% endif %}
+	{% if not user.get_profile.nickname %}
+	{{ user.username }}
+	{% endif %}
+	{% endif %}
+	{% if not user.get_profile %}
+	{{ user.username }}
+	{% endif %}
+	({{ user.username }})
+	</p>
+	<div id="post">
+	<div id="id_post_text">
+	{% price_post_body is_amazon price %}
+	</div>
+	<textarea id='id_post' name='post' style='width: 100%;height: 400px' class='tinymce'>
+	{% price_post_body is_amazon price %}
+	</textarea>
+	</div>
+</div>
+<input type="submit" value="{% trans "Post" %}" />
+<input type="button" value="{% trans "Edit" %}" onclick="toggleEdit(this)" />
+</form>
+{% endblock %}

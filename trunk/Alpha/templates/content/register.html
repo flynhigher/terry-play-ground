@@ -1,0 +1,125 @@
+{% extends "site_base.html" %}
+{% block head_title %}Register{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" valign="top"><table width="944" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td width="940" height="115" valign="top"><table width="944" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td height="70"><strong><img src="{{ MEDIA_URL }}register2.jpg" width="500" height="50"></strong></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext"> 
+                   </td>
+                  </tr>
+                </table> 
+                <table width="944" height="300" border="0" cellpadding="0" cellspacing="0">
+                <form name="register_form" method="post">
+                  <tr> 
+                    <td valign="top"><table width="688" border="0" cellpadding="0" cellspacing="0">
+                        <tr> 
+                          <td width="300" class="formheader">* Required<br> <br> 
+                          </td>
+                          <td width="300" valign="top" class="formheader"></td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.username.errors }}Username*</td>
+                          <td width="300" class="formheader">{{ form.companyname.errors }}Company Name</td>
+                        </tr>
+                        <tr> 
+                          <td width="300"> {{ form.username }}</td>
+                          <td width="300"> {{ form.companyname }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.password1.errors }}Password*</td>
+                          <td width="300" class="formheader">{{ form.firstname.errors }}First Name*</td>
+                        </tr>
+                        <tr> 
+                          <td width="300"> {{ form.password1 }}</td>
+                          <td width="300"> {{ form.firstname }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.password2.errors }}Confirm Password*</td>
+                          <td width="300" class="formheader">{{ form.lastname.errors }}Last Name*</td>
+                        </tr>
+                        <tr> 
+                          <td width="300"> {{ form.password2 }}</td>
+                          <td width="300"> {{ form.lastname }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.email.errors }}Email*</td>
+                          <td width="300" class="formheader">{{ form.middlename.errors }}Middle Name</td>
+                        </tr>
+                        <tr> 
+                          <td width="300"> {{ form.email }} </td>
+                          <td width="300"> {{ form.middlename }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.phone.errors }}Phone*</td>
+                          <td width="300" class="formheader">{{ form.address1.errors }}Address 1*</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.phone }}</td>
+                          <td width="300" class="formheader">{{ form.address1 }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.mobilephone.errors }}Mobile Phone</td>
+                          <td width="300" class="formheader">{{ form.address2.errors }}Address 2</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.mobilephone }}</td>
+                          <td width="300" class="formheader">{{ form.address2 }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.fax.errors }}Fax </td>
+                          <td width="300" class="formheader">{{ form.city.errors }}City*</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.fax }}</td>
+                          <td width="300" class="formheader">{{ form.city }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader"> </td>
+                          <td width="300" class="formheader">{{ form.state.errors }}State/Province/Region*</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader"></td>
+                          <td width="300" class="formheader">{{ form.state }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" rowspan="2"><table width="250" border="0" cellspacing="0" cellpadding="0">
+                              <tr> 
+                                <td width="180" class="formheader">I agree to 
+                                  the <a href="/termsofservice.html">terms of service</a></td>
+                                <td width="70"> <input type="checkbox" name="checkbox" value="checkbox"> 
+                                </td>
+                              </tr>
+                            </table></td>
+                          <td width="300" class="formheader">{{ form.zipcode.errors }}Zip/Postal Code*</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.zipcode }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" rowspan="2"><table width="150" border="0" cellspacing="0" cellpadding="0">
+                              <tr> 
+                                <td width="30"><input type="image" src="{{ MEDIA_URL }}reg2.gif" width="150" height="28" border="0" /></td>
+                              </tr>
+                            </table></td>
+                          <td width="300" class="formheader">{{ form.country.errors }}Country</td>
+                        </tr>
+                        <tr> 
+                          <td width="300" class="formheader">{{ form.country }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="300">&nbsp; </td>
+                          <td width="300">&nbsp;</td>
+                        </tr>
+                      </table> </td>
+                  </tr>
+                  </form>
+                </table></td>
+            </tr>
+          </table> </td>
+      </tr>
+{% endblock %}

@@ -1,0 +1,2 @@
+{% load i18n %}
+{{ price.product.name|slice:":60" }}{% if product_name_len_greater_than_60 %}...{% endif %} ${{ price.price }}

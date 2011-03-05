@@ -1,0 +1,54 @@
+{% extends "product/product_base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load voting_tags %}
+{% load pagination_tags %}
+{% load extra_voting_tags %}
+{% load in_filter %}
+{% load product_tags %}
+
+{% block head_title %}{% blocktrans %}Product Search{% endblocktrans %}{% if query %} {% trans "Results" %}{% endif %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Products Feed" href="/feeds/products/" />
+{% endblock %}
+
+{% block body %}
+{% if query %}
+	<p>{% trans "Product Search Results for" %} <b>{{ query|escape }}</b></p>
+    {% if products %}
+        {% autopaginate products %}
+        {% paginate %}
+        <table class="bookmarks">
+            {% for product in products %}
+                <tr class="{% cycle odd,even %}">
+                    <td>
+                        <div class="url">{% if product.swatch_image_url %}<img src="{{ product.small_image_url }}" width="16" height="16" /> {% endif %}<a href="/product/product/{{ product.slug }}">{{ product.name }}</a> {% comment %}({{ product|weight }}){% endcomment %}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "No products yet." %}</p>
+    {% endif %}
+
+	<p>{% trans "Amazon Product Search Results for" %} <b>{{ query|escape }}</b></p>
+    {% if amazon_results %}
+        <table class="bookmarks">
+            {% for asin, name in amazon_results %}
+                <tr class="{% cycle odd,even %}">
+                    <td>
+                        <div class="url"><a href="/product/search/?q={{ asin }}{% if page %}&page={{ page }}{% endif %}">{{ name }}</a></div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "No Amazon products found." %}</p>
+    {% endif %}
+    {% if products %}
+        {% paginate %}
+    {% endif %}
+{% endif %}
+{% endblock %}

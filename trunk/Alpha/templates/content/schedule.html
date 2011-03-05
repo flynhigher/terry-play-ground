@@ -1,0 +1,85 @@
+{% extends "site_base.html" %}
+{% block extra_head %}
+<link rel='stylesheet' type='text/css' href='{{ MEDIA_URL }}fullcalendar.css' />
+<script type='text/javascript' src='{{ MEDIA_URL }}jquery.js'></script>
+<script type='text/javascript' src='{{ MEDIA_URL }}fullcalendar.js'></script>
+<script type='text/javascript' src='{{ MEDIA_URL }}gcal.js'></script>
+<script type='text/javascript'>
+
+	$(document).ready(function() {
+	
+		$('#calendar').fullCalendar({
+		
+			editable: false,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			allDayDefault: false,
+			eventSources: [
+				$.fullCalendar.gcalFeed('http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic'),
+//				$.fullCalendar.gcalFeed('http://www.google.com/calendar/feeds/terry.go%40gmail.com/private-b0a340200dfacedc94dc1c4e4c194abe/basic'),
+//				"{{ MEDIA_URL }}json-events.txt"
+				"/product/schedule/json/"
+			],
+			
+			eventDrop: function(event, delta) {
+				alert(event.title + ' was moved ' + delta + ' days\n' +
+					'(should probably update your database)');
+			},
+			
+			loading: function(bool) {
+				if (bool) $('#loading').show();
+				else $('#loading').hide();
+			}
+			
+		});
+		
+	});
+
+</script>
+<style type='text/css'>
+
+	body {
+		text-align: center;
+		font-size: 13px;
+		font-family: Arial,Helvetica,Verdana,sans-serif;
+		}
+		
+	#loading {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		}
+
+	#calendar {
+		width: 800px;
+		margin: 0 auto;
+		}
+
+</style>
+{% endblock %}
+{% block head_title %}Schedule{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" valign="top"> <div align="center"> 
+            <table width="944" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><img src="{{ MEDIA_URL }}trainig_sch.jpg" width="500" height="50"></td>
+              </tr>
+              <tr>
+                <td>
+                <p>&nbsp;</p>
+                <div align="center">
+	                <div id='loading' style='display:none'>loading...</div>
+									<div id='calendar'></div>
+	                <!-- img src="{{ MEDIA_URL }}calendar.jpg" width="781" height="581" -->
+                </div></td>
+              </tr>
+            </table>
+            <p align="left">&nbsp;</p>
+            <p>&nbsp;</p>
+          </div></td>
+      </tr>
+{% endblock %}

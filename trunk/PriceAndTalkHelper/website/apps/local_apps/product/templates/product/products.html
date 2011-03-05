@@ -1,0 +1,40 @@
+{% extends "product/product_base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load voting_tags %}
+{% load pagination_tags %}
+{% load extra_voting_tags %}
+{% load in_filter %}
+
+{% block head_title %}{% blocktrans %}List of Products{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Products Feed" href="/feeds/products/" />
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "All Products" %}</h1>
+    
+    {% if products %}
+        <p>{% trans "Here is the list of product whose Amazon sales rank is higher than 1000 in each category:" %}</p>
+        
+        {% autopaginate products %}
+        
+        <table class="bookmarks">
+            {% for product in products %}
+                <tr class="{% cycle odd,even %}">
+                    <td>
+                        <div class="url">{% if product.swatch_image_url %}<img src="{{ product.small_image_url }}" width="16" height="16" /> {% endif %}<a href="/product/product/{{ product.slug }}">{{ product.name }}</a></div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        {% paginate %}
+        
+    {% else %}
+        <p>{% trans "No products yet." %}</p>
+    {% endif %}
+    
+{% endblock %}

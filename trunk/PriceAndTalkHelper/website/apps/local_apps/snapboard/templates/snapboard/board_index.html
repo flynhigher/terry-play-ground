@@ -1,0 +1,33 @@
+{% extends "snapboard/base_forum.html" %}
+{% load i18n %}
+
+{% block snapboard_main %}
+    <div class="index_title">
+    <h2 style="font-size: 152%;">
+    {% trans "Topics Board List" %}
+    </h2>
+    </div>
+    {% if cat_list %}
+        {% for board in cat_list %}
+        <div class="thread">
+            <span style="font-size:medium;">
+                <b><a href="{% url snapboard_board_post_index board.id %}">{{ board.label }}</a></b>
+            </span>
+            <span style="color: #999; font-size: small; float: right;">
+                {% if board.moderators %}
+                {% trans "moderators" %}:  {{ board.moderators }}
+                {% endif %}
+            </span>
+            <br />
+            <span style="color: #999; padding-left:2em; font-size:small;">
+                {% blocktrans count board.post_count as cnt %}{{ cnt }} post{% plural %}{{ cnt }} posts{% endblocktrans %}
+            </span>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>{% trans "No boards are available." %}</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->

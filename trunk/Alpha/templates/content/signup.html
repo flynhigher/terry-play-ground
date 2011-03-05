@@ -1,0 +1,105 @@
+{% extends "site_base.html" %}
+{% block head_title %}Sign up{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" valign="top"><table width="944" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td width="940" height="115" valign="top"><table width="944" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td height="70"><strong><img src="{{ MEDIA_URL }}register2.jpg" width="500" height="50"></strong></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext"> 
+                   </td>
+                  </tr>
+                </table> 
+                <table width="944" height="300" border="0" cellpadding="0" cellspacing="0">
+                <form name="signup_form" method="post">
+                  <tr> 
+                    <td valign="top"><table width="688" border="0" cellpadding="0" cellspacing="0">
+                        <tr> 
+                          <td width="300" class="formheader">* Required<br> <br> 
+                          </td>
+                          <td width="300" valign="top" class="formheader"></td>
+                        </tr>
+                        <tr> 
+	                        <td width="300" class="formheader">{{ form.firstname.errors }}First Name*</td>
+	                        <td width="300" class="formheader">{{ form.address1.errors }}Address 1</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300"> {{ form.firstname }}</td>
+                          <td width="300"> {{ form.address1 }}</td>
+                        </tr>
+	                    <tr>
+		                    <td width="300" class="formheader">{{ form.middlename.errors }}Middle Name</td>
+		                    <td width="300" class="formheader">{{ form.address2.errors }}Address 2</td>
+	                    </tr>
+	                    <tr>
+		                    <td width="300"> {{ form.middlename }}</td>
+	                      <td width="300"> {{ form.address2 }}</td>
+	                    </tr>
+                        <tr>
+	                        <td width="300" class="formheader">{{ form.lastname.errors }}Last Name*</td>
+                          <td width="300" class="formheader">{{ form.city.errors }}City</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300"> {{ form.lastname }}</td>
+                          <td width="300"> {{ form.city }}</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300" class="formheader">{{ form.phone.errors }}Phone*</td>
+                          <td width="300" class="formheader">{{ form.state.errors }}State/Province/Region</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300">{{ form.phone }}</td>
+                          <td width="300"> {{ form.state }}</td>
+                        </tr>
+                        <tr>
+	                        <td width="300" class="formheader">{{ form.businessname.errors }}Business Name</td>
+                          <td width="300" class="formheader">{{ form.zipcode.errors }}Zip/Postal Code</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300"> {{ form.businessname }}</td>
+                          <td width="300"> {{ form.zipcode }}</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300" class="formheader">{{ form.businesstype.errors }}Business Type</td>
+	                        <td width="300" class="formheader">{{ form.country.errors }}Country</td>
+                        </tr>
+                        <tr> 
+	                        <td width="300"> {{ form.businesstype }} </td>
+                          <td width="300">{{ form.country }}</td>
+                        </tr>
+	                    <tr>
+		                    <td width="300" class="formheader">{{ form.position.errors }}Position</td>
+		                    <td width="300" class="formheader">{{ form.email.errors }}Email</td>
+	                    </tr>
+	                    <tr>
+		                    <td width="300">{{ form.position }}</td>
+	                      <td width="300">{{ form.email }}</td>
+	                    </tr>
+	                    <tr>
+		                    <td width="300" class="formheader">{{ form.numberofemployees.errors }}No. of Employees</td>
+		                    <td width="300" class="formheader">{{ form.comment.errors }}Comment</td>
+	                    </tr>
+	                    <tr>
+		                    <td width="300" valign="top">{{ form.numberofemployees }}</td>
+	                      <td width="300">{{ form.comment }}</td>
+	                    </tr>
+                          <td width="600" colspan="2"><table width="150" border="0" cellspacing="0" cellpadding="0">
+                              <tr> 
+                                <td width="30"><input type="image" src="{{ MEDIA_URL }}reg2.gif" width="150" height="28" border="0" /></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                        <tr>
+                          <td width="600" colspan="2">&nbsp; </td>
+                        </tr>
+                      </table> </td>
+                  </tr>
+                  </form>
+                </table></td>
+            </tr>
+          </table> </td>
+      </tr>
+{% endblock %}

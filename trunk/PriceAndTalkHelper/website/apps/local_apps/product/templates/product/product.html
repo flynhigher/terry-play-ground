@@ -1,0 +1,126 @@
+{% extends "product/product_base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load voting_tags %}
+{% load pagination_tags %}
+{% load extra_voting_tags %}
+{% load extra_tagging_tags %}
+{% load in_filter %}
+
+{% load product_tags %}
+
+{% block head_title %}{% trans "Product" %}: {{ product.name }}{% endblock %}
+
+{% block body %}
+
+    <div style="width: 550px;">
+
+        <h1>{{ product.name }}</h1>
+
+        <p>
+            <img src="{{ product.medium_image_url }}" align="right" />
+            <b>{% trans "UPC" %}</b>: <tt>{{ product.upc }}</tt><br />
+            <b>{% trans "Model" %}/{% trans "Part Number" %}</b>: {{ product.model }}/{{ product.part_number }}<br />
+            {% if product.manufacturer.slug %}
+            <b>{% trans "Manufacturer" %}</b>: <a href="{% url product.views.company product.manufacturer.slug %}">{{ product.manufacturer }}</a><br />
+            {% endif %}
+            <b>{% trans "Creator" %}</b>: <a href="{% url basic_profiles.views.profile product.creator.username %}">{{ product.creator }}</a><br />
+            <b>{% trans "Created" %}</b>: {{ product.created|date }}
+            {% if product.discontinued %}<b>Discontinued</b> on {{ product.discontinued|date }} {% endif %}
+            <br />
+            <b>{% trans "Amazon" %} {% trans "Sales Rank" %}, {% trans "Rating" %}</b>: {{ product.amazon_sales_rank }}, {{ product.amazon_review_rating }} ({{ product.amazon_total_reviews }} {% trans "reviews" %})<br />
+            <b>{% trans "Categories" %}</b>:
+            {% for category in product.categories.all %}
+               {% if not forloop.first %}
+               |
+               {% endif %}
+               <a href="{% url product.views.category category.slug %}" title="{{ category.name }}">{{ category.name }}</a>
+            {% endfor %}
+            <br />
+        </p>
+
+        <p>{{ product.description }}</p>
+
+        {% ifequal user product.creator %}
+            <p><a href="#" onclick="$('#product_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
+
+            <form id="product_form" method="POST" action="" style="display: none;">
+                <table>
+                    {{ product_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
+                </table>
+            </form>
+            
+{%comment%}            
+                <p><img src="/site_media/delete.png" /> <a href="#" onclick="$('#delete_product_form').toggle(); return false;">{% trans "Delete product" %}</a><p>
+                 <form class="delete_form" id="delete_product_form" action="{% url product_delete product.slug %}" method="POST" style="display: none;">
+                     <input type="submit" value="{% trans "Delete Product" %}" /> (all content will be removed)
+                </form>
+{%endcomment%}            
+            
+        {% endifequal %}
+
+{%comment%}            
+        {% if user.is_authenticated %}
+            <div>
+                <form method="POST" action="">
+                    {% if own_it %}
+                        <input type="hidden" name="action" value="not_own" />
+                        <input type="submit" value="{% trans 'Not own it anymore' %}"/>
+                    {% else %}
+                        <input type="hidden" name="action" value="own" />
+                        <input type="submit" value="{% trans "I own it" %}"/>
+                    {% endif %}
+                    {% if interested_in %}
+                        <input type="hidden" name="action" value="not_interested" />
+                        <input type="submit" value="{% trans 'Not interested anymore' %}"/>
+                    {% else %}
+                        <input type="hidden" name="action" value="interested" />
+                        <input type="submit" value="{% trans "I am interested" %}"/>
+                    {% endif %}
+                </form>
+            </div>
+        {% else %}
+            {% url acct_signup as signup_url %}
+            {% url acct_login as login_url %}
+            <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to mark this product as owner or interested item.{% endblocktrans %}</p>
+        {% endif %}
+{%endcomment%}            
+
+        <h2>{% trans "Retailer/Price List" %}{% if prices.count %} ({{ prices.count }}){% endif %}</h2>
+        <p><a href="/product/search/?q={{ product.upc }}">Update Now</a></p>
+
+{%comment%}            
+        {% if prices %}
+            {% for price in prices %}
+                {% show_product_price price %}
+            {% endfor %}
+            <p><a href="{% url product_prices product.slug %}">{% trans "more..." %}</a></p>
+        {% else %}
+            {% url product_prices product.slug as new_price_url %}
+            <p>{% blocktrans %}None yet. <a href="{{ new_price_url }}">Add one...</a>{% endblocktrans %}</p>
+        {% endif %}
+{%endcomment%}            
+        {% if prices %}
+            {% for price in prices %}
+                {% show_product_price price %}
+            {% endfor %}
+        {% else %}
+            <p>{% blocktrans %}None yet.{% endblocktrans %} <a href="{% url product_price_add product.slug %}">{% blocktrans %}Add one...{% endblocktrans %}</a></p>
+        {% endif %}
+
+{%comment%}
+        <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+{%endcomment%}
+    </div>
+
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        {% if product_form.errors %}
+            $('#product_form').show();
+        {% endif %}
+    </script>
+{% endblock %}
