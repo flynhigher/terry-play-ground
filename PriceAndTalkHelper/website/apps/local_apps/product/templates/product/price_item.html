@@ -1,0 +1,34 @@
+{% load i18n %}
+{% load gravatar %}
+{% load threadedcommentstags %}
+{% load extra_tagging_tags %}
+
+<div class="topic clearfix">
+{%comment%}
+    <div class="task-meta">
+        <div class="avatar">{% gravatar price.creator 40 %}</div>
+        <div class="details"><a href="{{ price.creator.get_profile.get_absolute_url }}">{{ price.creator }}</a></div>
+        <div class="created">{{ price.created|date }}</div>
+    </div>
+{%endcomment%}
+    <div class="bulk">
+        <b><a href="{{ price.cleaned_url }}">${{ price.price }} @ {{ price.retailer.name }}</a></b>
+        {% trans "created by" %}
+        <a href="{{ price.creator.get_profile.get_absolute_url }}">{{ price.creator }}</a>
+         {% trans "on" %}
+        {{ price.created|date }}
+		<a href="{% url price_post_preview price.id %}"><b>{% trans "Post this deal" %}</b></a><br />
+        <div class="body"><b>Description:</b>
+        {{ price.description }}</div>
+        {% get_comment_count for price as comment_count %}
+        {% if comment_count %}
+            <div class="comment_stats">
+                {{ comment_count }} comment{{ comment_count|pluralize }}
+                {% blocktrans with price.updated|date as price_updated %}
+                (most recent: {{ price_updated }})
+                {% endblocktrans %}
+            </div>
+        {% endif %}
+        <p>{% show_tags_for price %}</p>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+for filename in os.listdir(path):
+	doc = etree.parse(path + '\\' + filename)
+	for post in doc.xpath('//post'):
+		content = title = None
+		for e in post:
+			cleaned = nltk.clean_html(re.sub('<br\s*?/?>|</?p\s*?/?>', '. ', e.text.decode('base64')))
+			if e.tag == 'content':
+				content = cleaned
+			if e.tag == 'title':
+				title = cleaned
+			print e.tag + ':' + cleaned
+		print 'title-ie:'
+		print ie_preprocess(title)
+		print 'content-ie:'
+		print ie_preprocess(content)
+
+		
+category:FW
+title:Sears: Smartparts SP104C Digital frame 10.4 - $59.99 free pickup or s/h
+regdate:20091010225613
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:Rating: 0 Posted By: jidli2002 . Views: 4  Replies: 0 . .  . Sears: Smartparts SP104C Digital frame 10.4 - $59.99. At Sears for $59.99. + S/H or Free pickup. . http://www.sears.com/shc/s/p_10153_12605_00354913000P?keyword=Smartparts+SP104C&sLevel=0. . 10.4 inch with 640x480.. . It seems to be atleast $10+ than the next cheapest. Which is at Amazon.. . http://www.amazon.com/Smartparts-SP104C-10-4-Inch-Digital-Picture/dp/B0015C4Y0Y. . . Has fairly good reviews.. . Online Coupons. . . Source: http://feedproxy.google.com/~r/FatwalletHotDeals/~3/dgV0oIl_L08/958351.
+title-ie:
+[[('Sears', 'NNS'), (':', ':'), ('Smartparts', 'NNS'), ('SP104C', 'NNP'), ('Digital', 'NNP'), ('frame', 'VBD'), ('10.4', 'CD'), ('-', ':'), ('$', '$'), ('59.99', 'CD'), ('free', 'CD'), ('pickup', 'NN'), ('or', 'CC'), ('s/h', 'JJ')]]
+content-ie:
+[[('Rating', 'VBG'), (':', ':'), ('0', '-NONE-'), ('Posted', 'NNP'), ('By', 'NNP'), (':', ':'), ('jidli2002', 'NNP'), ('.', '.')], [('Views', 'NNS'), (':', ':'), ('4', 'CD'), ('Replies', 'NNS'), (':', ':'), ('0', '-NONE-'), ('.', '.')], [('.', '.')], [('.', '.')], [('Sears', 'NNS'), (':', ':'), ('Smartparts', 'NNS'), ('SP104C', 'NNP'), ('Digital', 'NNP'), ('frame', 'VBD'), ('10.4', 'CD'), ('-', ':'), ('$', '$'), ('59.99', 'CD'), ('.', '.')], [('At', 'IN'), ('Sears', 'NNPS'), ('for', 'IN'), ('$', '$'), ('59.99', 'CD'), ('.', '.')], [('+', 'NN'), ('S/H', 'JJ'), ('or', 'CC'), ('Free', 'NNP'), ('pickup', 'NN'), ('.', '.')], [('.', '.')], [('http', 'NN'), (':', ':'), ('//www.sears.com/shc/s/p_10153_12605_00354913000P', 'JJ'), ('?', '.'), ('keyword', 'NN'), ('=', ':'), ('Smartparts', 'NNS'), ('+', 'VBP'), ('SP104C&sLevel', 'JJ'), ('=', 'NN'), ('0', '-NONE-'), ('.', '.')], [('.', '.')], [('10.4', 'CD'), ('inch', 'NN'), ('with', 'IN'), ('640x480..', 'CD'), ('.', '.')], [('It', 'PRP'), ('seems', 'VBZ'), ('to', 'TO'), ('be', 'VB'), ('atleast', 'VBN'), ('$', '$'), ('10', 'CD'), ('+', 'CD'), ('than', 'IN'), ('the', 'DT'), ('next', 'JJ'), ('cheapest', 'NN'), ('.', '.')], [('Which', 'WDT'), ('is', 'VBZ'), ('at', 'IN'), ('Amazon..', 'NNP'), ('.', '.')], [('http', 'NN'), (':', ':'), ('//www.amazon.com/Smartparts-SP104C-10-4-Inch-Digital-Picture/dp/B0015C4Y0Y', 'JJ'), ('.', '.')], [('.', '.')], [('.', '.')], [('Has', 'VBZ'), ('fairly', 'RB'), ('good', 'JJ'), ('reviews..', 'NNP'), ('.', '.')], [('Online', 'NNP'), ('Coupons', 'NNP'), ('.', '.')], [('.', '.')], [('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//feedproxy.google.com/', 'JJ'), ('~', 'NN'), ('r/FatwalletHotDeals/', 'NN'), ('~', ':'), ('3/dgV0oIl_L08/958351', 'CD'), ('.', '.')]]
+category:FW
+title:WITTNAUER  MENS DRESS WATCH $59.99 @ shnoop
+regdate:20091010224849
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:Rating: 0 Posted By: mathsz . Views: 38  Replies: 0 . .  . Link to this watch at shnoop. . compare with  $138.00 at Ashford.com and Amazon.com. . Features:. .     * Brand - Wittnauer (by Bulova).     * Style # 10B013.     * Dial window material - Mineral.     * Crystal type - Scratch resistant sapphire crystal.     * Dial Color - Black.     * Case diameter - 26mm.     * Band Material - Stainless Steel.     * Calendar - Date.     * Movement - Swiss Quartz.     * Water resistant depth - 30 M.     * Sleek lines and intricate geometry.     * Manufacturer's Warranty.     * Includes original retail box.     * Lowest price on the web!!!. . Online Coupons. . . Source: http://feedproxy.google.com/~r/FatwalletHotDeals/~3/EFJFawNSMEs/958347.
+title-ie:
+[[('WITTNAUER', 'NN'), ('MENS', 'NNS'), ('DRESS', 'NNP'), ('WATCH', 'NNP'), ('$', '$'), ('59.99', 'CD'), ('@', 'CD'), ('shnoop', 'NN')]]
+content-ie:
+[[('Rating', 'VBG'), (':', ':'), ('0', '-NONE-'), ('Posted', 'NNP'), ('By', 'NNP'), (':', ':'), ('mathsz', 'NN'), ('.', '.')], [('Views', 'NNS'), (':', ':'), ('38', 'CD'), ('Replies', 'NNS'), (':', ':'), ('0', '-NONE-'), ('.', '.')], [('.', '.')], [('.', '.')], [('Link', 'NNP'), ('to', 'TO'), ('this', 'DT'), ('watch', 'NN'), ('at', 'IN'), ('shnoop', 'NN'), ('.', '.')], [('.', '.')], [('compare', 'NN'), ('with', 'IN'), ('$', '$'), ('138.00', 'CD'), ('at', 'IN'), ('Ashford.com', 'JJ'), ('and', 'CC'), ('Amazon.com', 'JJ'), ('.', '.')], [('.', '.')], [('Features', 'NNS'), (':', ':'), ('.', '.')], [('.', '.')], [('*', '-NONE-'), ('Brand', 'NNP'), ('-', ':'), ('Wittnauer', 'NNP'), ('(', ':'), ('by', 'IN'), ('Bulova', 'NNP'), (')', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Style', 'VB'), ('#', '#'), ('10B013', 'CD'), ('.', '.')], [('*', '-NONE-'), ('Dial', 'JJ'), ('window', 'NN'), ('material', 'NN'), ('-', ':'), ('Mineral', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Crystal', 'JJ'), ('type', 'NN'), ('-', ':'), ('Scratch', 'NNP'), ('resistant', 'NN'), ('sapphire', 'NN'), ('crystal', 'NN'), ('.', '.')], [('*', '-NONE-'), ('Dial', 'JJ'), ('Color', 'NNP'), ('-', ':'), ('Black', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Case', 'VB'), ('diameter', 'NN'), ('-', ':'), ('26mm', 'CD'), ('.', '.')], [('*', '-NONE-'), ('Band', 'NNP'), ('Material', 'NNP'), ('-', ':'), ('Stainless', 'NNP'), ('Steel', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Calendar', 'VB'), ('-', ':'), ('Date', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Movement', 'VBN'), ('-', ':'), ('Swiss', 'JJ'), ('Quartz', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Water', 'VB'), ('resistant', 'JJ'), ('depth', 'NN'), ('-', ':'), ('30', 'CD'), ('M.', 'NNP'), ('*', '-NONE-'), ('Sleek', 'VB'), ('lines', 'NNS'), ('and', 'CC'), ('intricate', 'JJ'), ('geometry', 'NN'), ('.', '.')], [('*', '-NONE-'), ('Manufacturer', 'NNP'), ("'s", 'POS'), ('Warranty', 'NNP'), ('.', '.')], [('*', '-NONE-'), ('Includes', 'VBZ'), ('original', 'JJ'), ('retail', 'NN'), ('box', 'NN'), ('.', '.')], [('*', '-NONE-'), ('Lowest', 'VBP'), ('price', 'NN'), ('on', 'IN'), ('the', 'DT'), ('web', 'NN'), ('!', '.'), ('!', '.'), ('!', '.'), ('.', '.')], [('.', '.')], [('Online', 'NNP'), ('Coupons', 'NNP'), ('.', '.')], [('.', '.')], [('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//feedproxy.google.com/', 'JJ'), ('~', 'NN'), ('r/FatwalletHotDeals/', 'NN'), ('~', ':'), ('3/EFJFawNSMEs/958347', 'CD'), ('.', '.')]]
+category:DT
+title:Dinoland Kids Complete Bedding Set - Sheets Included - Twin Size $17.99 (was $89.95), Full Size $19.99 (was $99.95)
+regdate:20091010224318
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:. Source: http://www.dealtaker.com/index.php?showtopic=267189.
+title-ie:
+[[('Dinoland', 'NNP'), ('Kids', 'NNP'), ('Complete', 'NNP'), ('Bedding', 'NNP'), ('Set', 'NNP'), ('-', ':'), ('Sheets', 'NNPS'), ('Included', 'NNP'), ('-', ':'), ('Twin', 'NNP'), ('Size', 'NNP'), ('$', '$'), ('17.99', 'CD'), ('(', 'CD'), ('was', 'VBD'), ('$', '$'), ('89.95', 'CD'), (')', 'CD'), (',', ','), ('Full', 'NNP'), ('Size', 'NNP'), ('$', '$'), ('19.99', 'CD'), ('(', 'CD'), ('was', 'VBD'), ('$', '$'), ('99.95', 'CD'), (')', 'CD')]]
+content-ie:
+[[('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//www.dealtaker.com/index.php', 'JJ'), ('?', '.'), ('showtopic', 'JJ'), ('=', 'NN'), ('267189', 'CD'), ('.', '.')]]
+category:FW
+title:Coolaroo Medium Collapsible Pet Courier 32" x 22" $30 + s/h  @ Big Lots - Online only
+regdate:20091010224305
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:Rating: 0 Posted By: dirtyemu . Views: 49  Replies: 0 . .  . Haven't tried one of these so can't vouch for the quality!  I paid a lot more for a smaller Sof-Krate a while ago.. Link. . There is also a small version(30" x 20") for $25.. Ground shipping was estimated at $7.10 for me.. . 32" x 22" Coolaroo Medium Pet Courier. # Breathable Coolaroo fabric helps control temperature to keep your pet cool. # Coolaroo fabric is durable and will withstand lots of use. .     * 90% UV protection.     * Resists fading.     * Water resistant.     * Mold and mildew resistant.     * Flea and insect resistant.     * 3 year limited warranty. . # Water resistant flooring. # Convenient access with zippered door at each end. # Durable powder-coated steel frame. # 32"L x 22"W x 26"H for medium size pets. # Includes carrying case for easy storage and transport. # Ground stakes included for outdoor positioning. . Online Coupons. . . Source: http://feedproxy.google.com/~r/FatwalletHotDeals/~3/EoZDxUM2mgs/958345.
+title-ie:
+[[('Coolaroo', 'NNP'), ('Medium', 'NNP'), ('Collapsible', 'NNP'), ('Pet', 'NNP'), ('Courier', 'NNP'), ('32', 'CD'), ('"', 'CD'), ('x', 'NN'), ('22', 'CD'), ('"', 'CD'), ('$', '$'), ('30', 'CD'), ('+', 'CD'), ('s/h', 'JJ'), ('@', 'NN'), ('Big', 'NNP'), ('Lots', 'NNP'), ('-', ':'), ('Online', 'NNP'), ('only', 'RB')]]
+content-ie:
+[[('Rating', 'VBG'), (':', ':'), ('0', '-NONE-'), ('Posted', 'NNP'), ('By', 'NNP'), (':', ':'), ('dirtyemu', 'NN'), ('.', '.')], [('Views', 'NNS'), (':', ':'), ('49', 'CD'), ('Replies', 'NNS'), (':', ':'), ('0', '-NONE-'), ('.', '.')], [('.', '.')], [('.', '.')], [('Have', 'NNP'), ("n't", 'RB'), ('tried', 'VBD'), ('one', 'CD'), ('of', 'IN'), ('these', 'DT'), ('so', 'RB'), ('ca', 'MD'), ("n't", 'RB'), ('vouch', 'VB'), ('for', 'IN'), ('the', 'DT'), ('quality', 'NN'), ('!', '.')], [('I', 'PRP'), ('paid', 'VBD'), ('a', 'DT'), ('lot', 'NN'), ('more', 'RBR'), ('for', 'IN'), ('a', 'DT'), ('smaller', 'JJR'), ('Sof-Krate', 'JJ'), ('a', 'DT'), ('while', 'NN'), ('ago..', 'NNP'), ('Link', 'NNP'), ('.', '.')], [('.', '.')], [('There', 'EX'), ('is', 'VBZ'), ('also', 'RB'), ('a', 'DT'), ('small', 'JJ'), ('version', 'NN'), ('(', ':'), ('30', 'CD'), ('"', 'CD'), ('x', 'NN'), ('20', 'CD'), ('"', 'CD'), (')', 'CD'), ('for', 'IN'), ('$', '$'), ('25.', 'CD'), ('.', '.')], [('Ground', 'NNP'), ('shipping', 'NN'), ('was', 'VBD'), ('estimated', 'VBN'), ('at', 'IN'), ('$', '$'), ('7.10', 'CD'), ('for', 'IN'), ('me..', 'NNP'), ('.', '.')], [('32', 'CD'), ('"', '``'), ('x', 'NN'), ('22', 'CD'), ('"', 'CD'), ('Coolaroo', 'NNP'), ('Medium', 'NNP'), ('Pet', 'NNP'), ('Courier', 'NNP'), ('.', '.')], [('#', '#'), ('Breathable', 'JJ'), ('Coolaroo', 'NNP'), ('fabric', 'JJ'), ('helps', 'NNS'), ('control', 'NN'), ('temperature', 'NN'), ('to', 'TO'), ('keep', 'VB'), ('your', 'PRP$'), ('pet', 'NN'), ('cool', 'NN'), ('.', '.')], [('#', '#'), ('Coolaroo', 'NNP'), ('fabric', 'JJ'), ('is', 'VBZ'), ('durable', 'JJ'), ('and', 'CC'), ('will', 'MD'), ('withstand', 'VB'), ('lots', 'NNS'), ('of', 'IN'), ('use', 'NN'), ('.', '.')], [('.', '.')], [('*', '-NONE-'), ('90', 'CD'), ('%', 'NN'), ('UV', 'NNP'), ('protection', 'NN'), ('.', '.')], [('*', '-NONE-'), ('Resists', 'VBZ'), ('fading', 'VBG'), ('.', '.')], [('*', '-NONE-'), ('Water', 'VB'), ('resistant', 'JJ'), ('.', '.')], [('*', '-NONE-'), ('Mold', 'VBN'), ('and', 'CC'), ('mildew', 'VB'), ('resistant', 'JJ'), ('.', '.')], [('*', '-NONE-'), ('Flea', 'NNP'), ('and', 'CC'), ('insect', 'VB'), ('resistant', 'JJ'), ('.', '.')], [('*', '-NONE-'), ('3', 'CD'), ('year', 'NN'), ('limited', 'VBN'), ('warranty', 'NN'), ('.', '.')], [('.', '.')], [('#', '#'), ('Water', 'NNP'), ('resistant', 'NN'), ('flooring', 'VBG'), ('.', '.')], [('#', '#'), ('Convenient', 'NNP'), ('access', 'NN'), ('with', 'IN'), ('zippered', 'JJ'), ('door', 'NN'), ('at', 'IN'), ('each', 'DT'), ('end', 'NN'), ('.', '.')], [('#', '#'), ('Durable', 'JJ'), ('powder-coated', 'JJ'), ('steel', 'NN'), ('frame', 'NN'), ('.', '.')], [('#', '#'), ('32', 'CD'), ('"', 'CD'), ('L', 'NNP'), ('x', 'NN'), ('22', 'CD'), ('"', 'CD'), ('W', 'NNP'), ('x', 'NN'), ('26', 'CD'), ('"', 'CD'), ('H', 'NNP'), ('for', 'IN'), ('medium', 'NN'), ('size', 'NN'), ('pets', 'NNS'), ('.', '.')], [('#', '#'), ('Includes', 'NNP'), ('carrying', 'NN'), ('case', 'NN'), ('for', 'IN'), ('easy', 'JJ'), ('storage', 'NN'), ('and', 'CC'), ('transport', 'NN'), ('.', '.')], [('#', '#'), ('Ground', 'NNP'), ('stakes', 'VBZ'), ('included', 'VBN'), ('for', 'IN'), ('outdoor', 'NN'), ('positioning', 'VBG'), ('.', '.')], [('.', '.')], [('Online', 'NNP'), ('Coupons', 'NNP'), ('.', '.')], [('.', '.')], [('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//feedproxy.google.com/', 'JJ'), ('~', 'NN'), ('r/FatwalletHotDeals/', 'NN'), ('~', ':'), ('3/EoZDxUM2mgs/958345', 'CD'), ('.', '.')]]
+category:FW
+title:Children's Shoes Sale At newchildrensshoes.com
+regdate:20091010224145
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:Rating: 0 Posted By: kimmyd . Views: 2  Replies: 0 . .  . Great Deals on Children's Shoes Sales Deal. . Shoes Styles 30-70% OFF. . Online Coupons. . . Source: http://feedproxy.google.com/~r/FatwalletHotDeals/~3/WOf3oHehDhA/958344.
+title-ie:
+[[('Children', 'NNP'), ("'s", 'POS'), ('Shoes', 'NNP'), ('Sale', 'NNP'), ('At', 'NNP'), ('newchildrensshoes.com', 'NNP')]]
+content-ie:
+[[('Rating', 'VBG'), (':', ':'), ('0', '-NONE-'), ('Posted', 'NNP'), ('By', 'NNP'), (':', ':'), ('kimmyd', 'JJ'), ('.', '.')], [('Views', 'NNS'), (':', ':'), ('2', 'CD'), ('Replies', 'NNS'), (':', ':'), ('0', '-NONE-'), ('.', '.')], [('.', '.')], [('.', '.')], [('Great', 'NNP'), ('Deals', 'NNPS'), ('on', 'IN'), ('Children', 'NNP'), ("'s", 'POS'), ('Shoes', 'NNP'), ('Sales', 'NNP'), ('Deal', 'NNP'), ('.', '.')], [('.', '.')], [('Shoes', 'VBZ'), ('Styles', 'NNP'), ('30-70', 'CD'), ('%', 'NN'), ('OFF', 'NNP'), ('.', '.')], [('.', '.')], [('Online', 'NNP'), ('Coupons', 'NNP'), ('.', '.')], [('.', '.')], [('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//feedproxy.google.com/', 'JJ'), ('~', 'NN'), ('r/FatwalletHotDeals/', 'NN'), ('~', ':'), ('3/WOf3oHehDhA/958344', 'CD'), ('.', '.')]]
+category:FW
+title:Gazillion Brand Toys at Amazon.com
+regdate:20091010223814
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:Rating: 1 Posted By: dogmomof5 . Views: 40  Replies: 0 . .  . Great Christmas Gifts or Birthday Gifts or just a Gift in general.. . Gazillion Bubble School Bus. . List Price $10.99. Amazon Price $3.76. Free shipping with Prime. . Gazillion Nemo Gazzler. . List Price $9.99. Amazon Price $3.42. Free shipping with Prime. . Gazillion Tow Mater Gazzle. . List Price $9.99. Amazon Price $3.42. Free shipping with Prime. . Gazillion Bruce Gazzler. . List Price $9.99. Amazon Price $3.42. Free shipping with Prime. . Online Coupons. . . Source: http://feedproxy.google.com/~r/FatwalletHotDeals/~3/QlH6LfeHcDo/958342.
+title-ie:
+[[('Gazillion', 'NN'), ('Brand', 'NNP'), ('Toys', 'NNP'), ('at', 'IN'), ('Amazon.com', 'NNP')]]
+content-ie:
+[[('Rating', 'VBG'), (':', ':'), ('1', 'LS'), ('Posted', 'NNP'), ('By', 'NNP'), (':', ':'), ('dogmomof5', 'NNP'), ('.', '.')], [('Views', 'NNS'), (':', ':'), ('40', 'CD'), ('Replies', 'NNS'), (':', ':'), ('0', '-NONE-'), ('.', '.')], [('.', '.')], [('.', '.')], [('Great', 'NNP'), ('Christmas', 'NNP'), ('Gifts', 'NNP'), ('or', 'CC'), ('Birthday', 'NNP'), ('Gifts', 'NNPS'), ('or', 'CC'), ('just', 'RB'), ('a', 'DT'), ('Gift', 'NNP'), ('in', 'IN'), ('general..', 'NNP'), ('.', '.')], [('Gazillion', 'NN'), ('Bubble', 'NNP'), ('School', 'NNP'), ('Bus', 'NNP'), ('.', '.')], [('.', '.')], [('List', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('10.99', 'CD'), ('.', '.')], [('Amazon', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('3.76', 'CD'), ('.', '.')], [('Free', 'NNP'), ('shipping', 'NN'), ('with', 'IN'), ('Prime', 'NNP'), ('.', '.')], [('.', '.')], [('Gazillion', 'NN'), ('Nemo', 'NNP'), ('Gazzler', 'NNP'), ('.', '.')], [('.', '.')], [('List', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('9.99', 'CD'), ('.', '.')], [('Amazon', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('3.42', 'CD'), ('.', '.')], [('Free', 'NNP'), ('shipping', 'NN'), ('with', 'IN'), ('Prime', 'NNP'), ('.', '.')], [('.', '.')], [('Gazillion', 'NN'), ('Tow', 'NNP'), ('Mater', 'NNP'), ('Gazzle', 'NNP'), ('.', '.')], [('.', '.')], [('List', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('9.99', 'CD'), ('.', '.')], [('Amazon', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('3.42', 'CD'), ('.', '.')], [('Free', 'NNP'), ('shipping', 'NN'), ('with', 'IN'), ('Prime', 'NNP'), ('.', '.')], [('.', '.')], [('Gazillion', 'NN'), ('Bruce', 'NNP'), ('Gazzler', 'NNP'), ('.', '.')], [('.', '.')], [('List', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('9.99', 'CD'), ('.', '.')], [('Amazon', 'NNP'), ('Price', 'NNP'), ('$', '$'), ('3.42', 'CD'), ('.', '.')], [('Free', 'NNP'), ('shipping', 'NN'), ('with', 'IN'), ('Prime', 'NNP'), ('.', '.')], [('.', '.')], [('Online', 'NNP'), ('Coupons', 'NNP'), ('.', '.')], [('.', '.')], [('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//feedproxy.google.com/', 'JJ'), ('~', 'NN'), ('r/FatwalletHotDeals/', 'NN'), ('~', ':'), ('3/QlH6LfeHcDo/958342', 'CD'), ('.', '.')]]
+regdate:20091010233011
+user_id:priceandtalk
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+category:DT
+title:Christmas Castle and Train Rotating Figurine $31.24 (was $124.99), Tall Snowman House Figurine $37.49 (was $149.99)
+regdate:20091010232626
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:. Source: http://www.dealtaker.com/index.php?showtopic=267191.
+title-ie:
+[[('Christmas', 'NNP'), ('Castle', 'NNP'), ('and', 'CC'), ('Train', 'NNP'), ('Rotating', 'NNP'), ('Figurine', 'NNP'), ('$', '$'), ('31.24', 'CD'), ('(', 'CD'), ('was', 'VBD'), ('$', '$'), ('124.99', 'CD'), (')', 'CD'), (',', ','), ('Tall', 'NNP'), ('Snowman', 'NNP'), ('House', 'NNP'), ('Figurine', 'NNP'), ('$', '$'), ('37.49', 'CD'), ('(', 'CD'), ('was', 'VBD'), ('$', '$'), ('149.99', 'CD'), (')', 'CD')]]
+content-ie:
+[[('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//www.dealtaker.com/index.php', 'JJ'), ('?', '.'), ('showtopic', 'JJ'), ('=', 'NN'), ('267191', 'CD'), ('.', '.')]]
+category:DT
+title:Sand Finish Exterior Wall Fixture $6.29 (was $62.99), Dr. Anyes Pet Wellness Kit $1.49 (was $64.85)
+regdate:20091010230620
+user_id:priceandtalk
+nick_name:PriceAndTalk
+content:. Source: http://www.dealtaker.com/index.php?showtopic=267190.
+title-ie:
+[[('Sand', 'NNP'), ('Finish', 'NNP'), ('Exterior', 'NNP'), ('Wall', 'NNP'), ('Fixture', 'NNP'), ('$', '$'), ('6.29', 'CD'), ('(', 'CD'), ('was', 'VBD'), ('$', '$'), ('62.99', 'CD'), (')', 'CD'), (',', ','), ('Dr.', 'NNP'), ('Anyes', 'NNP'), ('Pet', 'NNP'), ('Wellness', 'NNP'), ('Kit', 'NNP'), ('$', '$'), ('1.49', 'CD'), ('(', 'CD'), ('was', 'VBD'), ('$', '$'), ('64.85', 'CD'), (')', 'CD')]]
+content-ie:
+[[('.', '.')], [('Source', 'NN'), (':', ':'), ('http', 'NN'), (':', ':'), ('//www.dealtaker.com/index.php', 'JJ'), ('?', '.'), ('showtopic', 'JJ'), ('=', 'NN'), ('267190', 'CD'), ('.', '.')]]
+regdate:20091010233720
+user_id:priceandtalk
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+regdate:20091010234317
+user_id:priceandtalk
+nick_name:PriceAndTalk
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+regdate:20091010235020
+user_id:priceandtalk
+nick_name:PriceAndTalk
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+regdate:20091010235146
+user_id:flynhigh
+nick_name:PriceAndTalk
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+regdate:20091010235304
+user_id:flynhigh
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+regdate:20091010235426
+user_id:flynhigh
+nick_name:flynhigh
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]
+regdate:20091010235732
+user_id:flynhigh
+nick_name:flynhigh
+title:Delonghi TRD0715T Safe Heat Oil-Filled Radiator $77.58 @ Amazon.com
+content:Delonghi TRD0715T Safe Heat Oil-Filled Radiator Amazon.com $77.58. 
+title-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('@', 'CD'), ('Amazon.com', 'JJ')]]
+content-ie:
+[[('Delonghi', 'NNP'), ('TRD0715T', 'NNP'), ('Safe', 'NNP'), ('Heat', 'NNP'), ('Oil-Filled', 'NNP'), ('Radiator', 'NNP'), ('Amazon.com', 'NNP'), ('$', '$'), ('77.58', 'CD'), ('.', '.')]]

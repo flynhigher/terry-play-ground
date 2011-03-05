@@ -1,0 +1,59 @@
+{% load i18n %}
+<p>
+{% if is_amazon %}
+    {% ifnotequal price.retailer.name "Amazon.com" %}Amazon MarketPlace - {% endifnotequal %}{{ price.retailer.name }}에서 <a href="{{ price.cleaned_url }}&tag=pric048-20">{{ price.product.name }}를 ${{ price.price }}에 판매</a>하고 있습니다.<br />
+    </p>
+    <p>
+    <a target="_blank" href="{{ price.cleaned_url }}&tag=pric048-20"><img src="{{ price.product.large_image_url }}" border="0" /></a>
+    </p>
+    <p>
+    {% ifnotequal price.list_price price.price %}
+        {% trans "정상 가격:" %} ${{ price.list_price }}<br />
+    {% endifnotequal %}
+    {% trans "세일 가격:" %} ${{ price.price }}<br /><br />
+    {% ifnotequal price.retailer.name "Amazon.com" %}{% trans "판매사:" %} Amazon MarketPlace - {{ price.retailer.name }}<br />{% endifnotequal %}
+    {% trans "제조사:" %} {{ price.product.manufacturer.name }}<br />
+    {% trans "아마존 판매 순위:" %} # {{ price.product.amazon_sales_rank }}<br />
+
+    {% for c in price.product.categories.all %}
+    <a target="_blank" href="http://www.amazon.com/gp/bestsellers/electronics/{{ c.amazon_id }}">{{c.name}}</a><br />
+    {% endfor %}
+    {% ifnotequal price_desc_len 0 %}
+    {{ price.description }}
+    {% endifnotequal %}
+    </p>
+    <p>
+    <div class="body"><a target="_blank" href="{{ review_url }}&tag=pric048-20">아마존 사용자 리뷰: {{ price.product.amazon_review_rating }} ({{ price.product.amazon_total_reviews }} {% trans "reviews" %})</a><br />{{ price.product.description }}</div>
+    </p>
+    <p>
+    <center><a target="_blank" href="{{ price.cleaned_url }}&tag=pric048-20">쇼핑 하러 가기</a></center>
+    </p>
+{% else %}
+    {{ price.retailer.name }}에서 <a href="{{ price.cleaned_url }}">{{ price.product.name }}를 ${{ price.price }}에 판매</a>하고 있습니다.<br />
+    </p>
+    <p>
+    <a target="_blank" href="{{ price.cleaned_url }}"><img src="{{ price.product.large_image_url }}" border="0" /></a>
+    </p>
+    <p>
+    {% ifnotequal price.list_price price.price %}
+        {% trans "정상 가격:" %} ${{ price.list_price }}<br />
+    {% endifnotequal %}
+    {% trans "세일 가격:" %} ${{ price.price }}<br /><br />
+    {% trans "판매사:" %} {{ price.retailer.name }}<br />
+    {% trans "제조사:" %} {{ price.product.manufacturer.name }}<br />
+    {% trans "판매 순위:" %} # {{ price.product.amazon_sales_rank }}<br />
+
+    {% for c in price.product.categories.all %}
+        {{c.name}}<br />
+    {% endfor %}
+    {% ifnotequal price_desc_len 0 %}
+    {{ price.description }}
+    {% endifnotequal %}
+    </p>
+    <p>
+    <div class="body"><a target="_blank" href="{{ review_url }}>사용자 리뷰: {{ price.product.amazon_review_rating }} ({{ price.product.amazon_total_reviews }} {% trans "reviews" %})</a><br />{{ price.product.description }}</div>
+    </p>
+    <p>
+    <center><a target="_blank" href="{{ price.cleaned_url }}">쇼핑 하러 가기</a></center>
+    </p>
+{% endif %}

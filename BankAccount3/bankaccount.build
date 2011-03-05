@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+	This is to build BankAccount solution (bankaccount.build).
+-->
+<project name="BankAccount" default="cleanbuild">
+  <property name="nant.settings.currentframework" value="net-2.0" />
+  <echo message="Using '${nant.settings.currentframework}' framework on '${platform::get-name()}' platform." />
+  <!-- ================= Solution related ================= -->
+  <property name="solution.name" value="${project::get-name()}" />
+  <property name="solution.basepath" value="${project::get-base-directory()}" />
+  <property name="solution.filename" value="${solution.name}.sln" />
+  <property name="solution.fullpath" value="${solution.basepath}\${solution.filename}" />
+	<!-- ================= SourceSafe related ================= -->
+	<property name="sourcesafe.dbfolder" value="F:\SourceCode" />
+	<property name="sourcesafe.dbpath" value="${sourcesafe.dbfolder}\srcsafe.ini" />
+	<property name="sourcesafe.solution.basepath" value="$/${solution.name}" />
+  <!-- ================= project names ================= -->
+	<property name="project.names" value="Bank,		InterestController" readonly="true" />
+  
+	<!-- ================= targets ================= -->
+	<target name="checkusernameandpassword" description="Check if SourceSafe username and password exist">
+    <fail message="You have to provide SourceSafe username to 'username' property" unless="${property::exists('username')}" />
+    <fail message="You have to provide SourceSafe password to 'password' property" unless="${property::exists('password')}" />
+  </target>
+  
+	<target name="getlatest" depends="checkusernameandpassword" description="Get latest sourcecode">
+    <echo message="Getting latest solution" />
+    <vssget username="${username}" password="${password}" localpath="${solution.basepath}" recursive="true" replace="true" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.basepath}" />
+  </target>
+  
+	<target name="init" description="Initializes build properties">
+    <echo message="Initializing..." />
+		<!--In order to get the sourcecode from sourcesafe uncomment this /-->
+		<!--call target="getlatest" /-->
+  </target>
+  
+	<target name="clean" description="Deletes current build configuration">
+    <echo message="Deleting output folders" />
+    <foreach item="String" in="${project.names}" delim="," property="project.dir">
+			<property name="project.dir" value="${string::trim(project.dir)}" />
+			<echo message="Cleaning project, ${project.dir}" />
+      <property name="project.bin.dir" value="${project.dir}\bin" />
+      <property name="project.obj.dir" value="${project.dir}\obj" />
+      <property name="project.config.dir" value="${project.dir}\${solution.config}" />
+      <delete dir="${project.bin.dir}" if="${directory::exists(project.bin.dir)}" />
+      <delete dir="${project.obj.dir}" if="${directory::exists(project.obj.dir)}" />
+      <delete dir="${project.config.dir}" if="${directory::exists(project.config.dir)}" />
+    </foreach>
+  </target>
+  
+	<target name="build" depends="init" description="Builds current configuration">
+    <property name="solution.config" value="debug" unless="${property::exists('solution.config')}" />
+    <echo message="Building ${solution.fullpath} ${solution.config} configuration" />
+    <delete file="devenv.log" if="${file::exists('devenv.log')}" />
+    <exec program="devenv" commandline="&quot;${solution.fullpath}&quot; /rebuild ${solution.config} /out devenv.log" />
+    <call target="unittest" />
+  </target>
+  
+	<target name="cleanbuild" depends="clean,build" description="Cleans and then Builds current configuratioin">
+    <echo message="Done clean build" />
+  </target>
+
+	<target name="unittest" description="Unit Testing">
+    <echo message="Unit Testing..." />
+    <nunit2 verbose="true">
+      <formatter type="Plain" />
+      <test assemblyname="${solution.basepath}\Bank\bin\${solution.config}\Bank.dll" />
+      <test assemblyname="${solution.basepath}\InterestController\bin\${solution.config}\InterestController.dll" />
+    </nunit2>
+  </target>
+</project>

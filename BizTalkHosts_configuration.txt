@@ -1,0 +1,36 @@
+ReceivingHost: Enable Host Tracking property un-checked.
+ProcessingHost(OrchestrationHost): Enable Host Tracking property un-checked.
+TransmittingHost: Enable Host Tracking property un-checked.
+TrackingHost: Enable Host Tracking property checked. Even if there are multiple host instances only one will undertake the task for one message box db.
+
+
+MSMQT: Set up WLBS [NLB Ports: 1801/3527]
+	Have clients send messages to a single virtual IP or virtual DNS name receiving queue. For example, "Format Name:DIRECT=TCP:10.80.90.123\Private$\Initiate" or "Format Name:DIRECT=OS:server_name\Private$\Initiate"
+Only one host can serve single MSMQT receive location if one and only client is using this queue (Aws scenario) because of the ordered delivery feature. You can distribute workload over multiple receive locations based on non-deterministic design trick (p454).
+
+You cannot add more than one send handler per BizTalk server group for each adapter. Scalability on the send side can be achieved by adding more BizTalk servers.
+
+Available, but not highly available. All the SSO servers have the master secret cached in memory, and run-time operations will continue even if the master secret server fails. However, you will not be able to change the configuration of ports or the SSO configuration. The BizTalk Server runtime will continue working without problems, but you cannot make any design changes. You can create a Microsoft Operations Manager (MOM) event to notify you when the master secret server becomes unavailable, and you can then manually promote an SSO server to master secret server and restore the master secret on this server.
+
+Even if this configuration is not highly available, it can be satisfactory for most scenarios and it is consistent with scaling out the receiving, sending, and processing hosts.
+
+
+Changing the Master Secret Server
+
+After you set up the master secret server and configure the Credential database, you can change the master secret server if the original master secret server fails and cannot be recovered. To change the master secret server, you need to promote an SSO server to become the master secret server.
+
+To promote a Single Sign-On Server to master secret server
+
+   1. Create an XML file that includes the name of the SSO server you want to promote to master secret server. For example,
+
+      <sso>
+        <globalInfo>
+           <secretServer>SSO Server name</secretServer>
+        </globalInfo>
+      </sso>
+
+   2. On the Start menu, click run, and then type cmd.
+   3. At the command line prompt, go to the Enterprise Single Sign-On installation directory. The default installation directory is <drive>:\Program Files\Common Files\Enterprise Single Sign-On.
+   4. Type ssomanage –updatedb <update file>, where <update file> is the name of the XML file you create in step 1.
+   5. Restart the Master Secret Server.
+   6. Type ssoconfig –restoresecret <restore file>, where <restore file> is the path and name of the file where the master secret is stored.

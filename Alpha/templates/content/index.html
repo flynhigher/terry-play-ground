@@ -1,0 +1,110 @@
+{% extends "site_base.html" %}
+{% block extra_head %}
+<META NAME="Description" CONTENT="...">
+{% endblock %}
+{% block head_title %}Welcome{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" height="300"> <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="944" height="242">
+            <param name="movie" value="{{ MEDIA_URL }}banner.swf">
+            <param name="quality" value="high"><param name="wmode" value="opaque">
+            <embed src="{{ MEDIA_URL }}banner.swf" quality="high" wmode="opaque" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="944" height="242"></embed></object> 
+          <table width="944" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td height="70" bgcolor="#eae6d4"><img src="{{ MEDIA_URL }}prof.jpg" width="500" height="50"></td>
+              <td width="324" rowspan="3" bgcolor="#a6d151"> <table width="324" height="300" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td width="44" height="170">&nbsp;</td>
+                    <td width="270" height="170">
+                    {% if not user.is_authenticated %}
+                    <table width="280" border="0" cellpadding="0" cellspacing="0">
+                    <form id="login_form" method="POST" action="/account/login/">
+                        <tr> 
+                          <td class="formheader"><img src="{{ MEDIA_URL }}custlogin.jpg" width="242" height="32"></td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">Username</td>
+                        </tr>
+                        <tr> 
+                          <td><input id="id_username" type="text" name="username" maxlength="30" /></td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">Password</td>
+                        </tr>
+                        <tr> 
+                          <td><input type="password" name="password" id="id_password" /></td>
+                        </tr>
+                        <tr> 
+                          <td height="40"><table width="250" border="0" cellspacing="0" cellpadding="0">
+                              <tr> 
+                                <td width="30"><input type="image" src="{{ MEDIA_URL }}login.gif" width="75" height="28" border="0" /></td>
+                              </tr>
+                              <tr><td height="30" class="formheader" valign="bottom"><a href="{% url account.views.password_reset %}">Forgot password?</a> | <a href="{% url acct_signup %}">Don't have an account?</a></td></tr>
+                            </table></td>
+                        </tr>
+                      </form>
+                      </table>
+                      {% else %}
+                      <div class="maintext">Hello, {{ user.get_full_name }}.</div>
+                      {% endif %}
+                      </td>
+                    <td width="10" height="170">&nbsp;</td>
+                  </tr>
+                  <tr> 
+                    <td width="44" height="130">&nbsp;</td>
+                    <td width="270" height="130"> <div align="left"><a href="/schedule.html"><img src="{{ MEDIA_URL }}specials.gif" width="221" height="114" border="0"></a></div></td>
+                    <td width="10" height="130">&nbsp;</td>
+                  </tr>
+                </table></td>
+            </tr>
+            <tr> 
+              <td width="620" height="115" valign="top"><table width="620" height="115" border="0" cellpadding="0" cellspacing="0" bgcolor="#eae6d4">
+                  <tr> 
+                    <td width="285" valign="top" class="maintext"><strong>Alpha 
+                      Management Solution Programs</strong> deliver much more 
+                      than training. They combine critical information, exclusive 
+                      tools, and real world resources to transform knowledge into 
+                      action. We puts the highest standard to work for you every 
+                      day. </td>
+                    <td width="30">&nbsp;</td>
+                    <td width="285" valign="top" class="maintext"><strong>The 
+                      ServSafe Food Safety&reg; and ServSafe Alcohol&reg;</strong> 
+                      Programs offer food safety certifications and alcohol awareness 
+                      training programs aimed to the highest expectations. Classes 
+                      are fun, which makes for effective learning! Time and resources 
+                      are valuable.</td>
+                    <td width="20">&nbsp;</td>
+                  </tr>
+                </table></td>
+            </tr>
+            <tr> 
+              <td height="135" valign="top"><table width="620" height="135" border="0" cellpadding="0" cellspacing="0" bgcolor="#e2dece">
+                  <tr valign="top"> 
+                    <td width="302" height="34" bgcolor="#a6d151"><img src="{{ MEDIA_URL }}sat.jpg" width="242" height="32"></td>
+                    <td width="318" height="34" bgcolor="#ffa300"><img src="{{ MEDIA_URL }}cert.jpg" width="242" height="32"></td>
+                  </tr>
+                  <tr valign="top"> 
+                    <td width="302" bgcolor="#FFFFFF"><img src="{{ MEDIA_URL }}logosanimgif.gif" width="302" height="101"></td>
+                    <td width="318" height="101" bgcolor="#eae6d4" class="listmaintext"> 
+                      <p class="listmaintext">&#8226; Food Safety Certification 
+                        for Managers<br>
+                        &#8226; Food Safety Training for Employees<br>
+                        &#8226; Responsible Alcohol Training<br>
+                        &#8226; HACCP-Hazard Analysis Critical Control Point</p></td>
+                  </tr>
+                </table>
+             
+              </td>
+            </tr>
+          </table></td>
+      </tr>
+<script> 
+var sid='c2c2a04512b35d13102459f8784f1a2d';
+var swfheight=310;
+var swfwidth=320;
+var positionstr=' right:0px;bottom:0px;';
+var playmethod='hover';
+var elementId='standalone';</script>
+<script type='text/javascript' src='http://www.radiovideoads.com/votf/global/global.js'>
+</script>
+{% endblock %}

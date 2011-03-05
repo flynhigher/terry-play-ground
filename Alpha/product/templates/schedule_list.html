@@ -1,0 +1,60 @@
+{% extends "site_base.html" %}
+{% block head_title %}Product{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" valign="top"><table width="944" border="0" cellspacing="0" cellpadding="0">
+        {% if not schedules %}
+        <tr><td>No classes available yet.<br />Please <a href="/contactus.html">contact us</a> if you are interested in bringing the class in your area.</td></tr>
+        {% else %}
+        {% for schedule in schedules %}
+            <tr> 
+              <td width="940" valign="top"> 
+                <table width="944" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td valign="top" class="mainbold">{{ schedule.product.name }}</td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext">{{ schedule.product.description }}</td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext">
+                    <table width="280" border="0" cellpadding="0" cellspacing="0">
+                        <tr> 
+                          <td class="formheader">Venue</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ schedule.venue }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">Address</td>
+                        </tr>
+                        <tr> 
+                          <td>{% if schedule.address1 %}{{ schedule.address1 }}<br />{% endif %}
+                          {% if schedule.address2 %}{{ schedule.address2 }}<br />{% endif %}
+                          {{ schedule.city }}, {{ schedule.state }} {{ schedule.zipcode }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">Time</td>
+                        </tr>
+                        <tr> 
+                          <td>Start: {{ schedule.start|date }}<br/>
+                          End: {{ schedule.end|date }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">Price</td>
+                        </tr>
+                        <tr> 
+                          <td>${{ schedule.price }}</td>
+                        </tr>
+                        <tr> 
+                          <td><a href="{{ buyurl }}">Add to Cart</a></td>
+                        </tr>
+                      </table></td>
+                  </tr>
+                </table></td>
+            </tr>
+            {% endfor %}
+          {% endif %}
+          </table></td>
+      </tr>
+{% endblock %}

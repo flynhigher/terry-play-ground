@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+	This is to build Aws solution (aws.build).
+	Please take a look at the aws.bat file for usage information.
+-->
+<project name="CcnetBootstrap" default="go">
+	<property name="sourcesafe.dbfolder" value="\\vssprod\VSS\WebServices\VssParent" />
+	<property name="sourcesafe.dbpath" value="${sourcesafe.dbfolder}\srcsafe.ini" />
+	<readregistry property="devenv.dir" key="SOFTWARE\Microsoft\VisualStudio\7.1\InstallDir" hive="LocalMachine" />
+	<property name="devenv" value="${devenv.dir}\devenv.exe" />
+  <property name="al" value="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\al.exe" />
+	<property name="username" value="AwsBuilder" />
+	<property name="password" value="AWsPwd561" />
+	<property name="nunit.output.type" value="Xml" />
+
+	<property name="solution.basedir" value="${project::get-base-directory()}" unless="${property::exists('solution.basedir')}" />
+	<property name="build.file.dir" value="${solution.basedir}" unless="${property::exists('build.file.dir')}" />
+	
+	<fail message="You have to provide 'sourcesafe.solution.basedir' property" unless="${property::exists('sourcesafe.solution.basedir')}" />
+	<fail message="You have to provide 'build.file.name' property" unless="${property::exists('build.file.name')}" />
+	
+	<property name="sourcesafe.build.file.dir" value="${sourcesafe.solution.basedir}" unless="${property::exists('sourcesafe.build.file.dir')}" />
+
+	<target name="go" depends="getbuildfiles,launch" />
+	
+	<target name="getbuildfiles">
+		<call target="checkusernameandpassword" />
+		<vssget username="${username}" password="${password}" localpath="${build.file.dir}" recursive="false" replace="true" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.build.file.dir}/${build.file.name}" />
+	</target>
+
+	<target name="launch">
+		<property name="old.version.property.name" value="solution.${current.project}.old.version" if="${property::exists('current.project')}" />
+		<property name="old.version.property.name" value="solution.old.version" unless="${property::exists('current.project')}" />
+		<xmlpeek file="${solution.basedir}\${build.file.name}" property="solution.current.version" xpath="//property[@name='${old.version.property.name}']/@value" />
+		<regex pattern="^(?'major'[\d]+)\.(?'minor'[\d]+)\.(?'build'[\d]+)\.(?'revision'[\d]+)$" input="${solution.current.version}" />
+		<property name="build" value="${int::parse(build) + 1}" unless="${property::exists('revise')}" />
+		<property name="revision" value="${int::parse(revision) + 1}" if="${property::exists('revise')}" />
+		<property name="revision" value="0" unless="${property::exists('revise')}" />
+		<nant buildfile="${build.file.dir}\${build.file.name}" target="package" inheritall="true">
+			<properties>
+				<property name="solution.current.version" value="${major}.${minor}.${build}.${revision}" />
+			</properties>
+		</nant>
+		<!--call target="printproperties" /-->
+	</target>
+	
+	<target name="checkusernameandpassword">
+		<fail message="You have to provide SourceSafe username 'username' property" unless="${property::exists('username')}" />
+		<fail message="You have to provide SourceSafe password 'password' property" unless="${property::exists('password')}" />
+	</target>
+
+	<target name="printproperties">
+		<script language="C#">
+			<code>
+				<![CDATA[
+            public static void ScriptMain(Project project) {
+                project.Log(Level.Info, "Properties:");
+
+                foreach (DictionaryEntry entry in project.Properties) {
+                        project.Log(Level.Info, "{0}={1}", entry.Key, entry.Value);
+                }
+            }
+        ]]>
+			</code>
+		</script>
+	</target>
+</project>

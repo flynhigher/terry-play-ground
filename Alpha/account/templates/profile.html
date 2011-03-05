@@ -1,0 +1,65 @@
+{% extends "site_base.html" %}
+{% block head_title %}Profile{% endblock %}
+{% block body %}
+     <tr> 
+        <td width="944" valign="top"><table width="944" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td width="940" valign="top"> 
+                <table width="944" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td valign="top" class="maintext"><h1>Profile</h1><!-- img src="{{ MEDIA_URL }}contact.jpg" width="500" height="50"--></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext"><p>Below is your profile entered with us.</p>
+                    <p>You can <a href="{% url acct_passwd %}">change your password here</a>.</p></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext"><form id="profile_form" method="post">
+                    <table width="280" border="0" cellpadding="0" cellspacing="0">
+                    {{ form.as_table }}
+                        <!-- tr> 
+                          <td class="formheader">{{ form.email.errors }}Email</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.email }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">{{ form.phone.errors }}Phone</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.phone }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">{{ form.mobilephone.errors }}Mobile Phone</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.mobilephone }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">{{ form.name.errors }}Name</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.name }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">{{ form.message.errors }}Questions or Comments</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.message }}</td>
+                        </tr-->
+                        <tr> 
+                          <td height="40"><table width="250" border="0" cellspacing="0" cellpadding="0">
+                              <tr> 
+                                <td width="30"><input type="image" src="{{ MEDIA_URL }}submit.gif" width="75" height="28" alt="Submit"></input><!--img src="{{ MEDIA_URL }}submit.gif" width="75" height="28" border="0"--></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table></form></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table></td>
+      </tr>
+{% endblock %}

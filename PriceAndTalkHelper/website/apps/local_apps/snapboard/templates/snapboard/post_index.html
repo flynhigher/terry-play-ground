@@ -1,0 +1,61 @@
+{% extends "snapboard/base_forum.html" %}
+{% load i18n pagination_tags %}
+{% load extras %}
+
+{% block snapboard_main %}
+    <div class="index_title">
+    <h2 style="font-size: 152%;">
+    {{ title }}
+    </h2>
+        {% autopaginate posts user_settings.tpp %}
+        {% paginate %}
+    </div>
+
+    {% if posts %}
+        {% for post in posts %}
+        <div class="thread">
+            <p style="margin-top: 10px; margin-bottom: 5px;">
+                <span style="color: #999; font-size: small; float:right;">
+                &nbsp;by&nbsp;{% if post.user.get_profile %}
+	{% if post.user.get_profile.nickname %}
+	{{ post.user.get_profile.nickname }}
+	{% endif %}
+	{% if not post.user.get_profile.nickname %}
+	{{ post.user.username }}
+	{% endif %}
+	{% endif %}
+	{% if not post.user.get_profile %}
+	{{ post.user.username }}
+	{% endif %}
+	({{ post.user.username }})</span>
+                <span style="font-size: 100%;">
+                    <b>
+                        {% if post.gsticky %}
+                        {% trans "STICKY" %}
+						{% else %}
+							{% if board and post.csticky %}
+							{% trans "STICKY" %}
+							{% endif %}
+                        {% endif %}
+                        {% if post.closed %}
+                        {% trans "CLOSED" %}
+                        {% endif %}
+                        <a href="{% url snapboard_post post.id %}">{{ post.subject }}</a>
+                    </b>
+                </span>
+            <span style="color: #677; font-size: small; float:right;">
+                {% trans "last updated" %}
+                <span class="datetime">{{ post.date|date:"r T" }}<span class="timestamp">{{ post.date|timestamp }}</span></span>
+            </span>
+            </p>
+        </div>
+        {% endfor %}
+        {% paginate %}{# XXX It's inefficient calling that twice for the same result #}
+
+    {% else %}
+        <p>{% trans "No posts are available." %}</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->

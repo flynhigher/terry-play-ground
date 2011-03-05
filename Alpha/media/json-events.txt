@@ -1,0 +1,42 @@
+[
+	{
+		"id":1001,
+		"title":"ServSafe Manager Training and Exam/Test - Springfield, VA",
+		"start":"2010-07-10T08:30:00Z",
+		"end":"2010-07-10T17:30:00Z",
+		"where":"Courtyard marriot, 6710 Commerce Street, Springfield, VA 22150",
+		"url":"/product/schedule/servsafe-manager-training-and-exam-test-springfield-va"
+	},
+	{
+		"id":1002,
+		"title":"ServSafe Manager Training Only - Woodbridge, VA",
+		"start":"2010-07-11T08:30:00Z",
+		"end":"2010-07-11T17:30:00Z",
+		"where":"Comfort Suites Inn at Woodbridge, VA",
+		"url":"/product/schedule/servsafe-manager-training-only-woodbridge-va"
+	},
+	{
+		"id":1003,
+		"title":"ServSafe Manager Exam/Test Only - Springfield, VA",
+		"start":"2010-07-15T15:30:00Z",
+		"end":"2010-07-15T17:30:00Z",
+		"where":"Courtyard marriot, 6710 Commerce Street, Springfield, VA 22150",
+		"url":"/product/1003"
+	},
+	{
+		"id":1005,
+		"title":"ServSafe Manager Private Class - Hoboken, NJ",
+		"start":"2010-07-20T08:30:00Z",
+		"end":"2010-07-20T17:30:00Z",
+		"where":"Comfort Suites Inn at Hoboken, NJ",
+		"url":"/product/1005"
+	},
+	{
+		"id":2001,
+		"title":"ServSafe Alcohol Training and Test - Wilmington, DE",
+		"start":"2010-07-31T08:30:00Z",
+		"end":"2010-07-31T17:30:00Z",
+		"where":"Comfort Suites Inn at Wilmington, DE",
+		"url":"/product/2001"
+	}
+]

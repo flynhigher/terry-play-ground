@@ -1,0 +1,60 @@
+{% extends "site_base.html" %}
+{% block head_title %}Login{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" valign="top"><table width="944" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td width="940" valign="top"> 
+                <table width="944" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td valign="top" class="maintext"><img src="{{ MEDIA_URL }}cuslog.jpg" /></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext">
+        {% if user.is_authenticated %}
+            <p><span class="warning">Note</span>: you are already logged in as {{ user }}.</p>
+        {% else %}
+            {% url account.views.signup as signup_url %}
+            <p>Don't have an account? <a href="{{ signup_url }}">Register</a>! | Forgot password? <a href="{% url acct_passwd_reset %}">Reset it</a>!</p>
+        {% endif %}
+                    </td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" class="maintext"><form id="login_form" method="post">
+                    <table width="280" border="0" cellpadding="0" cellspacing="0">
+                        <tr><td class="errorlist">{{ form.non_field_errors }}</td></tr>
+                        <tr> 
+                          <td class="formheader">{{ form.username.errors }}Username</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.username }}</td>
+                        </tr>
+                        <tr> 
+                          <td class="formheader">{{ form.password.errors }}Password</td>
+                        </tr>
+                        <tr> 
+                          <td>{{ form.password }}</td>
+                        </tr>
+                        <tr> 
+                          <td height="40"><table width="250" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td width="30"><input type="image" src="{{ MEDIA_URL }}login.gif" width="75" height="28" border="0" /></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table></form>
+										</td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table></td>
+      </tr>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    $("#id_username").focus();
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "snapboard/base_forum.html" %}
+{% load i18n %}
+
+{% block extra_head %}
+<!-- Load jQuery build -->
+<script type="text/javascript" src="{{ MEDIA_URL }}js/tiny_mce/jquery.tinymce.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+	$('#id_post').tinymce({
+		script_url : '{{ MEDIA_URL }}js/tiny_mce/tiny_mce.js',
+		// General options
+		theme : "advanced",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+		content_css : "/site_media/base.css",
+//		hide : true
+	});
+//	$('#id_post').hide();
+});
+</script>
+{% endblock %}
+
+{% block snapboard_main %}
+    {% if user.is_authenticated %}
+    <form action="" method="POST" id="edit_post_div">
+                <p><b>{% trans "All revisions of this post are stored and publicly viewable." %}</b></p>
+                <p>
+        <table class="form">
+            {{ post.get_edit_form.as_table }}
+            <tr><th></th>
+                <td><input type="submit" value="{% trans "Update" %}" /> <input type="button" value="{% trans "Cancel" %}" onclick="javascript.back()" />
+            </td></tr>
+        </table>
+                </p>
+    </form>
+    {% else %}
+    <p>{% trans "You must be signed in to start a new discussion." %}</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<!--
+	This is to build BankAccount solution (bankaccount.build).
+-->
+<project name="BankAccount" default="build">
+  <property name="nant.settings.currentframework" value="net-1.1" />
+  <echo message="Using '${nant.settings.currentframework}' framework on '${platform::get-name()}' platform." />
+  <!-- ================= global project settings ================= -->
+  <property name="nant.onfailure" value="onfailure" />
+  <property name="nant.onsuccess" value="onsuccess" />
+  <!-- ================= Solution related ================= -->
+  <property name="solution.name" value="${project::get-name()}" />
+  <property name="solution.basepath" value="${project::get-base-directory()}" />
+  <property name="solution.filename" value="${solution.name}.sln" />
+  <property name="solution.fullpath" value="${solution.basepath}\${solution.filename}" />
+	<!-- ================= Version related ================= -->
+	<property name="solution.old.version" value="0.0.0.0" />
+  <regex pattern="^(?'old_version_major'[\d]+)\.(?'old_version_minor'[\d]+)\.(?'old_version_build'[\d]+)\.(?'old_version_revision'[\d]+)$" input="${solution.old.version}" />
+  <property name="solution.old.version.major.minor" value="${old_version_major}.${old_version_minor}" />
+  <property name="solution.changeversion" value="true" if="${property::exists('solution.current.version')}" />
+  <if test="${not(property::exists('solution.current.version'))}">
+    <property name="solution.changeversion" value="false" />
+    <property name="solution.current.version" value="${solution.old.version}" />
+  </if>
+  <regex pattern="^(?'current_version_major'[\d]+)\.(?'current_version_minor'[\d]+)\.(?'current_version_build'[\d]+)\.(?'current_version_revision'[\d]+)$" input="${solution.current.version}" />
+  <property name="solution.version.major.minor" value="${current_version_major}.${current_version_minor}" />
+	<!-- ================= Paths ================= -->
+	<property name="solution.version.filename" value="AssemblyInfo_BankAccount.cs" />
+  <property name="solution.version.file.path" value="${solution.basepath}\${solution.version.filename}" />
+	<property name="archive.dir.name" value="Archive" />
+  <property name="archive.path" value="${solution.basepath}\${archive.dir.name}" />
+	<property name="policy.path" value="${setup.path}" />
+	<!-- ================= SourceSafe related ================= -->
+  <property name="sourcesafe.dbfolder" value="\\vssprod\vss\webservices\vssparent" />
+  <property name="sourcesafe.dbpath" value="${sourcesafe.dbfolder}\srcsafe.ini" />
+	<property name="sourcesafe.solution.basepath" value="$/${solution.name}" />
+	<property name="sourcesafe.solution.version.file.path" value="${sourcesafe.solution.basepath}/${solution.version.filename}" />
+	<property name="sourcesafe.archive.path" value="${sourcesafe.solution.basepath}/${archive.dir.name}" />
+	<property name="sourcesafe.policy.path" value="${sourcesafe.setup.path}" />
+	<!-- ================= solution build optional behavior ================= -->
+  <property name="solution.getlatest" value="true" />
+  <property name="solution.updatelabel" value="true" />
+  <!-- ================= Current date and time ================= -->
+  <tstamp property="build.dateandtime" pattern="yyyyMMddHHmm" />
+  <!-- ================= setup project ================= -->
+  <property name="setup.project.name" value="BankAccountSetup" />
+  <property name="setup.path" value="${solution.basepath}\${setup.project.name}" />
+  <property name="setup.project.file.path" value="${setup.path}\${setup.project.name}.vdproj" />
+  <property name="setup.final.file.name" value="${setup.project.name}-v${solution.current.version}.msi" />
+  <property name="setup.final.file.path" value="${archive.path}\${setup.final.file.name}" />
+	<!-- ================= SourceSafe related ================= -->
+	<property name="sourcesafe.setup.path" value="${sourcesafe.solution.basepath}/${setup.project.name}" />
+	<property name="sourcesafe.setup.project.file.path" value="${sourcesafe.setup.path}/${setup.project.name}.vdproj" />
+  <property name="sourcesafe.setup.final.file.path" value="${sourcesafe.archive.path}/${setup.final.file.name}" />
+  <!-- ================= library zip file ================= -->
+  <property name="library.zip.filename" value="BankAccountLibrary-v${solution.current.version}.zip" />
+  <property name="library.zip.filepath" value="${archive.path}\${library.zip.filename}" />
+  <property name="sourcesafe.library.zip.filepath" value="${sourcesafe.archive.path}/${library.zip.filename}" />
+  <!-- ================= project names ================= -->
+	<property name="project.names" value="Bank,		InterestController" readonly="true" />
+	<property name="project.directories" value="${solution.basepath}\Bank|${sourcesafe.solution.basepath}/Bank,		${solution.basepath}\InterestController|${sourcesafe.solution.basepath}/InterestController" readonly="true" />
+  <!-- ================= policy related names ================= -->
+  <property name="policy.prefix" value="Policy.${solution.version.major.minor}" />
+  <property name="solution.policy.names" value="${policy.prefix}.Bank,		${policy.prefix}.InterestController" readonly="true" />
+  <!-- ================= check out current build file to modify ================= -->
+  <regex pattern="^(?'buildfileparentpath'.*(\\|/).*)(\\|/)(?'buildfilename'.*)$" input="${project::get-buildfile-uri()}" />
+  <property name="build.file.path" value="${solution.basepath}\${buildfilename}" />
+  <property name="sourcesafe.build.file.path" value="${sourcesafe.solution.basepath}/${buildfilename}" />
+  <!-- ================= document (ndoc) related ================= -->
+  <property name="document.name" value="BankAccountApiRef" />
+  <property name="document.filename" value="${document.name}.chm" />
+  <property name="document.folder.name" value="Document" />
+  <property name="document.dir" value="${solution.basepath}\${document.folder.name}" />
+  <property name="document.fullpath" value="${document.dir}\${document.filename}" />
+  <property name="sourcesafe.document.path" value="${sourcesafe.solution.basepath}/${document.folder.name}/${document.filename}" />
+  <!-- ================= targets ================= -->
+  <target name="checkusernameandpassword" description="Check if SourceSafe username and password exist">
+    <fail message="You have to provide SourceSafe username 'username' property" unless="${property::exists('username')}" />
+    <fail message="You have to provide SourceSafe password 'password' property" unless="${property::exists('password')}" />
+  </target>
+  <target name="getlatest" description="Get latest sourcecode">
+    <echo message="Getting latest solution" />
+    <call target="checkusernameandpassword" />
+    <vssget username="${username}" password="${password}" localpath="${solution.basepath}" recursive="true" replace="true" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.basepath}" />
+    <!--foreach item="String" in="${project.names}" delim="," property="project.name">
+      <property name="project.name" value="${string::trim(project.name)}" />
+      <vssget username="${username}" password="${password}" localpath="${solution.basepath}\${project.name}" recursive="true" replace="true" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.basepath}/${project.name}" />
+    </foreach-->
+  </target>
+  <target name="init" description="Initializes build properties">
+    <echo message="Initializing" />
+    <call target="getlatest" if="${solution.getlatest}" />
+    <call target="changeversion" if="${solution.changeversion}" />
+    <call target="checkusernameandpassword" />
+    <vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${build.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.build.file.path}" failonerror="false" />
+    <if test="${not(solution.changeversion)}">
+      <echo message="Checking out output files when the version is not changed" />
+      <vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${setup.final.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.setup.final.file.path}" failonerror="false" />
+      <vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${library.zip.filepath}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.library.zip.filepath}" failonerror="false" />
+    </if>
+  </target>
+  <target name="changeversion" description="change version in related files">
+    <call target="checkusernameandpassword" />
+    <echo message="Changing versions of solution and projects to ${solution.current.version}" />
+    <vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${solution.version.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.version.file.path}" />
+    <vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${setup.project.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.setup.project.file.path}" />
+    <script language="c#">
+      <code><![CDATA[
+		public static void ScriptMain(Project project) 
+		{
+			string versionWORevision = project.Properties["solution.current.version"].Substring(0, project.Properties["solution.current.version"].LastIndexOf(@"."));
+			string versionFileFullPath = project.Properties["solution.version.file.path"];
+			string setupFileFullPath = project.Properties["setup.project.file.path"];
+			string sateliteSetup1FileFullPath = project.Properties["setup1.project.file.path"];
+			string sateliteSetup2FileFullPath = project.Properties["setup2.project.file.path"];
+			string sateliteSetup3FileFullPath = project.Properties["setup3.project.file.path"];
+			string versionFileContent = "";
+			string setupFileContent = "";
+
+			VersionFileUpdate(versionFileFullPath, project, versionWORevision);
+
+			SetupFileUpdate(setupFileFullPath, project, versionWORevision);
+			SetupFileUpdate(sateliteSetup1FileFullPath, project, versionWORevision);
+			SetupFileUpdate(sateliteSetup2FileFullPath, project, versionWORevision);
+		}
+
+		public static void SetupFileUpdate(string setupFileFullPath, Project project, string versionWORevision)
+		{
+			string setupFileContent;
+			//Setup File Update
+			using(StreamReader reader = new StreamReader(setupFileFullPath))
+			{
+				setupFileContent = reader.ReadToEnd();
+			}
+			int indexOfProductName = setupFileContent.IndexOf("\"ProductName\"");
+			int indexOfRegistry = setupFileContent.IndexOf("\"Registry\"");
+			int lengthOfVersionRelatedPart = indexOfRegistry - indexOfProductName;
+			string firstOfContentPart = setupFileContent.Substring(0, indexOfProductName);
+			string targetContentPart = setupFileContent.Substring(indexOfProductName, lengthOfVersionRelatedPart);
+			string restOfContentPart = setupFileContent.Substring(indexOfRegistry);
+			//Version change
+			targetContentPart = new Regex(@"[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*").Replace(targetContentPart, project.Properties["solution.current.version"]);
+			targetContentPart = new Regex(@"[0-9]*\.[0-9]*\.[0-9]*").Replace(targetContentPart, versionWORevision);
+			targetContentPart = new Regex(@"v[0-9]*\.[0-9]*").Replace(targetContentPart, "v"+project.Properties["solution.version.major.minor"]);
+			//Product & Package Code change
+
+			string newProductCodeLine = "\"ProductCode\" = \"8:{" + Guid.NewGuid().ToString().ToUpper() + "}\"";
+			string newPackageCodeLine = "\"PackageCode\" = \"8:{" + Guid.NewGuid().ToString().ToUpper() + "}\"";
+			targetContentPart = new Regex(@"""ProductCode""\s=\s""8:\{[\S]*\}""").Replace(targetContentPart, newProductCodeLine);
+			targetContentPart = new Regex(@"""PackageCode""\s=\s""8:\{[\S]*\}""").Replace(targetContentPart, newPackageCodeLine);
+
+			using(StreamWriter writer = new StreamWriter(setupFileFullPath))
+			{
+				writer.Write(firstOfContentPart + targetContentPart + restOfContentPart);
+			}
+		}
+
+		public static void VersionFileUpdate(string versionFileFullPath, Project project, string versionWORevision)
+		{
+			string versionFileContent;
+			//Version File Update
+			using(StreamReader reader = new StreamReader(versionFileFullPath))
+			{
+				versionFileContent = reader.ReadToEnd();
+			}
+			versionFileContent = new Regex(@"\""[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\""").Replace(versionFileContent, "\"" + project.Properties["solution.current.version"] + "\"");
+			versionFileContent = new Regex(@"\""[0-9]*\.[0-9]*\.[0-9]*\""").Replace(versionFileContent, "\"" + versionWORevision + "\"");
+			using(StreamWriter writer = new StreamWriter(versionFileFullPath))
+			{
+				writer.Write(versionFileContent);
+			}
+		}
+]]></code>
+    </script>
+    <call target="policy" />
+  </target>
+  <target name="policy" description="Link policy files">
+    <call target="checkusernameandpassword" />
+    <echo message="Creating policy dlls for version, ${solution.current.version}" />
+    <property name="new.policy.file" value="1" if="${property::get-value('solution.version.major.minor') != property::get-value('solution.old.version.major.minor')}" />
+		<foreach item="String" in="${project.names}" delim="," property="project.name">
+      <property name="policy.name" value="${policy.prefix}.${string::trim(project.name)}" />
+      <if test="${property::exists('new.policy.file')}">
+				<property name="old.policy.name" value="${string::replace(policy.name, solution.version.major.minor, solution.old.version.major.minor)}" />
+				<copy file="${policy.path}\${old.policy.name}.txt" tofile="${policy.path}\${policy.name}.txt" />
+				<exec program="attrib" commandline="-R &quot;${policy.path}\${policy.name}.txt&quot;" />
+      </if>
+      <if test="${not property::exists('new.policy.file')}">
+				<vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${policy.path}\${policy.name}.dll" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.dll" />
+				<vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${policy.path}\${policy.name}.txt" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.txt" />
+      </if>
+      <script language="c#">
+        <code><![CDATA[
+		public static void ScriptMain(Project project) {
+			string policyTextFileFullPath = project.Properties["policy.path"] + @"\" + project.Properties["policy.name"] + ".txt";
+			string policyTextFileContent = "";
+
+			//Policy File Update
+			using(StreamReader reader = new StreamReader(policyTextFileFullPath))
+			{
+				policyTextFileContent = reader.ReadToEnd();
+			}
+			if(project.Properties["solution.version.major.minor"] == project.Properties["solution.old.version.major.minor"])
+			{
+				policyTextFileContent = new Regex(@"-[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*").Replace(policyTextFileContent, "-" + project.Properties["solution.old.version"]);
+			}
+			else
+			{
+				policyTextFileContent = new Regex(@"""[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*-").Replace(policyTextFileContent, @"""" + project.Properties["solution.version.major.minor"] + ".0.0-");
+				policyTextFileContent = new Regex(@"-[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*").Replace(policyTextFileContent, "-" + project.Properties["solution.version.major.minor"] + ".0.0");
+			}
+			policyTextFileContent = new Regex(@"""[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*""").Replace(policyTextFileContent, @"""" + project.Properties["solution.current.version"] + @"""");
+			
+			using(StreamWriter writer = new StreamWriter(policyTextFileFullPath))
+			{
+				writer.Write(policyTextFileContent);
+			}
+		}
+]]></code>
+      </script>
+      <echo message="Linking ${policy.path}\${policy.name}.txt into ${policy.path}\${policy.name}.dll" />
+      <exec program="al" commandline="/link:&quot;${policy.path}\${policy.name}.txt&quot; /out:&quot;${policy.path}\${policy.name}.dll&quot; /keyfile:&quot;${solution.basepath}\${solution.name}.snk&quot; /version:${solution.current.version} /title:&quot;Publisher Policy for v${solution.version.major.minor}&quot;" />
+      <!--al output="${setup.path}\${policy.name}.dll" target="lib" keyfile="${setup.path}\AllianceCapital.Wsg.snk" version="${solution.current.version}" title="Publisher Policy for v${solution.version.major.minor}">
+        <sources>
+          <include name="${setup.path}\${policy.name}.txt" />
+        </sources>
+      </al-->
+			<if test="${property::exists('create.policy.file')}">
+				<if test="${property::exists('new.policy.file')}">
+					<vssadd username="${username}" password="${password}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}">
+						<fileset basedir="${policy.path}">
+							<include name="${policy.path}\${policy.name}.dll" />
+							<include name="${policy.path}\${policy.name}.txt" />
+						</fileset>
+					</vssadd>
+				</if>
+				<if test="${not property::exists('new.policy.file')}">
+					<vsscheckin username="${username}" password="${password}" localpath="${policy.path}\${policy.name}.dll" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.dll" />
+					<vsscheckin username="${username}" password="${password}" localpath="${policy.path}\${policy.name}.txt" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.txt" />
+				</if>
+			</if>
+    </foreach>
+    <if test="${property::exists('create.policy.file')}">
+			<fail message="Policy has been built for v${solution.version.major.minor}" />
+		</if>
+  </target>
+  <target name="clean" description="Deletes current build configuration">
+    <echo message="Deleting ${solution.config} build configuration" />
+    <!--exec program="devenv" commandline="&quot;${solution.fullpath}&quot; /clean ${solution.config}" /-->
+    <foreach item="String" in="${project.names}" delim="," property="project.dir">
+      <echo message="Cleaning project, ${project.dir}" />
+      <property name="project.bin.dir" value="${project.dir}\bin" />
+      <property name="project.obj.dir" value="${project.dir}\obj" />
+      <property name="project.config.dir" value="${project.dir}\${solution.config}" />
+      <delete dir="${project.bin.dir}" if="${directory::exists(project.bin.dir)}" />
+      <delete dir="${project.obj.dir}" if="${directory::exists(project.obj.dir)}" />
+      <delete dir="${project.config.dir}" if="${directory::exists(project.config.dir)}" />
+    </foreach>
+  </target>
+  <target name="build" depends="init" description="Builds current configuration">
+    <property name="solution.config" value="debug" unless="${property::exists('solution.config')}" />
+    <echo message="Building ${solution.fullpath} v${solution.current.version} ${solution.config} configuration" />
+    <delete file="devenv.log" if="${file::exists('devenv.log')}" />
+    <exec program="devenv" commandline="&quot;${solution.fullpath}&quot; /rebuild ${solution.config} /out devenv.log" />
+    <call target="unittest" />
+    <call target="zip.libs" />
+    <call target="ndoc" />
+    <xmlpoke file="${build.file.path}" xpath="/project/property[@name='solution.old.version']/@value" value="${solution.current.version}" if="${solution.changeversion}" />
+  </target>
+  <target name="cleanbuild" depends="clean,build" description="Cleans and then Builds current configuratioin">
+    <echo message="Doing clean build" />
+  </target>
+  <target name="package" description="Creates a package file">
+    <echo message="Creating a package" />
+    <property name="solution.config" value="release" />
+    <call target="cleanbuild" />
+    <mkdir dir="${archive.path}" failonerror="false" />
+    <property name="setup.file.path" value="${setup.path}\${solution.config}\${setup.project.name}.msi" />
+    <copy file="${setup.file.path}" tofile="${setup.final.file.path}" overwrite="true" />
+  </target>
+  <target name="ndoc" description="Generate documentation">
+    <uptodate property="doc.uptodate">
+      <targetfiles>
+        <include name="${document.folder.name}\*.chm" />
+      </targetfiles>
+      <sourcefiles>
+        <include name="${solution.basepath}\bin\${solution.config}\Bank.dll" />
+        <include name="${solution.basepath}\bin\${solution.config}\InterestConroller.dll" />
+      </sourcefiles>
+    </uptodate>
+    <echo message="Document is up to date!" if="${doc.uptodate}" />
+    <if test="${not(doc.uptodate)}">
+      <echo message="Generating document" />
+      <vsscheckout username="${username}" password="${password}" recursive="false" writable="true" localpath="${document.fullpath}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.document.path}" />
+      <ndoc>
+        <assemblies>
+					<include name="${solution.basepath}\bin\${solution.config}\Bank.dll" />
+					<include name="${solution.basepath}\bin\${solution.config}\InterestConroller.dll" />
+				</assemblies>
+        <summaries>
+          <include name="${solution.basepath}\NamespaceSummary.xml" />
+        </summaries>
+        <documenters>
+          <documenter name="MSDN">
+            <property name="OutputDirectory" value="${document.dir}" />
+            <property name="OutputTarget" value="HtmlHelp" />
+            <property name="HtmlHelpName" value="${document.name}" />
+            <property name="HtmlHelpCompilerFilename" value="hhc.exe" />
+            <property name="IncludeFavorites" value="False" />
+            <property name="AssemblyVersionInfo" value="AssemblyVersion" />
+            <property name="Title" value="BankAccount API Reference Document - v${solution.current.version}" />
+            <property name="CopyrightText" value="AllianceBernstein" />
+            <property name="FeedbackEmailAddress" value="terry.go@alliancebernstein.com" />
+            <property name="Preliminary" value="${not(solution.config == 'release')}" />
+            <property name="CleanIntermediates" value="True" />
+            <property name="SplitTOCs" value="False" />
+            <property name="DefaulTOC" value="" />
+            <property name="ShowVisualBasic" value="True" />
+            <property name="ShowMissingSummaries" value="${not(solution.config == 'release')}" />
+            <property name="ShowMissingRemarks" value="${not(solution.config == 'release')}" />
+            <property name="ShowMissingParams" value="${not(solution.config == 'release')}" />
+            <property name="ShowMissingReturns" value="${not(solution.config == 'release')}" />
+            <property name="ShowMissingValues" value="${not(solution.config == 'release')}" />
+            <property name="DocumentInternals" value="False" />
+            <property name="DocumentProtected" value="True" />
+            <property name="DocumentPrivates" value="False" />
+            <property name="DocumentEmptyNamespaces" value="False" />
+            <property name="IncludeAssemblyVersion" value="False" />
+            <property name="CopyrightText" value="Copyright (C) 2004-${datetime::get-year(datetime::now())} AllianceBernstein" />
+          </documenter>
+        </documenters>
+      </ndoc>
+    </if>
+  </target>
+  <target name="unittest" description="Unit Testing">
+    <echo message="Unit Testing..." />
+    <nunit2 verbose="true">
+      <formatter type="Plain" />
+      <test assemblyname="${solution.basepath}\bin\${solution.config}\Bank.dll" />
+      <test assemblyname="${solution.basepath}\bin\${solution.config}\InterestConroller.dll" />
+    </nunit2>
+  </target>
+  <target name="zip.libs" description="Zipping library dlls">
+    <echo message="Zipping library dlls..." />
+    <property name="output.dir" value="${solution.basepath}\output" />
+    <delete dir="${output.dir}" if="${directory::exists(output.dir)}" />
+    <copy flatten="true" todir="${output.dir}">
+      <fileset>
+        <include name="${solution.basepath}\bin\${solution.config}\Bank.dll" />
+        <include name="${solution.basepath}\bin\${solution.config}\InterestConroller.dll" />
+      </fileset>
+    </copy>
+    <delete file="${library.zip.filepath}" if="${file::exists(library.zip.filepath)}" />
+    <zip zipfile="${library.zip.filepath}">
+      <fileset basedir="${output.dir}">
+        <include name="*.dll" />
+      </fileset>
+    </zip>
+    <delete dir="${output.dir}" />
+  </target>
+  <!-- targets for the last step -->
+  <target name="onfailure" description="Called only when NAnt fails">
+    <script language="C#">
+      <code><![CDATA[
+            public static void ScriptMain(Project project) {
+                project.Log(Level.Info, "Properties:");
+
+                foreach (DictionaryEntry entry in project.Properties) {
+                        project.Log(Level.Info, "{0}={1}", entry.Key, entry.Value);
+                }
+            }
+        ]]></code>
+    </script>
+    <if test="${property::exists('solution.changeversion') and solution.changeversion}">
+			<foreach item="String" in="${project.names}" delim="," property="project.name">
+				<property name="policy.name" value="${policy.prefix}.${string::trim(project.name)}" />
+				<if test="${not property::exists('new.policy.file')}">
+					<vssundocheckout username="${username}" password="${password}" localpath="${policy.path}\${policy.name}.dll" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.dll" failonerror="false" />
+					<vssundocheckout username="${username}" password="${password}" localpath="${policy.path}\${policy.name}.txt" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.txt" failonerror="false" />
+				</if>
+      </foreach>
+      <vssundocheckout username="${username}" password="${password}" localpath="${solution.version.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.version.file.path}" failonerror="false" />
+      <vssundocheckout username="${username}" password="${password}" localpath="${setup.project.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.setup.project.file.path}" failonerror="false" />
+    </if>
+    <if test="${not(property::exists('solution.changeversion') and solution.changeversion)}">
+      <vssundocheckout username="${username}" password="${password}" localpath="${setup.final.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.setup.final.file.path}" failonerror="false" />
+    </if>
+    <vssundocheckout username="${username}" password="${password}" localpath="${build.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.build.file.path}" failonerror="false" />
+    <vssundocheckout username="${username}" password="${password}" localpath="${document.fullpath}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.document.path}" failonerror="false" />
+    <vssundocheckout username="${username}" password="${password}" localpath="${library.zip.filepath}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.library.zip.filepath}" failonerror="false" />
+  </target>
+  <target name="onsuccess" description="Called only when NAnt succeeds">
+    <call target="checkusernameandpassword" />
+    <if test="${solution.updatelabel}">
+      <echo message="Labeling source tree as 'v${solution.current.version}'" />
+      <vsslabel username="${username}" password="${password}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.basepath}" label="v${solution.current.version}-${build.dateandtime}" />
+    </if>
+    <vsscheckin username="${username}" password="${password}" localpath="${build.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.build.file.path}" />
+    <vsscheckin username="${username}" password="${password}" localpath="${document.fullpath}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.document.path}" />
+    <if test="${property::exists('solution.changeversion') and solution.changeversion}">
+			<foreach item="String" in="${project.names}" delim="," property="project.name">
+				<property name="policy.name" value="${policy.prefix}.${string::trim(project.name)}" />
+				<if test="${property::exists('new.policy.file')}">
+					<property name="old.policy.name" value="${string::replace(policy.name, solution.version.major.minor, solution.old.version.major.minor)}" />
+					<vssadd username="${username}" password="${password}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}">
+						<fileset basedir="${policy.path}">
+							<include name="${policy.path}\${old.policy.name}.dll" />
+							<include name="${policy.path}\${old.policy.name}.txt" />
+						</fileset>
+					</vssadd>
+				</if>
+				<if test="${not property::exists('new.policy.file')}">
+					<vsscheckin username="${username}" password="${password}" localpath="${policy.path}\${policy.name}.dll" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.dll" />
+					<vsscheckin username="${username}" password="${password}" localpath="${policy.path}\${policy.name}.txt" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.policy.path}/${policy.name}.txt" />
+				</if>
+      </foreach>
+      <vsscheckin username="${username}" password="${password}" localpath="${solution.version.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.solution.version.file.path}" />
+      <vsscheckin username="${username}" password="${password}" localpath="${setup.project.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.setup.project.file.path}" />
+      <vssadd username="${username}" password="${password}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.archive.path}">
+        <fileset basedir="${archive.path}">
+          <include name="${setup.final.file.path}" />
+          <include name="${library.zip.filepath}" />
+        </fileset>
+      </vssadd>
+    </if>
+    <if test="${not(property::exists('solution.changeversion') and solution.changeversion)}">
+      <vsscheckin username="${username}" password="${password}" localpath="${setup.final.file.path}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.setup.final.file.path}" />
+      <vsscheckin username="${username}" password="${password}" localpath="${library.zip.filepath}" dbpath="${sourcesafe.dbpath}" path="${sourcesafe.library.zip.filepath}" />
+    </if>
+  </target>
+</project>

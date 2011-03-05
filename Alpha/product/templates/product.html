@@ -1,0 +1,104 @@
+{% extends "site_base.html" %}
+{% block head_title %}Schedule{% endblock %}
+{% block body %}
+      <tr> 
+        <td width="944" valign="top">
+        		<table width="944" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td width="940" height="115" valign="top"><table width="944" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td height="70"><img src="{{ MEDIA_URL }}trainig_sch.jpg" width="500" height="50"></td>
+                  </tr>
+                  <tr> 
+                    <td height="2" valign="top" class="maintext"> </td>
+                  </tr>
+                </table>
+                <table width="944" height="300" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td valign="top"> <table width="700" border="0" cellspacing="0" cellpadding="0">
+                    {% if statename %}
+                        <tr> 
+                          <td width="600" height="40" class="mainbold"><h1>{{ statename }}</h1></td>
+                          <td width="100" height="40" class="mainbold">&nbsp;</td>
+                        </tr>
+							        {% if not schedules %}
+							        <tr><td colspan="2" class="maintext">We do private classes in your area.<br />
+								        Please <a href="/contactus.html">contact us</a> with your requirement,
+								        number of food handlers to certify, and dates you wish to have the class.<br />
+								        We will respond back to you with a training/certification solution
+								        that fits your needs.</td></tr>
+							        {% else %}
+							        {% for schedule in schedules %}
+                        <tr> 
+                          <td height="1" colspan="2" bgcolor="#d9d2b1" class="mainbold"><img src="{{ MEDIA_URL }}/spcer.gif" width="1" height="1"></td>
+                        </tr>
+                        <tr> 
+                          <td width="600" height="40" class="mainbold">
+                          <strong>{{ schedule.start|date }} ({{ schedule.start|date:"D" }})- {% if schedule.title %}{{ schedule.title }}{% else %}{{ schedule.product.name }}{% endif %}</strong>
+                          </td>
+                          <td width="100" class="mainbold">${{ schedule.price }}</td>
+                        </tr>
+                        <tr> 
+                          <td width="600" height="140"> <table width="520" height="90" border="0" cellpadding="0" cellspacing="0">
+                              <tr> 
+                                <td width="110"> <div align="left"><img src="{{ MEDIA_URL }}/servsafetrain.jpg" width="90" height="90"></div></td>
+                                <td width="410" class="maintext"> <span class="topnav"> 
+                                  {% if schedule.description %}{{ schedule.description }}{% else %}{{ schedule.product.description }}{% endif %}<br>
+                                  {{ schedule.venue }}<br>
+                                  {% if schedule.address1 %}{{ schedule.address1 }}{% endif %}
+                          {% if schedule.address2 %}{{ schedule.address2 }}{% endif %}
+                          {{ schedule.city }}, {{ schedule.state }} {{ schedule.zipcode }}<br>
+                                  <strong>{{ schedule.start|time }} - {{ schedule.end|time }} </strong></span></td>
+                              </tr>
+                            </table></td>
+                          <td width="100"><table width="100" height="80" border="0" cellpadding="0" cellspacing="0">
+                              <tr> 
+                                <td valign="bottom"><a href="{{ buyurl }}{{ schedule.buycode }}"><img src="{{ MEDIA_URL }}/cart2.gif" width="78" height="31" border="0"></a></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      {% endfor %}
+                      {% endif %}
+                    {% else %}
+                        <tr> 
+                          <td height="1" colspan="2" bgcolor="#d9d2b1" class="mainbold"><img src="{{ MEDIA_URL }}/spcer.gif" width="1" height="1"></td>
+                        </tr>
+                        <tr> 
+                          <td width="600" height="40" class="mainbold">
+	                          <strong>{{ schedule.start|date }} ({{ schedule.start|date:"D" }})- {% if schedule.title %}{{ schedule.title }}{% else %}{{ schedule.product.name }}{% endif %}</strong>
+	                          </td>
+	                          <td width="100" class="mainbold">${{ schedule.price }}</td>
+	                        </tr>
+	                        <tr>
+	                          <td width="600" height="140"> <table width="520" height="90" border="0" cellpadding="0" cellspacing="0">
+	                              <tr>
+	                                <td width="110"> <div align="left"><img src="{{ MEDIA_URL }}/servsafetrain.jpg" width="90" height="90"></div></td>
+	                                <td width="410" class="maintext"> <span class="topnav">
+	                                  {% if schedule.description %}{{ schedule.description }}{% else %}{{ schedule.product.description }}{% endif %}<br>
+	                                  {{ schedule.venue }}<br>
+	                                  {% if schedule.address1 %}{{ schedule.address1 }}{% endif %}
+                          {% if schedule.address2 %}{{ schedule.address2 }}{% endif %}
+                          {{ schedule.city }}, {{ schedule.state }} {{ schedule.zipcode }}<br>
+                                  <strong>{{ schedule.start|time }} - {{ schedule.end|time }} </strong></span></td>
+                              </tr>
+                            </table></td>
+                          <td width="100"><table width="100" height="80" border="0" cellpadding="0" cellspacing="0">
+                              <tr> 
+                                <td valign="bottom"><a href="{{ buyurl }}"><img src="{{ MEDIA_URL }}/cart2.gif" width="78" height="31" border="0"></a></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                    {% endif %}
+                        <tr> 
+                          <td width="600">&nbsp;</td>
+                          <td width="100">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <p>&nbsp;</p></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table></td>
+        <td width="40" class="mainbold">&nbsp;</td>
+      </tr>
+{% endblock %}

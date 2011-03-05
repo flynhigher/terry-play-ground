@@ -1,0 +1,26 @@
+<html><head>
+<script type="text/javascript" src="mootools-1.2-core-yc.js"></script>
+<script type="text/javascript" src="checkoutapi.js"></script>
+<script type="text/javascript">
+initializeCheckoutAPI("CSTES", null, "http://localhost:8080/UltraCartTest/media/proxy.php");
+//alert(merchantId)
+alert(callbackUrl)
+var str = "product1,product2";
+var ids = str.split(",");
+alert(ids.length)
+try {
+var items = getItems(ids);
+alert(items)
+} catch(err) {
+	alert(err)
+}
+alert("after getItems")
+for(var i=0; i< items.length; i++) {
+	var item = items[i];
+	alert("itemId: " + item.itemId + "\ndescription: " + item.description);
+}
+</script>
+</head>
+<body>
+<div id="items">Ultra Cart API Test</div>
+</body></html>
