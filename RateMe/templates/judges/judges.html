@@ -1,0 +1,40 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load humanize %}
+{% load judge_tags%}
+
+{% block head_title %}{% blocktrans %}All Judges{% endblocktrans %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/judges.jpg" />
+{% endblock %}
+
+{% block body %}
+    {% if judges %}
+        <p class="profile">Check out our judges and decide which judge is right for you. Log In > Select A Judge > Upload Your Picture > Check Your Profile</p>
+        <form id="judge" name="change_judge" action="{% url profile_judge_edit %}" method="POST">
+        {% autopaginate judges %}
+        <div id="judge_list">
+        {% for judge in judges %}
+            <div class="judge {% cycle 'odd' 'even' %}">
+            {% show_judge judge myjudge request.user.is_authenticated %}
+            </div>
+        {% endfor %}
+        </div>
+        {% paginate %}
+        </form>
+    {% else %}
+       <p>No judge were found.</p>
+    {% endif %}
+    <div class="clearfix bluetext" style="">If you are an experienced Internet professional, with a unique sense of style and would like to become a potential judge, please click on the sign up button below.</div>
+    <a href="{% url judge_signup %}"><img src="{{ MEDIA_URL }}images/signup_btn.jpg" border="0" /></a>
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+$(':radio').click(function () {$('#judge').submit();});
+</script>
+{% endblock %}

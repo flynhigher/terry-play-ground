@@ -1,0 +1,47 @@
+{% extends "rateme_profiles/base.html" %}
+
+{% load i18n %}
+{% load avatar_tags %}
+{% load uni_form_tags %}
+{% load rateme_profile_tags %}
+{% load judge_tags %}
+
+{% block head_title %}{% blocktrans %}Profile{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+    <link href='{{ MEDIA_URL }}css/jquery.rating.css' type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/profilep.jpg" alt="Profile" />
+{% endblock %}
+
+{% block body %}
+    <div class="right_panel">
+        {% include "rateme_profiles/profile_right_panel.html" %}
+    </div>
+    <div class="left_panel">
+    <p><b>{% if is_me %}My{% else %}{{ other_user }}'s{% endif %} Information</b></p>
+    {% show_rateme_profile request other_user %}
+    {% if is_me %}
+    <div class="myjudge">
+    <p><b>My Judge</b></p>
+    <div id="judge_short">
+    {% if myjudge %}
+    {% show_judge_short myjudge %}
+
+    <div class="switch">Want to switch judge?</div>
+    {% else %}
+    <div class="switch">No judge is assgined for you.<br/>Want to select judge?</div>
+    {% endif %}
+    <div><a href="{% url judge_list %}">click here</a></div>
+    </div>
+    </div>
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{{ MEDIA_URL }}js/avatar.js" type="text/javascript"></script>
+    <script src='{{ MEDIA_URL }}js/jquery.rating.js' type="text/javascript" language="javascript"></script>
+{% endblock %}

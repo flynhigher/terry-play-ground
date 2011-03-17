@@ -1,0 +1,26 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Contact Us" %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/contactp.jpg" alt="Contact Us" />
+{% endblock %}
+
+{% block body %}
+<p class="maintext"><strong>Thank you for your
+                interest in ratemepopular.com.</strong> We
+                welcome suggestions and new ideas. We will get back to you as
+                soon as possible.</p>
+<form class="login uniForm" method="POST" action="{% url contactus %}">
+    <fieldset class="inlineLabels">
+        {{ form|as_uni_form }}
+        <p>
+        <input type="image" src="{{ MEDIA_URL }}images/submit.jpg" value="{% trans "Submit" %}" />
+        </p>
+    </fieldset>
+</form>
+{% endblock %}

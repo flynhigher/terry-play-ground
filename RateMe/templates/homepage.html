@@ -1,0 +1,62 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+=
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block tab_id %}id="home_tab"{% endblock %}
+{% block extra_body_class %}home_class{% endblock %}
+{% block body %}
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" width="973" height="347">
+        <param name=movie value="{{ MEDIA_URL }}banner3.swf">
+        <param name=quality value=high>
+        <embed src="{{ MEDIA_URL }}banner3.swf" quality=high pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="973" height="347">
+        </embed>
+    </object>
+    <table id="home_table" width="973" border="0" cellspacing="0" cellpadding="0" style="margin:0;">
+      <tr>
+        <td height="15" colspan="3"><img src="{{ MEDIA_URL }}images/topbar.jpg" width="973" height="15"></td>
+      </tr>
+      <tr bgcolor="#f0f0f0">
+        <td width="586">
+          <div align="center">
+            <table width="550" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+              <tr>
+                <td class="hometext" rowspan="3" width="15">
+                    <img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1">
+                </td>
+                <td class="hometext" height="15">
+                  <img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1">
+                </td>
+                <td class="hometext" rowspan="3" width="15"><img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1"></td>
+              </tr>
+              <tr>
+                <td class="hometext">
+                  <p class="hometext">Welcome to <b>ratemepopular.com,</b>
+                    Upload an image of yourself, your look, your outfit and
+                    anything else you want... and find out if you are popular
+                    or not! </p>
+                    <p><a href="{% if request.user.is_authenticated %}{% url what_next %}{% else %}{% url acct_signup %}{% endif %}"><img src="{{ MEDIA_URL }}images/getstarted.jpg" width="285" height="51" border="0"></a></p>
+                </td>
+              </tr>
+              <tr>
+                <td class="hometext" height="15"><img src="{{ MEDIA_URL }}images/spacer_gr.gif" width="1" height="1"></td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td width="50"><img src="{{ MEDIA_URL }}images/spacer.jpg" width="1" height="1"></td>
+        <td width="337">
+          <table width="337" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="160"><img src="{{ MEDIA_URL }}images/downloadapp.jpg" width="160" height="122"></td>
+              <td width="177"><img src="{{ MEDIA_URL }}images/app.jpg" width="177" height="122"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td height="15" colspan="3"><img src="{{ MEDIA_URL }}images/botbar.jpg" width="973" height="15"></td>
+      </tr>
+    </table>
+{% endblock %}

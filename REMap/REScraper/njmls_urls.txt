@@ -1,0 +1,11 @@
+http://njmls.com/cf/search.cfm?LineNbr=1&StartRow=1&thrshld=true&Cat=2&Town=0903%2C0906%2C0908%2C0911%2C0912&MinPrice=400000&MaxPrice=850000&bdrms=0&baths=0&HTMLPage=select.cfm?County=Hudson&sortmethod=area&display=20&id=999999&searchtype=1
+http://njmls.com/cf/search.cfm?LineNbr=2&StartRow=21&thrshld=true&Cat=2&Town=0903%2C0906%2C0908%2C0911%2C0912&MinPrice=400000&MaxPrice=850000&bdrms=0&baths=0&HTMLPage=select.cfm?County=Hudson&sortmethod=area&display=20&id=999999&searchtype=1
+http://njmls.com/cf/search.cfm?LineNbr=1&StartRow=1&thrshld=true&Cat=2&Town=0206%2C0213%2C0219%2C0245%2C0250&MinPrice=400000&MaxPrice=850000&bdrms=0&baths=0&HTMLPage=select.cfm?County=Bergen&sortmethod=area&display=20&id=999999&searchtype=1
+http://njmls.com/cf/search.cfm?LineNbr=2&StartRow=21&thrshld=true&Cat=2&Town=0206%2C0213%2C0219%2C0245%2C0250&MinPrice=400000&MaxPrice=850000&bdrms=0&baths=0&HTMLPage=select.cfm?County=Bergen&sortmethod=area&display=20&id=999999&searchtype=1
+http://njmls.com/cf/search.cfm?LineNbr=2&StartRow=21&thrshld=true&Cat=1%2C3%2C2&Town=0206%2C0213%2C0219%2C0245%2C0250&MinPrice=400000&MaxPrice=1000000&bdrms=0&baths=0&HTMLPage=select.cfm?County=Bergen&sortmethod=area&display=20&id=999999&searchtype=1
+
+http://photos.njmls.com/thumbnails/2636485.1.jpg
+http://njmls.com/cf/details.cfm?mls_number=2636485&id=999999
+
+
+http://njmls.com/cf/search.cfm?LineNbr=1&StartRow=1&thrshld=true&Cat=2&Town=0903%2C0906%2C0908%2C0911%2C0912&MinPrice=400000&MaxPrice=1000000&bdrms=0&baths=0&HTMLPage=select.cfm?County=Hudson&sortmethod=area&display=20&id=999999&searchtype=1

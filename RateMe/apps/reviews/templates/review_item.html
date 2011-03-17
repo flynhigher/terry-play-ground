@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load humanize %}
+{% load review_tags %}
+
+<div class="review-item">
+{% if enabled %}
+<form id="review_picture_{{ image.id }}" action="{% url pictures_review image.id %}" method="get">
+{%  endif %}
+<div class="review-item-question">
+{% if image.question %}
+{{ image.question }}
+{% endif %}
+{% if show_username %}
+<span class="review-item-username">- <a href="{% url profile_detail image.member.username %}">{{ image.member }}</a></span>
+{% endif %}
+</div>
+<div class="review-item-rate">
+{% for i in score_range %}
+    {% show_rate_item image.id i review.score disabled %}
+{% endfor %}
+</div>
+<div class="review-item-comment">
+{% show_comment_item image.id review.comment disabled %}
+{% if review.user %}
+<span class="reviewer">- {{ review.user }}</span>
+{% endif %}
+</div>
+{% if enabled %}
+<input type="image" src="{{ media_url }}images/rateme_btn.jpg" value="Rate" />
+</form>
+{% endif %}
+</div>

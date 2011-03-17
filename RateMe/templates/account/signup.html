@@ -1,0 +1,46 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Register" %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/registerp.jpg" />
+{% endblock %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <p class="bigbluetext">{% trans "You are already logged in." %}</p>
+    {% else %}
+        <p class="bigbluetext">{% trans "Already registered?" %} <a href="{% url acct_login %}">{% trans "Just Login" %}</a></p>
+        <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}">
+
+        <fieldset class="inlineLabels">
+                {{ form|as_uni_form }}
+            </fieldset>
+            <p>
+                <input type="image" src="{{ MEDIA_URL }}images/register_btn.jpg" value="{% trans "Register" %}" />
+            </p>
+        </form>
+
+        <p>
+        <b><span class="judgelnk">Yep,
+          this is all the info we need to set you up. Once you activate
+          your account, login, edit your profile and start uploading
+          right away!</span></b>
+        </p>
+        <p><a href="{% url judge_list %}" class="registd">Interested in learning more about our judges? Click here</a></p>
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+        $(function(){
+            $('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $('#id_username'), event: 'change'});
+            $("#id_username").focus();
+        });
+    </script>
+{% endblock %}

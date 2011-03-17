@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with current_site.name as site_name %}{{ site_name }} user has selected you as judge{% endblocktrans %}

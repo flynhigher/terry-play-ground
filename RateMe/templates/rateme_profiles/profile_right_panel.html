@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load review_tags %}
+
+{% if photos %}
+    <p class="contentheader">{% if is_me %}A track of all your pictures!{% else %}Pictures {{ other_user }} uploaded{% endif %}</p>
+{% autopaginate photos %}
+    {% for photo in photos %}
+        <div class="thumb-row clearfix">
+    <div class="gallery-photo-thumb">
+        <img src="{{ photo.get_rateme_url }}" alt="{{ photo.title }}"/>
+    </div>
+    {% show_review photo request.user %}
+    </div>
+    {% endfor %}
+    {% paginate %}
+{% else %}
+<p class="contentheader">No pictures were found. You can <a href="{% url photo_upload %}">upload pictures here.</a></p>
+{% endif %}

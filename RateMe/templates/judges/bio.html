@@ -1,0 +1,21 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load humanize %}
+{% load judge_tags%}
+
+{% block head_title %}{% blocktrans %}Judge Bio{% endblocktrans %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/judges.jpg" />
+{% endblock %}
+
+{% block body %}
+    {% if judge %}
+       {% show_judge judge %}
+    {% else %}
+       <p>No judge were found.</p>
+    {% endif %}
+{% endblock %}

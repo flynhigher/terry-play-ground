@@ -1,0 +1,70 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "Guidelines" %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/guidelinesp.jpg" alt="Guidelines" />
+{% endblock %}
+
+{% block body %}
+<table width="973" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td width="430" height="1"><img src="{{ MEDIA_URL }}images/spacer_gr.gif" width="1" height="1"></td>
+  <td rowspan="2" width="73">
+    <div align="center"><img src="{{ MEDIA_URL }}images/spacer_gr.gif" width="1" height="350"></div>
+  </td>
+  <td width="450" height="1"><img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1"></td>
+</tr>
+<tr>
+  <td width="450" valign="top">
+    <p class="maintext"><span class="maintext">The following guidelines
+      are designed to help provide a quality environment for our users.
+      Please take a minute to read them and keep them in mind when
+      you are setting up your profile.</span></p>
+    <p class="maintext">We welcome all questions and commentary, including
+      constructive feedback. We do expect that users upload content
+      and images that are both relevant and respectful to this community
+      as a whole. We reserve the right to remove any content or image
+      that does not adhere to our guidelines and to block anyone who
+      violates them repeatedly.</p>
+    <p><b class="photohd">Specifically, we do not tolerate these kinds
+      of uploads:</b></p>
+    <ul style="color:#22acd2">
+      <li><span class="maintext">No nudity or other sexually explicit
+        content</span></li>
+      <li><span class="maintext">No content that contains hate speech</span></li>
+      <li><span class="maintext">No content that attacks an individual
+        or group</span></li>
+      <li><span class="maintext">No content that contains self harm
+        or excessive violence</span></li>
+      <li><span class="maintext">No content that contains illegal
+        drug use</span></li>
+    </ul>
+  </td>
+  <td width="450" valign="top"><span class="photohd">To upload photos,
+    take the following steps:</span><br>
+    <ul style="color:#22acd2">
+      <li><span class="maintext"> Go to your profile.</span></li>
+      <li><span class="maintext">Enter personal information that include,
+        your email, password, address and phone number</span></li>
+      <li><span class="maintext">Upload image: ensure images are the
+        correct format. We accepts jpg, jpeg, gif, png file formats.
+        Image size must not exceed 1MB</span></li>
+      <li><span class="maintext">Enter questions / comments: You are
+        limited to 500 characters</span></li>
+      <li><span class="maintext">Check whether you wish to make profile
+        public or not</span></li>
+      <li><span class="maintext">Save profile</span></li>
+    </ul>
+    <p class="photohd">Termination</p>
+    <p class="maintext">If you violate the letter or spirit of this
+      Statement, or otherwise create risk or possible legal exposure
+      for us, we reserve the right to revoke your membership from
+      the website. We will notify you of your termination by email.</p>
+  </td>
+</tr>
+</table>
+{% endblock %}

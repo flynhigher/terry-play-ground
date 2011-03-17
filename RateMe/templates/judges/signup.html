@@ -1,0 +1,38 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load humanize %}
+{% load judge_tags%}
+{% load uni_form_tags %}
+
+{% block head_title %}{% blocktrans %}Judge Signup{% endblocktrans %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/judges.jpg" />
+{% endblock %}
+
+{% block body %}
+    {% if judge %}
+        <p class="bigbluetext">
+        {% if judge.is_active %}
+            You are already our judge.<br />
+            You can click "<b>Rate Me</b>" button on the top navigation or <a href="{% url photo_rate %}">click here</a> and start rating user's pictures.
+        {% else %}
+            You have already submitted the judge signup form.
+        {% endif %}
+        </p>
+    {% else %}
+    <p class="bigbluetext">Please fill out below Judge signup form.</p>
+        <form class="signup uniForm" id="signup_form" method="post" action="{% url judge_signup %}">
+
+        <fieldset class="inlineLabels">
+                {{ form|as_uni_form }}
+            </fieldset>
+            <p>
+                <input type="image" src="{{ MEDIA_URL }}images/register_btn.jpg" value="{% trans "Register" %}" />
+            </p>
+        </form>
+    {% endif %}
+{% endblock %}

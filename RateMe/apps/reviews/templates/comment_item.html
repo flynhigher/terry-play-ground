@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load humanize %}
+
+{% if disabled %}
+{{ value }}
+{% else %}
+<input name="comment_{{ image_id }}" type="text" class="review_comment_input" value="{{ value }}" />
+{% endif %}

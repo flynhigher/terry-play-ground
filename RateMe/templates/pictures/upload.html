@@ -1,0 +1,43 @@
+{% extends "pictures/base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+{% load judge_tags %}
+
+{% block head_title %}{% blocktrans %}Upload Picture{% endblocktrans %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/uploadp.jpg" />
+{% endblock %}
+
+{% block body %}
+    <div class="right_panel">
+    <div class="upload_form">
+    <form class="uniForm" id="edit-profile" method="POST" enctype="multipart/form-data" action="">
+        <fieldset class="inlineLabels">
+            {{ photo_form|as_uni_form }}
+            <div class="form_block">
+                <input type="hidden" name="action" value="upload" />
+                <p><input type="image" src="{{ MEDIA_URL }}images/uploadbtn.jpg" value="{% trans "Upload" %}" /></p>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+    <div class="upload_form_right bigbluetext">
+        <a href="{% url judge_list %}">Interested in learning more about our judges? Click here</a>
+    </div>
+    </div>
+    <div class="left_panel">
+    <p><b>My Judge</b></p>
+    <div id="judge_short">
+    {% if myjudge %}
+    {% show_judge_short myjudge %}
+
+    <div class="switch">Want to switch judge?</div>
+    {% else %}
+    <div class="switch">No judge is assgined for you.<br/>Want to select judge?</div>
+    {% endif %}
+    <div class="switch_click"><a href="{% url judge_list %}">click here</a></div>
+    </div>
+    </div>
+{% endblock %}
