@@ -1,0 +1,14 @@
+Amazon|http://www.amazon.com/gp/goldbox/ref=cs_top_nav_gb27
+Newegg Daily Deal|http://www.newegg.com/DailyDeal.aspx?Name=DailyDeal|Doesn't support iframe.
+Dell|http://dell.com
+Dell Daily Deal|http://accessories.us.dell.com/sna/sna.aspx?c=us&cs=19&l=en&s=dhs&~topic=daily_deals_available
+Lenovo|http://lenovo.com
+Woot|http://woot.com
+DailySteals|http://www.dailysteals.com/
+1saleaday|http://www.1saleaday.com/
+TigerDirect|http://tigerdirect.com
+Microcenter|http://microcenter.com
+J&R|http://www.jr.com/
+WalMart Value of the day|http://www.walmart.com/catalog/catalog.gsp?cat=1058864&povid=cat14503-env172199-module112609-lLinkCCDDM-hp|Doesn't support iframe.
+WalMart|http://walmart.com|Doesn't support iframe.
+Frys Weekly Deal|http://www.frys.com/template/onad/product_navigation/?site=sa:TOP_BANNER:Spot1|Doesn't support iframe.
