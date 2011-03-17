@@ -1,0 +1,45 @@
+{% extends "pictures/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load review_tags %}
+{% load rateme_profile_tags %}
+
+{% block head_title %}{% blocktrans %}Pictures waiting for rating{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+    <link href='{{ MEDIA_URL }}css/jquery.rating.css' type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/rme.jpg" />
+{% endblock %}
+
+{% block body %}
+    <div class="right_panel">
+    {% if photos %}
+        <p class="contentheader">{% trans "Pictures waiting for your rating" %}</p>
+    {% autopaginate photos %}
+        {% for photo in photos %}
+        <div class="thumb-row clearfix">
+        <div class="gallery-photo-thumb">
+            <img src="{{ photo.get_rateme_url }}" alt="{{ photo.title }}"/>
+        </div>
+        {% show_review photo request.user show_username %}
+        </div>
+        {% endfor %}
+        {% paginate %}
+    {% else %}
+        <p class="contentheader">{% trans "No pictures were found." %}</p>
+    {% endif %}
+    </div>
+    <div class="left_panel">
+    {% show_rateme_profile request request.user %}
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{{ MEDIA_URL }}js/avatar.js" type="text/javascript"></script>
+    <script src='{{ MEDIA_URL }}js/jquery.rating.js' type="text/javascript" language="javascript"></script>
+{% endblock %}

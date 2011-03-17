@@ -1,0 +1,13 @@
+{% extends "rateme_profiles/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Edit Profile{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Edit Profile" %}</h1>
+    
+    {% include "rateme_profiles/profile_form.html" %}
+    
+{% endblock %}

@@ -1,0 +1,4 @@
+{% load i18n %}
+{% load humanize %}
+
+<input name="score_{{ image_id }}" type="radio" class="star" value="{{ value }}"{% if disabled %} disabled="disabled"{% endif %}{% if checked %} checked="checked" persisted="yes"{% endif %}/>

@@ -1,0 +1,30 @@
+{% extends "product/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load product_tags %}
+
+{% block head_title %}{% blocktrans with product.name as product_name %}Topics for {{ product_name }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Price list for Product" %} <a href="{% url product_detail product.slug %}">{{ product.name }}</a></h1>
+    
+    {% autopaginate product.topics.all %}
+    
+    {% for topic in product.topics.all %}
+        {% show_product_topic topic %}
+    {% endfor %}
+    
+    {% paginate %}
+    
+    <h2>{% trans "New Price" %}</h2>
+    
+    <form action="{% url product_prices product.slug %}" method="POST">
+        <table>
+            {{ price_form }}
+            <tr><td><input type="submit" value="{% trans "Create New Price" %}" /></td></tr>
+        </table>
+        <input type="hidden" name="next" value="{{ request.path }}" />
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,113 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block head_title %}{% endblock %}</title>
+        <script language="JavaScript">
+        <!--
+        function MM_preloadImages() { //v3.0
+          var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+            var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+            if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+        }
+
+        function MM_swapImgRestore() { //v3.0
+          var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+        }
+
+        function MM_findObj(n, d) { //v4.0
+          var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+            d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+          if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+          for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+          if(!x && document.getElementById) x=document.getElementById(n); return x;
+        }
+
+        function MM_swapImage() { //v3.0
+          var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+           if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+        }
+//-->
+        </script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+// has the google object loaded?
+        if (window.google && window.google.load) {
+            google.load("jquery", "1.3.2");
+        } else {
+            document.write('<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.3.2.min.js"><\/script>');
+        }
+        </script>
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/rateme.css" type="text/css">
+        <!--[if IE]><style>
+            div {
+                zoom: 1; /* trigger hasLayout */
+            }
+        </style><![endif]-->
+        <!--link rel="stylesheet" href="{{ MEDIA_URL }}pinax/css/base.css" /-->
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/facebox.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/announcements.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/accounts.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/uni-form.css" />
+        {% if LANGUAGE_BIDI %}
+        <style type="text/css" media="screen">
+            div.right_panel {
+                float: left; /* hotfix for sidebar */
+            }
+        </style>
+        {% endif %}
+        {% block extra_head_base %}
+            {% block extra_head %}{% endblock %}
+        {% endblock %}
+    </head>
+    
+    <body class="{% block body_class %}{% endblock %}" onLoad="MM_preloadImages('{{ MEDIA_URL }}images/judgesoff.jpg','{{ MEDIA_URL }}images/getstartoff.jpg','{{ MEDIA_URL }}images/uploadoff.jpg','{{ MEDIA_URL }}images/myprofileoff.jpg','{{ MEDIA_URL }}images/homeoff.jpg','{{ MEDIA_URL }}images/ratemeoff.jpg')" {% block body_extra_attr %}{% endblock %}>
+        {% if site_wide_announcements %}
+            <div id="site_wide_announcements">
+                <ul>
+                    {% for announcement in site_wide_announcements %}
+                    <li>
+                        <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+                        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <div id="top_bar">
+            <span class="logo">{% block logo_link_image %}{% endblock %}</span>
+            <span class="login">{% block login %}{% endblock %}</span>
+        </div>
+        <div id="top_menu" >{% block top_menu %}{% endblock %}</div>
+        <div id="title">{% block page_header_image %}{% endblock %}</div>
+        {% if messages %}
+        <div id="message_bar">
+        <ul id="messages">
+            {% for message in messages %}
+            <li id="message_{{ forloop.counter }}"><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
+            {% endfor %}
+        </ul>
+        <div id="message_close"><a href="#" onclick="$('#message_bar').slideUp(); return false;">Close</a></div>
+        </div>
+        {% endif %}
+
+        {% block body_outer %}
+        <div id="body" class="{% block extra_body_class %}body_class{% endblock %}">
+            {% block body %}
+            {% endblock %}
+            
+        </div>
+        {% endblock %}
+        
+        <div id="footer">{% block footer %}{% endblock %}</div>
+        
+        <!--script src="{{ MEDIA_URL }}pinax/js/base.js" type="text/javascript"></script-->
+            <script src="{{ MEDIA_URL }}js/uni-form.jquery.js" type="text/javascript"></script>
+        {% include "facebox_js.html" %}
+        {% block extra_body_base %}
+            {% block extra_body %}{% endblock %}
+        {% endblock %}
+    </body>
+</html>

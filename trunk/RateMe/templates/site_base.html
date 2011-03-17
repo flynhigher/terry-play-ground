@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load openid_tags %}
+{% load ifsetting_tag %}
+
+{% block extra_head_base %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/avatar.css" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/photos.css" />
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block login %}
+    {% if user.is_authenticated %}
+        {% openid_icon openid user %}<b>{{ user }}</b> | <a href="{% url acct_email %}">{% trans "Account" %}</a> | {% if user.is_staff %}<a href="/admin/">{% trans "Admin" %}</a> | {% endif %}<a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
+    {% else %}
+        <a href="{% url acct_login %}"><img src="{{ MEDIA_URL }}images/login.jpg" alt={% trans "Login" %} /></a> {% ifsetting ACCOUNT_OPEN_SIGNUP %}<a href="{% url acct_signup %}"><img src="{{ MEDIA_URL }}images/register.jpg" alt={% trans "Register" %} /></a>{% endifsetting %}
+    {% endif %}
+{% endblock %}
+
+{% block logo_link_image %}<a href="{% url home %}"><img src="{{ MEDIA_URL }}images/logo.jpg" alt="Rate Me Popular"/></a>{% endblock %}
+
+{% block top_menu %}
+<ul>
+<li><a href="/" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image1','','{{ MEDIA_URL }}images/homeoff.jpg',1)"><img src="{{ MEDIA_URL }}images/homeon.jpg" width="195" height="60" border="0" name="Image1"></a></li>
+<li><a href="{% if request.user.is_authenticated %}{% url what_next %}{% else %}{% ifsetting ACCOUNT_OPEN_SIGNUP %}{% url acct_signup %}{% endifsetting %}{% endif %}" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','{{ MEDIA_URL }}images/getstartoff.jpg',1)"><img src="{{ MEDIA_URL }}images/getstarton.jpg" width="194" height="60" border="0" name="Image2"></a></li>
+<li><a href="{% url judge_list %}" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','{{ MEDIA_URL }}images/judgesoff.jpg',1)"><img src="{{ MEDIA_URL }}images/judgeson.jpg" width="196" height="60" border="0" name="Image3"></a></li>
+<li><a href="{% if perms.judges.is_judge %}{% url photo_rate %}{% else %}{% url photo_upload %}{% endif %}" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','{{ MEDIA_URL }}images/{% if perms.judges.is_judge %}ratemeoff{% else %}uploadoff{% endif %}.jpg',1)"><img src="{{ MEDIA_URL }}images/{% if perms.judges.is_judge %}ratemeon{% else %}uploadon{% endif %}.jpg" width="194" height="60" border="0" name="Image4"></a></li>
+<li><a href="{% if user.is_authenticated %}{% url profile_detail user %}{% else %}{% url acct_login %}{% endif %}" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image5','','{{ MEDIA_URL }}images/myprofileoff.jpg',1)"><img src="{{ MEDIA_URL }}images/myprofileon.jpg" width="193" height="60" name="Image5" border="0"></a></li>
+</ul>
+{% endblock %}
+
+{% block footer %}
+<table border="0" cellpadding="0" cellspacing="0" class="footnote">
+<tr>
+    <td width="973" bgcolor="#000000" height="60">
+        <div align="center">
+          <table width="930" border="0" cellspacing="0" cellpadding="0" height="48">
+            <tr>
+              <td width="130"><a href="#"><img src="{{ MEDIA_URL }}images/fb.gif" width="50" height="45" border="0"></a></td>
+              <td width="500">
+                <div align="center" class="legal">
+                  <p class="legaltxt">&copy; Copyright 2010 Ratemepopular.com.
+                    All Rights Reserved.</p>
+                </div>
+              </td>
+              <td width="300">
+                <div align="right">
+                  <p class="legaltxt"><a href="{% url about %}" class="legaltxt">About
+                    Us</a> l <a href="{% url contactus %}" class="legaltxt">Contact
+                    Us</a> l <a href="{% url terms %}" class="legaltxt">Terms</a>
+                    l <a href="{% url guidelines %}" class="legaltxt">Guidelines</a></p>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+    </td>
+</tr>
+</table>
+{% endblock %}

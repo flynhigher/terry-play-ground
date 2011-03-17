@@ -1,0 +1,6 @@
+User '{{ user }}' has requesed to be a judge with below information.
+
+Email Address: {{ user.email }}
+First Name: {{ profile.firstname }}
+Last Name: {{ profile.lastname }}
+Bio: {{ bio }}

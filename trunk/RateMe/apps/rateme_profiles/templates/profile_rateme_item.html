@@ -1,0 +1,29 @@
+{% load i18n %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load humanize %}
+
+<div class="vcard">
+{% if user %}
+    <div id="profile_avatar">
+        <div><img src="{% avatar_url user 105 %}" alt="Photo of {{ user }}" class="photo" /></div>
+        {% if is_me %}
+        <a href="{% url avatar_change %}" id="avatar_replace">(replace)</a>
+        {% endif %}
+    </div>
+
+    {% if user.get_profile.name %}
+        <p class="profiletext">{{ user.get_profile.name }}</p>
+    {% else %}
+        <p class="fn profiletext">{{ user }}</p>
+    {% endif %}
+
+    <div class="about">
+        {% if user.get_profile.about %}<p>{{ user.get_profile.about }}</p>{% endif %}
+    </div>
+
+    {% if is_me %}
+        <p class="profiletext"><a href="{% url profile_edit %}" rel="facebox">Edit profile</a></p>
+    {% endif %}
+{% endif %}
+</div><!--/vcard-->

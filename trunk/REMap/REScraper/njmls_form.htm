@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		  	<form action="search.cfm?&thrshld=true" method=POST name="selectPage">
+			<INPUT TYPE="hidden" NAME="id" VALUE="999999">
+              <tr> 
+                <td width="262" class="generalcopybig">property price</td>
+                <td width="15" bgcolor="#FFFFFF" class="generalcopybig">&nbsp;</td>
+                <td width="262" class="generalcopybig">property location</td>
+              </tr>
+            </table>
+            <table width="550" align="center" cellpadding="0" cellspacing="0" bgcolor="ffffed">
+              <tr> 
+                <td width="265" rowspan="2" class="generalcopybig"><table width="260" align="center" cellpadding="0" cellspacing="0">
+                    <tr> 
+                      <td class="generalcopy"><div align="right">Minimum Price:&nbsp;</div></td>
+                      <td> <select name="MINPRICE">
+                          <option value="0" SELECTED>$0 
+                          <option value="50000">$50,000 
+                          <option value="100000">$100,000 
+                          <option value="150000">$150,000 
+                          <option value="200000">$200,000 
+                          <option value="250000">$250,000 
+                          <option value="300000">$300,000 
+                          <option value="350000">$350,000 
+                          <option value="400000">$400,000 
+                          <option value="450000">$450,000 
+                          <option value="500000">$500,000 
+                          <option value="550000">$550,000 
+                          <option value="600000">$600,000 
+                          <option value="650000">$650,000 
+                          <option value="700000">$700,000 
+                          <option value="750000">$750,000 
+                          <option value="800000">$800,000 
+                          <option value="850000">$850,000 
+                          <option value="900000">$900,000 
+                          <option value="1000000">$1,000,000 
+                          <option value="1500000">$1,500,000 
+                          <option value="2000000">$2,000,000 
+                          <option value="2500000">$2,500,000 
+                          <option value="3000000">$3,000,000 </select></td>
+                    </tr>
+                    <tr> 
+                      <td class="generalcopy"><div align="right"></div></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr> 
+                      <td class="generalcopy"><div align="right">Max Price:&nbsp;&nbsp;</div></td>
+                      <td><select name="MAXPRICE">
+                          <option value="100000">$100,000 
+                          <option value="150000">$150,000 
+                          <option value="200000">$200,000 
+                          <option value="250000">$250,000 
+                          <option value="300000">$300,000 
+                          <option value="350000">$350,000 
+                          <option value="400000">$400,000 
+                          <option value="450000">$450,000 
+                          <option value="500000" SELECTED>$500,000 
+                          <option value="550000">$550,000 
+                          <option value="600000">$600,000 
+                          <option value="650000">$650,000 
+                          <option value="700000">$700,000 
+                          <option value="750000">$750,000 
+                          <option value="800000">$800,000 
+                          <option value="850000">$850,000 
+                          <option value="900000">$900,000 
+                          <option value="1000000">$1,000,000 
+                          <option value="1500000">$1,500,000 
+                          <option value="2000000">$2,000,000 
+                          <option value="2500000">$2,500,000 
+                          <option value="99999999">$3,000,000 and Over </select></td>
+                    </tr>
+                    <tr> 
+                      <td class="generalcopy"><div align="right"></div></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr> 
+                      <td class="generalcopy"><div align="right"># of Bedrooms:&nbsp;&nbsp;</div></td>
+                      <td> <select name="bdrms">
+                          <option value="0" SELECTED>0 or more 
+                          <option value="01">1 or more 
+                          <option value="02">2 or more 
+                          <option value="03">3 or more 
+                          <option value="04">4 or more 
+                          <option value="05">5 or more </select></td>
+                    </tr>
+		     <tr> 
+                      <td class="generalcopy"><div align="right"></div></td>
+                      <td>&nbsp;</td>
+                    </tr>
+		    <tr> 
+                      <td class="generalcopy"><div align="right"># of Full Baths:&nbsp;&nbsp;</div></td>
+                      <td> <select name="baths">
+                          <option value="0" SELECTED>0 or more 
+                          <option value="01">1 or more 
+                          <option value="02">2 or more 
+                          <option value="03">3 or more 
+                          <option value="04">4 or more 
+                          <option value="05">5 or more </select></td>
+                    </tr>
+                  </table></td>
+                <td width="20" rowspan="2" bgcolor="#FFFFFF">&nbsp;</td>
+                <td width="265" align="center" class="generalcopybig"><div align="center" class="generalsm">select 
+                    a Town to Search:<br>
+                    (hold Ctrl for multiple towns)<br>
+										 </div></td>
+              </tr>
+              <tr> 
+                <td><div align="center">
+                    <select name="Town" width=30 size=5 MULTIPLE>
+                       
+                        <option value="9   ">* ALL OF HUDSON COUNTY  
+                        <option value="0901">Bayonne  
+                        <option value="0902">East Newark  
+                        <option value="0903">Guttenberg  
+                        <option value="0904">Harrison  
+                        <option value="0905">Hoboken  
+                        <option value="0906">Jersey City  
+                        <option value="0907">Kearny  
+                        <option value="0908">North bergen  
+                        <option value="0909">Secaucus  
+                        <option value="0910">Union City  
+                        <option value="0911">Weehawken  
+                        <option value="0912">West New York  
+                        <option value="99  ">* ALL OTHER AREAS  
+                    </select>
+                    <br />
+                    </div></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td><table width="550" align="center" cellpadding="3" cellspacing="0" bgcolor="FCBE11">
+              <tr> 
+                <td class="generalcopybig">select the type(s) of properties to 
+                  be included in the results</td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr> 
+          <td><table width="550" align="center" cellpadding="0" cellspacing="0" bgcolor="ffffed">
+              <tr> 
+                <td><table width="550" align="center" cellpadding="0" cellspacing="0">
+                    <tr> 
+                      <td width="268"><table width="260" align="center" cellpadding="0" cellspacing="0">
+                          <tr> 
+                            <td class="generalcopy"><input type="hidden" name="trigger" value="99"> 
+                              <input type="Checkbox" name="Cat" value="1" checked> 
+                              &nbsp;&nbsp; Residential Single Family</td>
+                          </tr>
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="3" checked> 
+                              &nbsp;&nbsp; Condo/Coop/Townhouse</td>
+                          </tr>
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="4"> 
+                              &nbsp;&nbsp; Rentals-Residential</td>
+                          </tr>
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="2"> 
+                              &nbsp;&nbsp; Multi-Family</td>
+                          </tr>
+                        </table></td>
+                      <td width="20" bgcolor="#FFFFFF">&nbsp;</td>
+                      <td width="268"><table width="260" align="center" cellpadding="0" cellspacing="0">
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="5"> 
+                              &nbsp;&nbsp; Commerical</td>
+                          </tr>
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="7"> 
+                              &nbsp;&nbsp; Business</td>
+                          </tr>
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="8"> 
+                              &nbsp;&nbsp; Land for Sale</td>
+                          </tr>
+                          <tr> 
+                            <td class="generalcopy"><input type="Checkbox" name="Cat" value="9"> 
+                              &nbsp;&nbsp; 5+ Family/Mixed Use Bldgs </td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+          </td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td><table width="550" align="center" cellpadding="0" cellspacing="0" bgcolor="FCBE11">
+              <tr> 
+                <td><div align="center" class="generalcopybig">display 
+                    <select name="Display">
+                      <option value="5" selected>5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                    </select>
+                    listings per page, sort by 
+                    <select name="sortmethod">
+                      <option value="area" selected>Town</option>
+                      <option value="price">Price</option>
+                    </select>
+                  </div></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td><div align="center"><input type="Image" src="../images/beginsearch-button.jpg" width="80" height="16" name="submit">&nbsp;
+              <A HREF="javascript:document.forms[1].reset();"><img border="0" src="../images/startover-button.jpg" width="80" height="16"></a>
+            </div></td>
+        </tr>
+      </table> </td>
+	
+	</body>
+</html>

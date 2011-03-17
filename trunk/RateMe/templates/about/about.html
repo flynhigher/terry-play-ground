@@ -1,0 +1,73 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "About Us" %}{% endblock %}
+
+{% block page_header_image %}
+<img src="{{ MEDIA_URL }}images/aboutus.jpg" alt="About Us" />
+{% endblock %}
+
+{% block body %}
+<table width="973" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td colspan="3" height="20"><img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1"></td>
+</tr>
+<tr>
+  <td width="450" height="41" class="headers">our profile</td>
+  <td rowspan="4" height="62" class="headers" width="73">
+    <div align="center"></div>
+    <div align="center"><img src="{{ MEDIA_URL }}images/spacer_gr.gif" width="1" height="320"></div>
+  </td>
+  <td width="450" height="41" class="headers">our members</td>
+</tr>
+<tr>
+  <td width="450" height="1"><img src="{{ MEDIA_URL }}images/spacer_gr.gif" width="450" height="1"></td>
+  <td width="450" height="1"><img src="{{ MEDIA_URL }}images/spacer_gr.gif" width="450" height="1"></td>
+</tr>
+<tr>
+  <td valign="top" height="20"><img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1"></td>
+  <td valign="top" height="20"><img src="{{ MEDIA_URL }}images/spacer.gif" width="1" height="1"></td>
+</tr>
+<tr>
+  <td width="450" valign="top">
+    <p class="maintext"><span class="maintext"><b>Founded in 2010</b>,
+      with headquarters in Long Island, New York <b>Ratemepopular.com</b>
+      is the best way to get an unbiased, honest opinion about every
+      aspect of your appearance. <b>Ratemepopular.com</b> is a free
+      online social website where a user can upload an image of themselves
+      or outfit accessory and find out if they look popular or not.
+      Each user can pick from our list of online savvy judges and
+      within minutes they will receive a response! When uploading
+      an image the user may attach a question or statement so our
+      judges know exactly what to rate!</span></p>
+    <p class="maintext">Each user on Ratemepopular.com will create
+      a private, personalized home page with their profile. The home
+      page will keep track of your rated pictures.</p>
+    <p class="maintext">Users may opt to share their ratings and profile
+      with other users. Anyone can sign up to ratemepopular.com, and
+      be evaluated in a safe and trusted environment. Then you can
+      face the world with confidence and proven style! <b>Everyone
+      has a popular side let us show you yours</b></p>
+  </td>
+  <td width="450" valign="top">
+    <table width="410" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="195" class="photohd">Joel Berkowitz</td>
+        <td width="20">&nbsp;</td>
+        <td width="195" class="photohd">Joshua Berkowitz</td>
+      </tr>
+      <tr>
+        <td width="195" valign="top" class="phototxt"><b>Founder and
+          CEO</b><br>
+          Student, Queens College, New York</td>
+        <td width="20">&nbsp;</td>
+        <td width="195" valign="top" class="phototxt"><b>CO Founder</b><br>
+          Student, Mount Sinai School of Medicine, New York</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+{% endblock %}

@@ -1,0 +1,278 @@
+
+<html>
+<head>
+<title>Paragon XL Virtual Earth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="http://www.priv.njmls.xmlsweb.com/include/banner.css">
+<!--<script src="http://www.priv.njmls.xmlsweb.com/snapins/VirtualEarth/v3/mapcontrol.js"></script>      -->
+<script src="http://dev.virtualearth.net/mapcontrol/v3/mapcontrol.js"></script>
+<script>
+var map = null;
+var pinID = 1;
+var listing_loc;
+var locs = new Array;
+var locs2 = new Array;
+var anchor = 0;	//need to close poly at start point
+var searcharea = 0
+var pi = Math.PI;//less typing that way
+var DegreesPerMile = 145;
+var radi1;
+var pinID2 = 100;
+var drawnone = false
+var XMLVersion = "Version 1";  //Could use a function call to get this value//
+var fakeXMLTimestamp = "1981-01-01 00:00:00.000";
+var lookedfor =null
+function DegToRad(x){
+  x = x * pi / 180;
+  return x;
+}
+function RadToDeg(x){
+  x = x * 180 / pi;
+  return x;
+}
+
+function GetMap()        
+{
+	map = new VEMap('myMap');
+
+	//recenter > 1
+	
+	//lLat not null
+		
+			map.LoadMap(new VELatLong(40.7888, -74.0116), 16 ,'s' ,false);
+		
+   map.AttachEvent('oncontextmenu', BackOff);
+   
+
+}
+
+	function AddPin()
+	{
+		var PinInfo = "<table><tr><td valign='center'><img src='http://www.priv.njmls.xmlsweb.com//Images/MLS_Photos/2540611.1.jpg' width='100'></td><td style='font:normal 8pt arial, helvetica, sans-serif;'><a href='http://www.priv.njmls.xmlsweb.com/public/Reports.asp?ID=2540611&ReportID=C_FULL&public=1&PropType=2'>2540611</a><br>6309&nbsp;&nbsp;JACKSON<br>$679,000<br>6 Bedrooms<br>4/1 Bathrooms</td><td></tr></table>"
+		var pin = new VEPushpin(pinID,
+		new VELatLong(40.7888, -74.0116),
+		'http://www.priv.njmls.xmlsweb.com/images/ve/propballoon_w_blue.gif',
+		PinInfo,
+		''
+		);
+		listing_loc = new VELatLong(40.7888, -74.0116)
+		map.AddPushpin(pin);
+		pinID++;
+	}
+		
+function DoPixelToLL(x,y)
+{
+	var ll = map.PixelToLatLong(x,y).toString();
+	alert("The latitude,longitude of the pixel at ("+x+","+y+") is: "+ll);
+}
+function DoLLToPixel()
+{
+	var center = map.LatLongToPixel(map.GetCenter());
+}
+
+function showschools(){
+     	findit('Senior High & Preparatory Schools');
+		findit('Junior High & Middle Schools');
+		findit('Elementary Schools')
+		findit('Secondary & Elementary Schools');
+		findit('Preschool & Kindergarten Schools ');
+}
+function hideschools(){
+	map.DeleteAllPushpins();
+	Directions.innerHTML =""
+	myform.address.value = ""
+	myform.zipcode.value = ""
+	GetMap();
+	AddPin();
+}
+         
+function findit(what){
+	if (what.length > 0){
+		lookedfor = what;
+		if (what.indexOf("Schools") > -1){
+         map.FindNearby(what);
+         }else{
+         map.Find(what,null,null,checkresults);
+         //map.FindNearby(what);
+         }
+    }else{
+         alert ('Enter a value to search for on the map')
+}	}
+
+function checkresults(findResults){
+	var found = false
+            for (r=0; r < findResults.length; r++)
+            {
+				if (findResults[r].ID!=null)
+					found = true;
+            }
+            if (found == false){
+				alert("No matches for "+lookedfor+".  Zoom out and serach again or try a different search");
+            }
+}
+
+function DriveGetRoute(){
+	if (myform.how[1].checked){
+	Directions.innerHTML ="<b>Finding the Quickest Route, please wait</b><br>";
+	}else{
+	Directions.innerHTML ="<b>Finding the Shortest Route, please wait</b><br>";
+	}
+
+	var start = myform.address.value.toUpperCase()  + ', '+ myform.zipcode.value.toUpperCase() 
+	var end = listing_loc
+	if (myform.units[0].checked && myform.how[0].checked){
+	map.GetRoute(start, end, VEDistanceUnit.Miles, VERouteType.Shortest,onGotRoute);
+	}
+	if (myform.units[1].checked && myform.how[0].checked){
+	map.GetRoute(start, end, VEDistanceUnit.Kilometers, VERouteType.Shortest,onGotRoute);
+	}
+	if (myform.units[0].checked && myform.how[1].checked){
+	map.GetRoute(start, end, VEDistanceUnit.Miles, VERouteType.Quickest,onGotRoute);
+	}
+	if (myform.units[1].checked && myform.how[1].checked){
+	map.GetRoute(start, end, VEDistanceUnit.Kilometers, VERouteType.Quickest,onGotRoute);
+	}
+}
+
+function onGotRoute(route)
+{
+	var routeinfo = ""
+	if (route.Itinerary.RouteType == "q"){
+	routeinfo="Quickest Route:<br>";
+	}else{
+	routeinfo="Shortest Route:<br>";
+	}
+   routeinfo += "Total distance: ";
+   routeinfo += route.Itinerary.Distance+"&nbsp;";
+   routeinfo += route.Itinerary.DistanceUnit+"<br>";
+   var len = route.Itinerary.Segments.length;
+   routeinfo+="<B>"
+   for(var i = 0; i<len ;i++){
+   if (i == len - 1) routeinfo += "<B>";
+   routeinfo += i+1+"&nbsp;"+route.Itinerary.Segments[i].Instruction+"&nbsp;";
+   if (i == 0) routeinfo +="</b>";
+   if (route.Itinerary.Segments[i].Distance > 0){
+	routeinfo+=route.Itinerary.Segments[i].Distance+"&nbsp;"+route.Itinerary.DistanceUnit+"<br>"
+   }else
+   if(i < len -1) routeinfo +="<br>"
+   }
+   routeinfo+="&nbsp;6309  JACKSON</b>"
+   Directions.innerHTML = routeinfo;
+}
+function GetCloser(e)
+{
+	map.SetCenterAndZoom(e.view.LatLong, map.GetZoomLevel() + 1);
+}
+function BackOff(e)
+{
+	map.SetCenterAndZoom(e.view.LatLong, map.GetZoomLevel() - 1);
+	
+}
+function SetRubberBand(e){
+	if (document.myform2.how[0].checked){
+		if (drawnone){
+		map.DeleteAllPushpins();
+		map.DeleteAllPolylines();
+		AddPin();
+		drawnone = false;
+		locs = new Array;
+		pinID2 = 100;
+		}
+		pinID2 = pinID2 + 1
+		var pin = new VEPushpin(pinID2,new VELatLong(e.view.LatLong.Latitude, e.view.LatLong.Longitude),'http://www.priv.njmls.xmlsweb.com/images/menu/ball_button_sm_green.gif')
+		map.AddPushpin(pin);
+		locs.push(new VELatLong(e.view.LatLong.Latitude, e.view.LatLong.Longitude))
+		if (pinID2 == 101){
+			anchor = new VELatLong(e.view.LatLong.Latitude, e.view.LatLong.Longitude)
+		}
+	}else{
+		map.SetCenter(e.view.LatLong);
+		AddPin();
+	}
+}
+function DrawPoly(points)
+{
+	map.DeleteAllPolylines();
+	map.DeleteAllPushpins();	//They don't line up exactly with the line, so hide them untill ms fixes
+	poly = new VEPolyline(1,points);
+	poly.SetWidth(3);
+	poly.SetColor(new VEColor(58,229,58,1.0));
+	map.AddPolyline(poly);
+	drawnone = true
+			myform.north.value = 0
+			myform.south.value = 0
+			myform.east.value = 0
+			myform.west.value = 0
+			myform.RubberBand.value = ""
+	for(var i=0;i<points.length;i++){//here
+		if (document.myform2.how[0].checked){//rubber band
+			document.myform.RubberBand.value += "new VELatLong(" + points[i].Latitude+"|"+ points[i].Longitude+"),";
+		}
+		if (parseFloat(myform.north.value) == 0  || parseFloat(myform.north.value) < parseFloat(points[i].Latitude))
+			myform.north.value = parseFloat(points[i].Latitude)
+		if (parseFloat(myform.south.value) == 0  || parseFloat(myform.south.value) > parseFloat(points[i].Latitude))
+			myform.south.value = parseFloat(points[i].Latitude)
+		if (parseFloat(myform.east.value) == 0  || parseFloat(myform.east.value) < parseFloat(points[i].Longitude))
+			myform.east.value = parseFloat(points[i].Longitude)
+		if (parseFloat(myform.west.value) == 0  || parseFloat(myform.west.value) > parseFloat(points[i].Longitude))
+			myform.west.value = parseFloat(points[i].Longitude)
+	}
+	if (document.myform2.how[0].checked){//rubber band
+		document.myform.RubberBand.value = document.myform.RubberBand.value.slice(0,document.myform.RubberBand.value.length -1)
+		searcharea = Math.round((((myform.north.value - myform.south.value)*65)*((myform.east.value - myform.west.value)*65)))
+		if (searcharea < 1){
+			searcharea = Math.round((((myform.north.value - myform.south.value)*65)*((myform.east.value - myform.west.value)*65))*100)/100
+		}
+		SearchArea.innerHTML = "<img src='http://www.priv.njmls.xmlsweb.com/images/menu/ball_button_sm_gold.gif'> Indicates the center of the map."
+		SearchArea.innerHTML += "Your search covers approximately "+ searcharea +" square miles<br>"//+iMilesPerDegree +' '+ (myform.north.value - myform.south.value) + ' '+(myform.east.value - myform.west.value)
+	}
+}
+
+function FillCoords(){}
+
+	function DisplayControl(){
+        controls1.style.display = 'inline';
+		controls2.style.display='none';
+		map.ShowDashboard();
+	}
+	function HideControl(){
+        controls2.style.display = 'inline';
+		controls1.style.display='none';
+		map.HideDashboard();
+	}
+
+</script> 
+<script language="JavaScript" src="http://www.priv.njmls.xmlsweb.com/include/inc_FormCheck.js"></script>
+<script language="JavaScript" src="http://www.priv.njmls.xmlsweb.com/include/inc_jscriptXML.js"></script>
+<script language="JavaScript" src="http://www.priv.njmls.xmlsweb.com/include/inc_GraphicFunctions.js"></script>
+<script language="JavaScript" src="http://www.priv.njmls.xmlsweb.com/include/inc_search.js"></script>
+</head>
+<!-- this was backwards before-->
+<body onload="GetMap();AddPin();DisplayControl();"onbeforeprint="controls.style.display='none';" onafterprint="controls.style.display='inline'">
+	<div id="myMap" style="position:relative; width:770px; height:400px;"></div>
+	<table width="700"><tr><td align="center">Location Map for <b>2540611 6309  JACKSON $679,000</b></td></tr></table>
+		<div id="controls" name="controls" style="position:relative;display:inline;">
+		
+			<div id='controls1' class=np>
+			<form name="getloc1"><input type="text" name="what" size="30">  <input type="button" value="Find on Map" name="ll2p" onclick="javascript:findit(document.getloc1.what.value);"></input><input type="button" value="Show Schools" name="ll2p" onclick="javascript:showschools();"></input><input type="button" value="Reset Map" name="ll2p" onclick="self.location.href='/VirtualEarth/MapDisplay.asp?listing_id=2540611';"></input><input type="button" value="Hide Map Controls" name="hide" onclick="javascript:HideControl();"></input></form>
+			</div>
+			<div id='controls2' class=np>
+			<form name="getloc2"><input type="text" name="what" size="30">  <input type="button" value="Find on Map" name="ll2p" onclick="javascript:findit(document.getloc2.what.value);"></input><input type="button" value="Show Schools" name="ll2p" onclick="javascript:showschools();"></input><input type="button" value="Reset Map" name="ll2p" onclick="self.location.href='/VirtualEarth/MapDisplay.asp?listing_id=2540611';"></input><input type="button" value="Display Map Controls" name="display" onclick="javascript:DisplayControl();"></input></form>
+			</div>
+		<!--<br><form name="getloc"><input type="text" name="what" size="30">  <input type="button" value="Find on Map" name="ll2p" onclick="javascript:findit(document.getloc.what.value);"><input type="button" value="Show Schools" name="ll2p" onclick="javascript:showschools();"><input type="button" value="Reset Map" name="ll2p" onclick="self.location.href='/VirtualEarth/MapDisplay.asp?listing_id=2540611';"></form>-->
+		
+		<br>Enter address information below for driving directions to 6309  JACKSON.
+		<form name="myform">
+		Address:<input type="text" name="address" size="30"> City, State OR Zip Code:<input type="text" name="zipcode" size="30"><br>
+		<input type="radio" name="how" value="Shortest" checked> Shortest <input type="radio" name="how" value="Quickest"> Quickest
+		<input type="radio" name="units" value="Miles" checked> Miles <input type="radio" name="units" value="Kilometers"> Kilometers
+		<input type="button" value="Get Driving Directions" name="ll2p" onclick="map.SetMapStyle('r');DriveGetRoute();">
+		<input type="button" value="Print Map" name="printit" onclick="controls.style.display='none';window.print();controls.style.display='inline'">
+		<input type="button" value="Close Map" name="closeit" onclick="window.close();">
+		</form>
+		</div>
+		<span id="Directions"> </span>
+
+
+</body>
+</html>

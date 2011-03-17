@@ -1,0 +1,44 @@
+{% extends "products/base.html" %}
+
+{% load i18n %}
+{% load extra_tagging_tags %}
+{% load threadedcommentstags %}
+{% load gravatar %}
+{% load comments_tag %}
+
+{% block head_title %}{{ price.title }}{% endblock %}
+
+{% block body %}
+    <p><a href="{% url product_prices price.product.slug %}">&larr; {% trans "Back to Price List for Product " %} {{ price.product }}</a></p>
+    
+    <ul class="responses">
+        <li class="odd thread-0 clearfix">
+            <div class="meta">
+                <div class="avatar">{% gravatar price.creator 40 %}</div>
+                <div class="details"><a href="{% url profiles.views.profile price.creator.username %}">{{ price.creator }}</a></div>
+                {{ price.created|date }}
+            </div>
+            <div class="bulk">
+                <h1>{{ price.title }}</h1>
+                <div class="body">{{ price.description|urlize|linebreaks }}</div>
+                <p>{% show_tags_for price %}</p>
+                {% ifequal user price.creator %}
+                <form method="POST" action="{% url tc_comment_delete price.id %}">
+                    <input type="submit" value="{% trans "Delete Price" %}" />
+                    <input type="hidden" name="next" value="{% url product_prices price.product.slug %}" />
+                </form>
+                {% if not edit %}<p><a href="{{ request.path }}edit/">Edit Price</a></p>{% endif %}
+                {% endifequal %}
+            </div>
+        </li>
+        {% if edit %}
+            </ul>
+            <h2>Edit {{ price.name }}</h2>
+            <form method="post" action="{{ request.path }}">
+                <textarea id="id_body" rows="10" cols="40" name="body">{{ price.body }}</textarea>
+                <input type="submit" name="edit" value="Edit!" />
+            </form>
+        {% else %}
+            {% comments price %}
+    {% endif %}
+{% endblock %}

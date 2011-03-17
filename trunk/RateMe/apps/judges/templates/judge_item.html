@@ -1,0 +1,10 @@
+{% load i18n %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load humanize %}
+
+    <div class="avatar">{% avatar judge.user 105 %}</div>
+    <div class="bio">
+     {% if judge.user.get_profile.name %}<div class="judge_name">{{ judge.user.get_profile.name }}{% if user_logged_in %} <input type="radio" name="id_myjudge" value="{{ judge.id }}"{% if myjudge %}{% ifequal judge.id myjudge.id %} checked="checked"{% endifequal %}{% endif %} />{% endif %}</div>{% endif %}
+     {% if judge.bio %}<div class="judge_bio">{{ judge.bio }}</div>{% endif %}
+    </div>
