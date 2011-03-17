@@ -1,0 +1,25 @@
+product	*-*	price
+
+deal	*/*	price
+	1-1	company
+- coupon
+- rebate
+- cashback
+- discount
+- refurbished
+- store credit
+- black friday
+
+
+*HP Pavilion Core 2 Duo 2.2GHz 17" Laptop
+*HP
+*$600/$650
+*Staples
+*Rebate - $50 Purchase dates:	10-18-2009 through 01-16-2010
+$50 (U.S) mail-in/easy rebate when you purchase a qualifying HP Pavilion notebook PC model ending with the suffix "US".
+
+*-
+*-
+*-
+*eForCity.com
+*Coupon - 20% off on Camera Accessories DVBCA20F
