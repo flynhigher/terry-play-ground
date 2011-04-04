@@ -18,7 +18,7 @@ def show_review_item(image, review, user, score_range, show_username):
     # or there's review and the reviewer is current user and can change already reviewed item
     enabled = user.is_authenticated() \
             and ( (review.user and review.user == user and settings.REVIEWS_CAN_CHANGE_VOTE)\
-               or (not review.user and image.member.get_profile().myjudge.user == user))
+               or (not review.user and image.member.get_profile().myjudge and image.member.get_profile().myjudge.user == user))
     return {"image": image, "review": review, "user": user, "score_range": score_range,
             "disabled": not enabled, "enabled": enabled, "show_username": show_username,
             "media_url": settings.MEDIA_URL,}
