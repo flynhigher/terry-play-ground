@@ -178,6 +178,13 @@ class WootScraper(Scraper):
                     site_name='woot.com',
                     url='http://www.woot.com')
 
+#    def get_product(self):
+#        from datetime import datetime
+#        key_value = super(WootScraper, self).get_product()
+#        key_value['product_id'] = 'woot-' + datetime.now().strftime('%Y-%m-%d')
+#        key_value['part_number'] = key_value['product_id']
+#        return key_value
+
 class NeweggScraper(Scraper):
     def __init__(self, product_url, retriever_creator=None):
         if retriever_creator:

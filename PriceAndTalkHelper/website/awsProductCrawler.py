@@ -252,6 +252,10 @@ def get_or_create_product(itemId, creator, idType="ASIN", category=None, require
 	p = None
 	p_created = False
 	p_info = None
+	pr = None
+	pr_a = None
+	pr_created = None
+	pr_a_created = None
 	from django.db.models import Q
 	try:
 		if idType != 'ASIN':
@@ -291,10 +295,6 @@ def get_or_create_product(itemId, creator, idType="ASIN", category=None, require
 				p.save()
 			p_created = True
 			write_trace( p.name.encode('ascii', 'ignore') + ' created')
-		pr = None
-		pr_a = None
-		pr_created = None
-		pr_a_created = None
 		if p_info.OfferListingId:
 			if p_info.a_OfferListingId:
 				a_p_info = ProductInfo()

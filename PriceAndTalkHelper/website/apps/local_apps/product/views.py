@@ -227,6 +227,7 @@ def handle_search_query(request, query):
     from scraper import scraper
     s = scraper.get_scraper(query)
     if not s:
+        raise 'Can''t get the scraper...'
         return None
     pd = s.get_product()
 
@@ -239,6 +240,9 @@ def handle_search_query(request, query):
         if request.user.is_authenticated():
             request.user.message_set.create(message="Item has just been " + ("created" if created else "updated"))
         return HttpResponseRedirect(reverse('product_detail', args=[p.slug]))
+    else:
+        raise 'Can''t get the product...'
+        return None
 
 def search(request):
     from awsProductCrawler import search_products
