@@ -22,8 +22,10 @@
             <img src="{{ product.medium_image_url }}" align="right" />
             <b>{% trans "UPC" %}</b>: <tt>{{ product.upc }}</tt><br />
             <b>{% trans "Model" %}/{% trans "Part Number" %}</b>: {{ product.model }}/{{ product.part_number }}<br />
-            {% if product.manufacturer.slug %}
-            <b>{% trans "Manufacturer" %}</b>: <a href="{% url product.views.company product.manufacturer.slug %}">{{ product.manufacturer }}</a><br />
+            {% if product.manufacturer %}
+            {% with product.manufacturer.slug as product_manufacturer_slug %}
+            <b>{% trans "Manufacturer" %}</b>: <a href="{% url product.views.company product_manufacturer_slug %}">{{ product.manufacturer }}</a><br />
+            {% endwith%}
             {% endif %}
             <b>{% trans "Creator" %}</b>: <a href="{% url basic_profiles.views.profile product.creator.username %}">{{ product.creator }}</a><br />
             <b>{% trans "Created" %}</b>: {{ product.created|date }}

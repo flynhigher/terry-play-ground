@@ -83,7 +83,7 @@ class Product(models.Model):
     part_number = models.CharField(_('mfg_part_no'), max_length=100, blank=True, null=True)
     model = models.CharField(_('model'), max_length=100, blank=True, null=True)
     msrp = models.DecimalField(_('msrp'), default=0, decimal_places=2, max_digits=20)
-    manufacturer = models.ForeignKey(Company, related_name="manufactured_products", verbose_name=_('manufacturer'))
+    manufacturer = models.ForeignKey(Company, related_name="manufactured_products", verbose_name=_('manufacturer'), blank=True, null=True)
     creator = models.ForeignKey(User, related_name="created_products", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     updater = models.ForeignKey(User, related_name="updated_products", verbose_name=_('updater'), blank=True, null=True)
@@ -178,66 +178,75 @@ def get_queryset(initial_queryset, query, search_fields):
 def get_or_create_product2(dic, user):
     p = None
     p_created = False
+    pr = None
+    pr_created = False
+    manufacturer_i = None
+    created = False
+    not_exist = False
     try:
         if 'manufacturer' in dic.keys():
             manufacturer_i, created = Company.objects.get_or_create(name=dic['manufacturer'][:199], defaults={'slug':slugify(dic['manufacturer'][:199]), 'creator':user})
-
-        try:
-            p = Product.objects.get(other_id=dic['product_id'])
-            p = Product(id=p.id, created=p.created, creator=p.creator, name=dic['name'], \
-                manufacturer=manufacturer_i, description=dic['description'], updater=user, updated=datetime.now(), \
-                swatch_image_url=dic['image'], \
-                small_image_url=dic['image'], medium_image_url=dic['image'], large_image_url=dic['image'], \
-                amazon_review_rating=float(dic['review']), amazon_total_reviews=int(dic['review2']), part_number=dic['part_number'])
-            slugtool.unique_slugify(p, p.name[:349])
-            p.save()
-        except Product.DoesNotExist:
-            try:
-                rank = int(dic['sales_rank']) if 'sales_rank' in dic.keys() and dic['sales_rank'] else 0
-            except:
-                rank = 0
-            try:
-                review = float(dic['review']) if 'review' in dic.keys() and dic['review'] else None
-            except:
-                review = None
-            try:
-                review2 = int(dic['review2']) if 'review2' in dic.keys() and dic['review2'] else None
-            except:
-                review2 = None
-            upc = dic['upc'] if 'upc' in dic.keys() else None
-            p = Product(name=dic['name'], upc=upc, model=dic['part_number'], \
-                manufacturer=manufacturer_i, description=dic['description'], creator=user, amazon_sales_rank=rank, \
-                swatch_image_url=dic['image'], small_image_url=dic['image'], medium_image_url=dic['image'], large_image_url=dic['image'], \
-                amazon_review_rating=review, amazon_total_reviews=review2, part_number=dic['part_number'], other_id=dic['product_id'])
-            slugtool.unique_slugify(p, dic['name'][:349])
-            p.save()
-            #if category:
-            #	p.categories.add(category)
-            #	p.save()
-            p_created = True
-            write_trace( p.name.encode('ascii', 'ignore') + ' created')
-#amazon        pr_a, pr_a_created = create_retailer_price(p, dic, user)
-        pr, pr_created = create_retailer_price(p, dic, user)
     except:
 #		raise
-        key_value = ''
-        for key in dic.keys():
-            key_value += key + ':' + dic[key] + ','
-        write_error("Exception while getting a product, %s\n\n%s" % (format_exc().encode('ascii', 'ignore'), key_value))
+        ex = format_exc().encode('ascii', 'ignore')
+        #key_value = ''
+        #for key in dic.keys():
+        #    key_value += key + ' ' + dic[key].encode('ascii', 'ignore') + ','
+        #write_error("Exception while getting a product, %s\n\n%s" % (ex, key_value))
+        write_error("Exception while getting a product, %s" % (ex))
+    try:
+        rank = int(dic['sales_rank']) if 'sales_rank' in dic.keys() and dic['sales_rank'] else 0
+    except:
+        rank = 0
+    try:
+        review = float(dic['review']) if 'review' in dic.keys() and dic['review'] else None
+    except:
+        review = None
+    try:
+        review2 = int(dic['review2']) if 'review2' in dic.keys() and dic['review2'] else None
+    except:
+        review2 = None
+    upc = dic['upc'] if 'upc' in dic.keys() else None
+    try:
+        p = Product.objects.get(other_id=dic['product_id'])
+        p = Product(id=p.id, created=p.created, creator=p.creator, name=dic['name'], \
+            manufacturer=manufacturer_i, description=dic['description'], updater=user, updated=datetime.now(), \
+            swatch_image_url=dic['image'], \
+            small_image_url=dic['image'], medium_image_url=dic['image'], large_image_url=dic['image'], \
+            amazon_review_rating=review, amazon_total_reviews=review2, part_number=dic['part_number'])
+        slugtool.unique_slugify(p, p.name[:349])
+        p.save()
+    except Product.DoesNotExist:
+        not_exist = True
+    if not_exist:
+        p = Product(name=dic['name'], upc=upc, model=dic['part_number'], \
+            manufacturer=manufacturer_i, description=dic['description'], creator=user, amazon_sales_rank=rank, \
+            swatch_image_url=dic['image'], small_image_url=dic['image'], medium_image_url=dic['image'], large_image_url=dic['image'], \
+            amazon_review_rating=review, amazon_total_reviews=review2, part_number=dic['part_number'], other_id=dic['product_id'])
+        slugtool.unique_slugify(p, dic['name'][:349])
+        p.save()
+        #if category:
+        #	p.categories.add(category)
+        #	p.save()
+        p_created = True
+        write_trace( p.name.encode('ascii', 'ignore') + ' created')
+#amazon        pr_a, pr_a_created = create_retailer_price(p, dic, user)
+    pr, pr_created = create_retailer_price(p, dic, user)
     return (p, p_created, pr, pr_created, None, None)
 
 def create_retailer_price(product, dic, creator):
     m, created = Company.objects.get_or_create(name=dic['site'], defaults={'slug':slugify(dic['site']), 'creator':creator})
     price = dic['price2'] if 'price2' in dic.keys() else dic['price']
-    shipping = 0 if dic['shipping'].lower().find('free') >= 0 else float(dic['shipping'])
-    general_url = dic['product_url_format'] % dic
+    shipping = '0' if dic['shipping'].lower().find('free') >= 0 else dic['shipping']
+    general_url = dic['product_url_format'] % dic if 'product_url_format' in dic else dic['home']
     #url = general_url + '?m='  + p_info.merchantId
     url = general_url
     price_i = None
+    created = False
     try:
         price_i, created = Price.objects.get_or_create(product=product, price=price, shipping=shipping, retailer=m,
             defaults={'list_price':None, 'source_url':general_url, 'cleaned_url':url, 'creator':creator, 'product_code':dic['product_id']})
-    except MultipleObjectsReturned:
+    except Price.MultipleObjectsReturned:
         pass
     if created:
         write_trace(product.name.encode('ascii', 'ignore') + ' $' + price + ' created')
