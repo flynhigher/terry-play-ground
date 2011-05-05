@@ -1,4 +1,5 @@
-﻿.wrapper { margin: 0 auto; width: 1015px; }
+﻿body { margin: 0; }
+.wrapper { margin: 0 auto; width: 1015px; }
 #top_bar_spacer { height: 26px; }
 #left_nav_spacer { height: 40px; }
 #container .column { float: left; }
@@ -11,6 +12,7 @@
 * html #left { left: 150px; }
 * html #left_home { left: 89px; }
 .textbox { position: absolute; }
+#home_phrase { left: 530px; top: 200px; font: bold 24px Arial; background-color:Aqua; }
 #remote_title { left: 345px; top: 200px; font: bold 16px Arial; }
 #remote_points { left: 192px; top: 270px; font: 12px Arial; }
 #remote_points ul { list-style-type:none; }
