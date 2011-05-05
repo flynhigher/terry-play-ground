@@ -1,0 +1,67 @@
+﻿.wrapper { margin: 0 auto; width: 1015px; }
+#top_bar_spacer { height: 26px; }
+#left_nav_spacer { height: 40px; }
+#container .column { float: left; }
+#center { width: 805px; }
+#left { width: 155px; }
+#center_home { width: 846px; }
+#left_home { width: 89px; }
+#right { width: 150px; }
+.clear { clear: both; }
+* html #left { left: 150px; }
+* html #left_home { left: 89px; }
+.textbox { position: absolute; }
+#remote_title { left: 345px; top: 200px; font: bold 16px Arial; }
+#remote_points { left: 192px; top: 270px; font: 12px Arial; }
+#remote_points ul { list-style-type:none; }
+#remote_available { left: 447px; top: 582px; font: 11px Arial; }
+#remote_small_points { left: 620px; top: 510px; font: 12px Arial; }
+#mouse_title { left: 345px; top: 200px; font: bold 16px Arial; }
+#mouse_points { left: 570px; top: 420px; font: 12px Arial; }
+#mouse_points ul { list-style-type:none; }
+#mouse_available { left: 260px; top: 545px; font: 11px Arial; }
+#mouse_small_points { left: 360px; top: 532px; font: 12px Arial; }
+#smartphone_title { left: 345px; top: 200px; font: bold 16px Arial; }
+#smartphone_points { left: 380px; top: 230px; font: 12px Arial; }
+#smartphone_points ul { list-style-type:none; }
+#smartphone_available { left: 337px; top: 580px; font: 11px Arial; }
+#smartphone_small_points { left: 640px; top: 580px; font: 12px Arial; }
+#about { left: 220px; top: 200px; font: 13px/22px Arial; }
+#about_last { left: 260px; top: 480px; font: 13px/22px Arial; }
+#contact { left: 212px; top: 180px; font: 13px/22px Arial; }
+#contact_comment { left: 650px; top: 430px; font: 13px/22px Arial; }
+label { 
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 80px; 
+	padding: 0; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: right; 
+}
+
+.value
+{
+    display: inline-block;
+    width: auto;
+	margin:5px 0 0 10px; /* set margin on left of form elements rather than right of
+                              label aligns textarea better in IE */
+}
+
+form input, form textarea {
+	/* display: inline; inline display must not be set or will hide submit buttons in IE 5x mac */
+	width:auto;      /* set width of form elements to auto-size, otherwise watch for wrap on resize */
+	margin:5px 0 0 10px; /* set margin on left of form elements rather than right of
+                              label aligns textarea better in IE */
+}
+
+form input#reset {
+	margin-left:0px; /* set margin-left back to zero on reset button (set above) */
+}
+
+textarea { overflow: auto; }
+form small {
+	display: block;
+	margin: 0 0 5px 87px; /* instructions/comments left margin set to align w/ right column inputs */
+	padding: 1px 3px;
+	font-size: 88%;
+}
