@@ -11,27 +11,28 @@
 .clear { clear: both; }
 * html #left { left: 150px; }
 * html #left_home { left: 89px; }
+.relative { position: relative; }
 .textbox { position: absolute; }
-#home_phrase { left: 530px; top: 200px; font: bold 24px Arial; background-color:Aqua; }
-#remote_title { left: 345px; top: 200px; font: bold 16px Arial; }
-#remote_points { left: 192px; top: 270px; font: 12px Arial; }
+#home_phrase { left: 390px; top: 40px; font: bold 24px Arial; background-color:Aqua; padding:8px; }
+#remote_title { left: 145px; top: 55px; font: bold 16px Arial; }
+#remote_points { left: -6px; top: 140px; font: 12px Arial; }
 #remote_points ul { list-style-type:none; }
-#remote_available { left: 447px; top: 582px; font: 11px Arial; }
-#remote_small_points { left: 620px; top: 510px; font: 12px Arial; }
-#mouse_title { left: 345px; top: 200px; font: bold 16px Arial; }
-#mouse_points { left: 570px; top: 420px; font: 12px Arial; }
+#remote_available { left: 247px; top: 435px; font: 11px Arial; }
+#remote_small_points { left: 420px; top: 360px; font: 12px Arial; }
+#mouse_title { left: 145px; top: 55px; font: bold 16px Arial; }
+#mouse_points { left: 350px; top: 280px; font: 12px Arial; }
 #mouse_points ul { list-style-type:none; }
-#mouse_available { left: 260px; top: 545px; font: 11px Arial; }
-#mouse_small_points { left: 360px; top: 532px; font: 12px Arial; }
-#smartphone_title { left: 345px; top: 200px; font: bold 16px Arial; }
-#smartphone_points { left: 380px; top: 230px; font: 12px Arial; }
+#mouse_available { left: 70px; top: 403px; font: 11px Arial; }
+#mouse_small_points { left: 140px; top: 390px; font: 12px Arial; }
+#smartphone_title { left: 145px; top: 55px; font: bold 16px Arial; }
+#smartphone_points { left: 180px; top: 85px; font: 12px Arial; }
 #smartphone_points ul { list-style-type:none; }
-#smartphone_available { left: 337px; top: 580px; font: 11px Arial; }
-#smartphone_small_points { left: 640px; top: 580px; font: 12px Arial; }
-#about { left: 220px; top: 200px; font: 13px/22px Arial; }
-#about_last { left: 260px; top: 480px; font: 13px/22px Arial; }
-#contact { left: 212px; top: 180px; font: 13px/22px Arial; }
-#contact_comment { left: 650px; top: 430px; font: 13px/22px Arial; }
+#smartphone_available { left: 133px; top: 430px; font: 11px Arial; }
+#smartphone_small_points { left: 430px; top: 435px; font: 12px Arial; }
+#about { left: 70px; top: 50px; font: 13px/22px Arial; }
+#about_last { left: 100px; top: 320px; font: 13px/22px Arial; }
+#contact { left: 50px; top: 30px; font: 13px/22px Arial; width:410px; }
+#contact_comment { left: 500px; top: 280px; font: 13px/22px Arial; }
 label { 
 	display: block;  /* block float the labels to left column, set a width */
 	float: left; 
