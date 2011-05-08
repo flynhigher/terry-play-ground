@@ -1,0 +1,4 @@
+<img id="human" class="textbox" src="<!--#echo var="image_path" -->/human.gif" width="144" height="293" alt="Human Figure" />
+<!--#if expr="${page_id}='home'" -->
+<img id="product" class="textbox" src="<!--#echo var="image_path" -->/remote_mouse_pad.jpg" width="314" height="274" alt="Small Product Images" />
+<!--#endif -->
