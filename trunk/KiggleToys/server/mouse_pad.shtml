@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--#set var="page_id" value="products" -->
+<!--#set var="sub_page_id" value="mousepad" -->
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<!--#include virtual="/media/header.shtml" -->
+</head>
+<body>
+<div class="wrapper">
+<!--#include virtual="/media/topbar.shtml" -->
+<div id="container">
+<div id="left" class="column">
+<!--#include virtual="/media/leftnav.shtml" -->
+</div>
+<div id="center" class="column relative">
+<img id="home" alt="Home" src="<!--#echo var="image_path" -->/my_1st_mouse_pad.jpg" width="805" height="509" />
+<div id="mouse_title" class="textbox">My 1st Mouse Pad</div>
+<div id="mouse_points" class="textbox">
+<ul>
+<li>- Ages +12 month<br /><br /></li>
+<li>- Cool and fun Light & Sound effect<br /><br /></li>
+<li>- Teach colors, shapes, direction, eye-hand<br />&nbsp;&nbsp;coordination, and dexterity<br /><br /></li>
+<li>- Comfy and paint free edges for baby teething habit<br /><br /></li>
+<li>- Portable and nice size for little hands<br /><br /></li>
+<li>- Best toy relating with your computer<br /><br /></li>
+</ul></div>
+<div id="mouse_available" class="textbox">available soon</div>
+<div id="mouse_small_points" class="textbox">
+<ul>
+<li>Mouse attached on mouse pad</li>
+<li>Good as traveling toy</li>
+<li>Silicone teether edges give safety<br />for younger kids</li>
+</ul></div>
+</div>
+<div id="right" class="column">&nbsp;</div>
+<br class="clear" />
+<!--#include virtual="/media/decorative.shtml" -->
+</div>
+<!--#include virtual="/media/footer.shtml" -->
+</div>
+<script src="<!--#echo var="script_path" -->/kiggle_toys.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!--#if expr="${page_id}='products'" -->
+<div id="left_nav_spacer"></div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td><img alt="Products Left Nav Top" src="<!--#echo var="image_path" -->/left_top.jpg" width="155" height="48" /></td></tr>
+<tr>
+<td><!--#if expr="${sub_page_id}!='remote'" --><a href="/teether_remote.shtml"><!--#endif -->
+<img id="tv_teether_remote" alt="TV Teether Remote" src="<!--#echo var="image_path" -->/left_tv_teether_remote<!--#if expr="${sub_page_id}='remote'" -->_on<!--#endif -->.jpg" width="155" height="16" />
+<!--#if expr="${sub_page_id}!='remote'" --></a><!--#endif --></td>
+</tr>
+<tr>
+<td><!--#if expr="${sub_page_id}!='mousepad'" --><a href="/mouse_pad.shtml"><!--#endif -->
+<img id="my_1st_mouse_pad" alt="My 1st Mouse Pad" src="<!--#echo var="image_path" -->/left_my_1st_mouse_pad<!--#if expr="${sub_page_id}='mousepad'" -->_on<!--#endif -->.jpg" width="155" height="16" />
+<!--#if expr="${sub_page_id}!='mousepad'" --></a><!--#endif --></td>
+</tr>
+<tr>
+<td><!--#if expr="${sub_page_id}!='smartphone'" --><a href="/smartphone.shtml"><!--#endif -->
+<img id="my_1st_smart_phone" alt="My 1st Smart Phone" src="<!--#echo var="image_path" -->/left_my_1st_smart_phone<!--#if expr="${sub_page_id}='smartphone'" -->_on<!--#endif -->.jpg" width="155" height="16" />
+<!--#if expr="${sub_page_id}!='smartphone'" --></a><!--#endif --></td>
+</tr>
+</table>
+<!--#else -->
+&nbsp;
+<!--#endif -->
