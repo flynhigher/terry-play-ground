@@ -1,4 +1,5 @@
 ﻿body { margin: 0; }
+img { border:0; }
 .wrapper { margin: 0 auto; width: 1015px; }
 #top_bar_spacer { height: 26px; }
 #left_nav_spacer { height: 40px; }
@@ -30,13 +31,14 @@
 #smartphone_points ul { list-style-type:none; }
 #smartphone_available { left: 133px; top: 430px; font: 11px Arial; }
 #smartphone_small_points { left: 430px; top: 435px; font: 12px Arial; }
-#about { left: 60px; top: 50px; font: 13px/22px Arial; }
+#about { left: 70px; top: 50px; font: 13px/22px Arial; }
 #about_last { left: 100px; top: 330px; font: 13px/22px Arial; }
 #contact { left: 50px; top: 30px; font: 13px/22px Arial; width:410px; }
 #contact_comment { left: 500px; top: 280px; font: 13px/22px Arial; }
-#footer_phrase { left: 200px; top: -10px; font: 16px Times; }
-#copy { right: 0px; top: 60px; font: 12px Arial; }
+#footer_phrase { left: 200px; top: -15px; font: 16px Times; }
+#copy { right: 140px; top: -10px; font: 10px Arial Narrow; }
 #human { left:20px; top:290px; }
+#human_right { right:0px; top:290px; }
 #product { left:680px; top:300px; }
 .bigger { font-size:150%; }
 .bold { font-weight:bold; }
@@ -68,6 +70,9 @@ form input, form textarea {
 
 form input#reset {
 	margin-left:0px; /* set margin-left back to zero on reset button (set above) */
+}
+form br {
+	clear:left; /* setting clear on inputs didn't work consistently, so brs added for degrade */
 }
 
 textarea { overflow: auto; }
