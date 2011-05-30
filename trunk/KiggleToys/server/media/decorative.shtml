@@ -1,4 +1,5 @@
 <img id="human<!--#if expr="${page_id}='products'" -->_right<!--#endif -->" class="textbox" src="<!--#echo var="image_path" -->/human.png" width="144" height="293" alt="Human Figure" />
 <!--#if expr="${page_id}='home'" -->
-<img id="product" class="textbox" src="<!--#echo var="image_path" -->/remote_mouse_pad.gif" width="322" height="278" alt="Small Product Images" />
+<img id="product" class="textbox" src="<!--#echo var="image_path" -->/remote_mouse_pad.gif" width="322" height="278" alt="TV Teether Remote Toy & My 1st Computer Mouse Pad Toy" usemap="imagemap" />
+<map id="imagemap" name="imagemap"><area shape="rect" alt="TV Teether Toy Remote" title="" coords="8,39,148,267" href="/teether_remote.shtml" target="" /><area shape="rect" alt="My 1st Computer Mouse Pad" title="" coords="152,38,308,267" href="/mouse_pad.shtml" target="" /></map>
 <!--#endif -->

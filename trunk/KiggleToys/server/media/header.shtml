@@ -6,12 +6,22 @@
 <!--#if expr="${page_id}='products'" -->
 <link rel="stylesheet" type="text/css" href="<!--#echo var="style_path" -->/kiggle_toys.css" />
 <!--#endif -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-23347639-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 <title>Kiggle Toys
 <!--#if expr="${page_id}='about'" --> :: About
 <!--#elif expr="${page_id}='contact'" --> :: Contact Us
 <!--#elif expr="${page_id}='products'" --> :: Products :: 
-<!--#if expr="${sub_page_id}='remote'" -->TV Teether Remote
-<!--#elif expr="${sub_page_id}='mousepad'" -->My 1st Mouse Pad
-<!--#elif expr="${sub_page_id}='smartphone'" -->My 1st Smartphone
+<!--#if expr="${sub_page_id}='remote'" -->TV Teether Remote Toy
+<!--#elif expr="${sub_page_id}='mousepad'" -->My 1st Computer Mouse Pad Toy
+<!--#elif expr="${sub_page_id}='smartphone'" -->My 1st Smartphone Toy
 <!--#endif -->
 <!--#endif --></title>

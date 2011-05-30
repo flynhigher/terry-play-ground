@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>http://kiggletoys.com/</loc>
+    <image:image>
+       <image:loc>http://kiggletoys.com/media/images/logo.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://kiggletoys.com/about.shtml</loc>
+  </url>
+<url>
+  <loc>http://kiggletoys.com/teether_remote.shtml</loc>
+    <image:image>
+        <image:loc>http://kiggletoys.com/media/images/tv_teether_remote.jpg</image:loc>
+    </image:image>
+</url>
+    <url>
+      <loc>http://kiggletoys.com/mouse_pad.shtml</loc>
+        <image:image>
+            <image:loc>http://kiggletoys.com/media/images/my_1st_mouse_pad.jpg</image:loc>
+        </image:image>
+    </url>
+    <url>
+      <loc>http://kiggletoys.com/smartphone.shtml</loc>
+        <image:image>
+            <image:loc>http://kiggletoys.com/media/images/my_1st_smartphone.jpg</image:loc>
+        </image:image>
+    </url>
+    <url>
+      <loc>http://kiggletoys.com/contact.shtml</loc>
+    </url>
+</urlset>
