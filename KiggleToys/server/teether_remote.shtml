@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <!--#include virtual="/media/header.shtml" -->
-<meta name="keywords" content="Toy TV Remote,TV Remote Toy,Baby,Kids,Remote,Toy,TV,Control" />
+<meta name="keywords" content="Toy TV Remote,Toy Remote Control,TV Remote Toy,Baby,Kids,Remote,Toy,TV,Control" />
 </head>
 <body>
 <div class="wrapper">
@@ -14,7 +14,7 @@
 <!--#include virtual="/media/leftnav.shtml" -->
 </div>
 <div id="center" class="column relative">
-<img id="remote_img" alt="Toy TV Teether Remote Toy" src="<!--#echo var="image_path" -->/tv_teether_remote.jpg" width="805" height="509" />
+<img id="remote_img" alt="TV Teether Toy Remote Control" src="<!--#echo var="image_path" -->/tv_teether_toy_remote_control.jpg" width="805" height="509" />
 <div id="remote_title" class="textbox">TV Teether Remote</div>
 <div id="remote_points" class="textbox">
 <ul>
@@ -22,8 +22,8 @@
 <li>- Cool and fun Light & Sound effect<br /><br /></li>
 <li>- Teach colors, numbers, direction, animal sounds,<br />&nbsp;&nbsp;and etc.<br /><br /></li>
 <li>- Comfy and paint free ends for baby teething habit<br /><br /></li>
-<li>- Portable and nice size for little hands<br /><br /></li>
-<li>- Most similar design as parents' real remote<br /><br /></li>
+<li>- Portable and nice size toy remote control for<br />&nbsp;&nbsp;little hands<br /><br /></li>
+<li>- Most similar design as parents' real remote control<br /><br /></li>
 </ul></div>
 <div id="remote_available" class="textbox">available soon</div>
 <div id="remote_small_points" class="textbox">
