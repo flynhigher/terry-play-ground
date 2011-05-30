@@ -1,12 +1,12 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>&nbsp;</td>
-<td><a href="/"><img id="logo" alt="Kiggle Toys Logo" src="<!--#echo var="image_path" -->/logo.jpg" width="176" height="82" /></a></td>
+<td><a href="/"><img id="kiggle_logo" alt="Kiggle Toys Logo" src="<!--#echo var="image_path" -->/kiggle_logo.jpg" width="176" height="82" /></a></td>
 <td colspan="7">&nbsp;</td>
 </tr>
 <tr>
 <td><img alt="Top Menu Bar" src="<!--#echo var="image_path" -->/topbar1.jpg" width="73" height="39" /></td>
-<td><a href="/"><img id="logo_phrase" alt="Kiggle Toys Phrase: Inspired by children Designed by their mom" src="<!--#echo var="image_path" -->/logo_phrase.jpg" width="176" height="39" /></a></td>
+<td><a href="/"><img id="kiggle_toys_phrase" alt="Kiggle Toys Phrase: Inspired by children Designed by their mom" src="<!--#echo var="image_path" -->/kiggle_toys_phrase.jpg" width="176" height="39" /></a></td>
 <td><img alt="Top Menu Bar" src="<!--#echo var="image_path" -->/topbar2.jpg" width="73" height="39" /></td>
 <td><!--#if expr="${page_id}!='about'" --><a href="/about.shtml"><!--#endif -->
 <img id="about_kiggle" alt="About Kiggle Toys" src="<!--#echo var="image_path" -->/about_kiggle<!--#if expr="${page_id}='about'" -->_on<!--#endif -->.jpg" width="112" height="39" />

@@ -14,15 +14,15 @@
                 t.attr("src", src);
             });
 }
-var a = $('<img />').attr('src', '/media/images/logo_phrase_on.jpg');
+var a = $('<img />').attr('src', '/media/images/kiggle_toys_phrase_on.jpg');
 var b = $('<img />').attr('src', '/media/images/about_kiggle_on.jpg');
 var c = $('<img />').attr('src', '/media/images/products_on.jpg');
 var d = $('<img />').attr('src', '/media/images/contact_us_on.jpg');
 var b = $('<img />').attr('src', '/media/images/tv_teether_remote.jpg');
 var c = $('<img />').attr('src', '/media/images/my_1st_mouse_pad.jpg');
 var d = $('<img />').attr('src', '/media/images/my_1st_smart_phone.jpg');
-set_mouse_over('logo', '/media/images/logo_phrase.jpg', '/media/images/logo_phrase_on.jpg', 'logo_phrase');
-set_mouse_over('logo_phrase');
+set_mouse_over('kiggle_logo', '/media/images/kiggle_toys_phrase.jpg', '/media/images/kiggle_toys_phrase_on.jpg', 'kiggle_toys_phrase');
+set_mouse_over('kiggle_toys_phrase');
 set_mouse_over('about_kiggle');
 set_mouse_over('products');
 set_mouse_over('contact_us');

@@ -15,7 +15,7 @@ img { border:0; }
 * html #left_home { left: 89px; }
 .relative { position: relative; }
 .textbox { position: absolute; }
-#home_phrase { left: 480px; top: 20px; font: bold 26px Times; text-align:right; background-color:#ABCBEB; padding: 10px 15px 10px 15px; border-radius: 15px; }
+#home_phrase { left: 480px; top: 20px; color:#333333; font: bold 26px Times; text-align:right; background-color:#ABCBEB; padding: 10px 15px 10px 15px; border-radius: 15px; }
 #remote_title { left: 145px; top: 55px; font: bold 16px Arial; }
 #remote_points { left: -6px; top: 140px; font: 12px Arial; }
 #remote_points ul { list-style-type:none; }
@@ -35,9 +35,10 @@ img { border:0; }
 #about_last { left: 100px; top: 330px; font: 13px/22px Arial; }
 #contact { left: 50px; top: 30px; font: 13px/22px Arial; width:410px; }
 #contact_comment { left: 500px; top: 280px; font: 13px/22px Arial; }
-#footer_phrase { left: 200px; top: -15px; font: 16px Times; }
-#copy { right: 140px; top: -10px; font: 10px Arial Narrow; }
-#human { left:20px; top:290px; }
+#footer_phrase { left: 200px; top: -10px; font: 16px Times; }
+#copy { right: 140px; top: -5px; font: 10px Arial Narrow; }
+#copy_home { right: 140px; top: 60px; font: 10px Arial Narrow; }
+#human { left:15px; top:290px; }
 #human_right { right:0px; top:290px; }
 #product { left:680px; top:300px; }
 .bigger { font-size:150%; }

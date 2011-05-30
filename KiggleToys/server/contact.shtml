@@ -17,11 +17,12 @@
 <legend>Kiggle Information</legend>
 <label for="kiggle_email">Email:</label><div class="value" id="kiggle_email">info@kiggletoys.com</div><br />
 <label for="kiggle_phone">Phone:</label><div class="value" id="kiggle_phone">U.S. 646-623-7057 / 201-679-8893</div><br />
-<label for="kiggle_hours">Hours:</label><div class="value" id="kiggle_hours">Mon-Fri, 9am to 10pm EST<br />Sat, 12pm to 6pm EST</div><br />
+<label for="kiggle_hours">Hours:</label><div class="value" id="kiggle_hours">Mon-Fri, 9am to 6pm EST<br />Sat, 12pm to 6pm EST</div><br />
 <label for="kiggle_address">Address:</label><div class="value" id="kiggle_address">46 64th st., West New York, NJ 07093</div><br />
 </fieldset>
 <p></p>
-<form action="#" method="post" name="f">
+<form action="/webformmailer.php" method="post" name="f">
+<input type="hidden" name="subject" value="Contact Us message" />
 <fieldset>
 <legend>Contact Message</legend>
 <label for="firstname" accesskey="i">First name: </label>
@@ -31,8 +32,8 @@
 <label for="email" accesskey="m">Email: </label>
 <input type="text" id="email" name="email" tabindex="3" title="email" /><br />
 <small>Your email address is safe with us, until we're acquired.</small>
-<label for="subject" accesskey="s">Subject: </label>
-<input type="text" id="subject" name="subject" tabindex="4" size="34" title="subject" /><br />
+<label for="contact_subject" accesskey="s">Subject: </label>
+<input type="text" id="contact_subject" name="contact_subject" tabindex="4" size="34" title="subject" /><br />
 <label for="message" accesskey="m">Message: </label>
 <textarea name="message" rows="3" cols="27" id="message" tabindex="5" title="message"></textarea><br />
 <label for="kludge"></label>
