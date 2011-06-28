@@ -3,7 +3,7 @@ import re
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, HttpResponseNotFound
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -262,11 +262,10 @@ def search(request):
                 response = handle_upc(request, upc)
                 if response:
                     return response
-            else:
-                q = get_queryset(Product.objects.all(), query, ProductAdmin.search_fields)
-                products = q.order_by("amazon_sales_rank", "-amazon_total_reviews", "-amazon_review_rating")
-                amazon_count, amazon_results = search_products(query, page)
-    return render_to_response("product/search.html", {"products": products,
+            q = get_queryset(Product.objects.all(), query, ProductAdmin.search_fields)
+            products = q.order_by("amazon_sales_rank", "-amazon_total_reviews", "-amazon_review_rating")
+            amazon_count, amazon_results = search_products(query, page)
+            return render_to_response("product/search.html", {"products": products,
                                                 "query" : query,
                                                 "page" : page,
                                                 "amazon_count" : amazon_count,
