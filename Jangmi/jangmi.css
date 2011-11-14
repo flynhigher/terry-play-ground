@@ -1,0 +1,21 @@
+td {
+	text-align: center;
+}
+td {
+	font-size: 9px;
+}
+td {
+	color: #999;
+}
+p { margin-top: 10px; margin-bottom: 10px;}
+.content {
+	font-family: Arial;
+    font-size: 8pt;
+	color: black;
+}
+
+.title {
+	font-family: "Times New Roman";
+	color: green;
+	font-size: 24px;
+}
