@@ -1,13 +1,13 @@
 td {
-	text-align: center;
-}
-td {
 	font-size: 9px;
-}
-td {
 	color: #999;
 }
 p { margin-top: 10px; margin-bottom: 10px;}
+
+.textbox {
+	position:relative;
+}
+
 .content {
 	font-family: Arial;
     font-size: 8pt;
@@ -18,4 +18,13 @@ p { margin-top: 10px; margin-bottom: 10px;}
 	font-family: "Times New Roman";
 	color: green;
 	font-size: 24px;
+}
+
+.copyright {
+	text-align: center;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	width: 466px;
+	height: 39px;
 }
