@@ -28,3 +28,16 @@ p { margin-top: 10px; margin-bottom: 10px;}
 	width: 466px;
 	height: 39px;
 }
+.gallery {
+    position: relative;
+}
+
+.gallery li {
+    display: inline;
+    list-style: none;
+    width: 240px;
+    min-height: 175px;
+    float: left;
+    margin: 0 10px 10px 0;
+    text-align: center;
+}
