@@ -33,11 +33,14 @@ p { margin-top: 10px; margin-bottom: 10px;}
 }
 
 .gallery li {
-    display: block;
     list-style: none;
-    width: 240px;
-    min-height: 175px;
-    float: left;
     margin: 0 10px 10px 0;
-    text-align: right;
+}
+
+.gallery p {
+	font-size: 15px;
+	color: black;
+	height: 175px;
+	vertical-align: top;
+	margin-top: 10px;
 }
