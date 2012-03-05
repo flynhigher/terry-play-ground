@@ -40,7 +40,7 @@ p { margin-top: 10px; margin-bottom: 10px;}
 .gallery img {
     float: left;
     resize: both;
-    height: 175px;
+    width: 210px;
     align: middle;
     padding-right: 20px;
 }
