@@ -1,0 +1,63 @@
+{% load cms_tags sekizai_tags menu_tags %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>씨뿌리는교회 | {% page_attribute "title" %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ STATIC_URL}}css/bootstrap.css"/>
+
+        <link rel="stylesheet" href="{{ STATIC_URL}}css/bootstrap-responsive.css"/>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <style>
+            .container {
+                padding-top: 50px;
+            }
+        </style>
+        {% render_block "css" %}
+    </head>
+    <body>
+      {% cms_toolbar %}
+
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12">
+                    <a class="brand" href="/"><img src="{{ STATIC_URL}}img/logo.gif" border="0" /></a>
+                    <!--div class="btn-group pull-right">
+                    </div-->
+                    <div class="nav-collapse pull-right">
+                        <ul class="nav">
+                            {% show_menu 0 0 0 0 %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {% block base_content%}{% endblock %}
+
+            <footer>
+                {% block footer %}
+                  {% placeholder 'footer' or %}
+                  <p><img src="{{ STATIC_URL}}img/addr.gif" border="0" width="915" height="40"></p>
+                  {% endplaceholder %}
+                {% endblock %}
+            </footer>
+        </div>
+
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
+        <script type="text/javascript">
+          $(function() {
+            $('.dropdown-toggle').dropdown();
+            $(".collapse").collapse()
+          });
+        </script>
+        {% render_block "js" %}
+    </body>
+</html>
