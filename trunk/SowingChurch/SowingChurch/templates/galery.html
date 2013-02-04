@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n cms_tags sekizai_tags cache menu_tags %}
+{% block "content" %}
+<div class="hero-unit">
+  <h1>{% placeholder "galery_title" or %}Galeria{% endplaceholder %}</h1>
+  <!--div id="slides">
+    <div class="slides_container">
+      <div class="slide">
+        <a href="http://www.flickr.com/photos/jliba/4665625073/" title="145.365 - Happy Bokeh Thursday! | Flickr - Photo Sharing!" target="_blank"><img src="{{ STATIC_URL }}img/slide-1.jpg" width="570" height="270" alt="Slide 1"></a>
+        <div class="caption" style="bottom:0">
+          <p>Happy Bokeh Thursday!</p>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="prev"><img src="{{ STATIC_URL }}img/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+    <a href="#" class="next"><img src="{{ STATIC_URL }}img/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+  </div-->
+</div>
+{% addtoblock "js" %}
+<script src="{{ STATIC_URL }}js/libs/slides.min.jquery.js"></script>
+<script>
+      $(function(){
+        $('#slides').slides({
+          preload: true,
+          preloadImage: '{{ STATIC_URL }}img/loading.gif',
+          play: 5000,
+          pause: 1500,
+          hoverPause: true,
+          animationStart: function(current){
+            $('.caption').animate({
+              bottom:-35
+            },100);
+          },
+          animationComplete: function(current){
+            $('.caption').animate({
+              bottom:0
+            },200);
+          },
+          slidesLoaded: function() {
+            $('.caption').animate({
+              bottom:0
+            },200);
+          }
+        });
+      });
+</script>
+{% endaddtoblock %}
+{% endblock %}
+{% comment %}-*- htmldjango -*- vim:set ft=htmldjango et sw=2 sts=2:{% endcomment %}

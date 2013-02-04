@@ -1,0 +1,39 @@
+{% extends "base__.html" %}
+{% load cms_tags %}
+
+{% block base_content %}
+    <div class="hero-unit">
+        {% placeholder "home-hero" or %}`
+        <h1>Top Section</h1>
+        <p>This is the top section of the homepage. Please add content to this area.</p>
+        {% endplaceholder %}
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6">
+          {% placeholder 'home-col-1'  or %}
+          <h2>Bottom Left Section</h2>
+           <p>This is the bottom left section of the homepage. Please add content to this area.</p>
+          {% endplaceholder %}
+        </div>
+        <div class="span6">
+            <div class="row-fluid">
+                <div class="span12">
+                    {% placeholder 'home-col-2-1' or %}
+                        <h2>Botom Right Top Section</h2>
+                        <p>Please add content to this area. </p>
+                    {% endplaceholder %}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    {% placeholder 'home-col-2-2' or %}
+                        <h2>Botom Right Bottom Section</h2>
+                        <p>Please add content to this area. </p>
+                    {% endplaceholder %}
+                </div>
+            </div>
+       </div>
+      </div>
+
+{% endblock %}
