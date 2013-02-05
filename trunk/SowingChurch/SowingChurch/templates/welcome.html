@@ -1,6 +1,25 @@
 {% extends "base__.html" %}
-{% load cms_tags %}
-
+{% load cms_tags sekizai_tags %}
+{% block css %}
+{% addtoblock "css" %}
+  <style>
+    .span2 {
+        margin-top: 42px;
+        margin-right: 70px;
+    }
+    .span10 {
+        margin-top: 38px;
+        width: 690px !important;
+    }
+    .welcome_hd_img {
+        margin-bottom: 54px;
+    }
+    .welcome_content {
+        margin-left: 20px;
+    }
+  </style>
+{% endaddtoblock %}
+{% endblock %}
 {% block base_content %}
     <div class="hero-unit">
         <img src="{{ STATIC_URL }}img/welcome_head.jpg" />
@@ -45,13 +64,17 @@
           {% placeholder 'right-title' or %}
               test
           {% endplaceholder %}
+        <span class="welcome_content">
+        <span class="welcome_hd_img">
             {% placeholder 'right-hero' or %}
                 test
             {% endplaceholder %}
+        </span>
           {% placeholder 'content' or %}
                 <h2>Botom Right Bottom Section</h2>
                 <p>Please add content to this area. </p>
           {% endplaceholder %}
+       </span>
        </div>
       </div>
 
