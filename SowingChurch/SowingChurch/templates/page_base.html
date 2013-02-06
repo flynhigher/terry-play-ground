@@ -1,5 +1,5 @@
 {% extends "base__.html" %}
-{% load cms_tags sekizai_tags %}
+{% load cms_tags menu_tags sekizai_tags %}
 {% block css %}
 {% addtoblock "css" %}
   <style>
@@ -55,10 +55,13 @@
                         <img src="{{ STATIC_URL }}img/in_sec_line.gif" border="0" vspace="6">    </td>
                 </tr>
                 </tbody></table>
-          {% placeholder 'left-nav'  or %}
-          <h2>Left Nav Section</h2>
-           <p>This is the left nav section of the homepage. Please add content to this area.</p>
-          {% endplaceholder %}
+        <div class="left-nav">
+          {% block left-nav %}
+              <ul>
+                  {% show_menu_below_id "welcome" %}
+              </ul>
+          {% endblock %}
+        </div>
         </div>
         <div class="right-body">
           {% placeholder 'right-title' or %}

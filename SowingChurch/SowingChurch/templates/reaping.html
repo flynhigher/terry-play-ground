@@ -1,8 +1,14 @@
 {% extends "page_base.html" %}
-{% load cms_tags %}
+{% load cms_tags menu_tags %}
 
 {% block page-head %}
 <img src="{{ STATIC_URL }}img/in_img_6.jpg" />
+{% endblock %}
+
+{% block left-nav %}
+    <ul>
+        {% show_menu_below_id "reaping" %}
+    </ul>
 {% endblock %}
 
 {% block left-title-image %}
