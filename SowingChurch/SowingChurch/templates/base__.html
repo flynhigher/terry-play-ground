@@ -14,8 +14,21 @@
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <style>
-            .container {
-                padding-top: 50px;
+            body {
+                font-size: 12px; color:#555555;
+            }
+            .outer {
+                width: 915px;
+                margin-right: auto;
+                margin-left: auto;
+                padding-top: 61px;
+            }
+            .top-spacer {
+                height: 13px;
+                background-color: #D8D8D8;
+            }
+            .header {
+                margin-bottom: 11px;
             }
         </style>
         {% render_block "css" %}
@@ -24,18 +37,16 @@
     </head>
     <body>
       {% cms_toolbar %}
-
-        <div class="container">
-            <div class="row-fluid">
-                <div class="span12">
-                    <a class="brand" href="/"><img src="{{ STATIC_URL}}img/logo.gif" border="0" /></a>
-                    <!--div class="btn-group pull-right">
-                    </div-->
-                    <div class="nav-collapse pull-right">
-                        <ul class="nav">
-                            {% show_menu 0 0 0 0 %}
-                        </ul>
-                    </div>
+        <div class="top-spacer"></div>
+        <div class="outer">
+            <div class="header">
+                <a class="brand" href="/"><img src="{{ STATIC_URL}}img/logo.gif" border="0" /></a>
+                <!--div class="btn-group pull-right">
+                </div-->
+                <div class="nav-collapse pull-right">
+                    <ul class="nav">
+                        {% show_menu 0 0 0 0 %}
+                    </ul>
                 </div>
             </div>
 
