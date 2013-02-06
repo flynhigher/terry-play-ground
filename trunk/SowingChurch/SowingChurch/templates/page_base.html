@@ -1,0 +1,81 @@
+{% extends "base__.html" %}
+{% load cms_tags sekizai_tags %}
+{% block css %}
+{% addtoblock "css" %}
+  <style>
+    .left-body {
+        margin-top: 42px;
+        margin-right: 80px;
+        width: 145px;
+        float: left;
+    }
+    .right-body {
+        margin-top: 46px;
+        width: 690px;
+        float: left;
+    }
+    .content_top_img {
+        margin-bottom: 54px;
+    }
+    .page_content {
+        margin-left: 20px;
+    }
+  </style>
+{% endaddtoblock %}
+{% endblock %}
+{% block base_content %}
+    <div class="page-head">
+        {% block page-head %}
+        <img src="{{ STATIC_URL }}img/welcome_head.jpg" />
+        {% endblock %}
+    </div>
+
+    <div class="row-fluid">
+        <div class="left-body">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                <tr>
+                    <td valign="bottom">
+                        {% block left-title-image %}
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td>
+                                    <img src="{{ STATIC_URL }}img/icon_1.gif" width="26" height="26" border="0"></td>
+                                <td>
+                                    <img src="{{ STATIC_URL }}img/spacer.gif" width="7" height="12" border="0"></td>
+                                <td>
+                                    <img src="{{ STATIC_URL }}img/welcome_text.gif" border="0"></td>
+                            </tr>
+                            </tbody></table>
+                        {% endblock %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{{ STATIC_URL }}img/in_sec_line.gif" border="0" vspace="6">    </td>
+                </tr>
+                </tbody></table>
+          {% placeholder 'left-nav'  or %}
+          <h2>Left Nav Section</h2>
+           <p>This is the left nav section of the homepage. Please add content to this area.</p>
+          {% endplaceholder %}
+        </div>
+        <div class="right-body">
+          {% placeholder 'right-title' or %}
+              test
+          {% endplaceholder %}
+        <div class="page_content">
+        <div class="content_top_img">
+            {% placeholder 'right-hero' or %}
+
+            {% endplaceholder %}
+        </div>
+          {% placeholder 'content' or %}
+                <h2>Botom Right Bottom Section</h2>
+                <p>Please add content to this area. </p>
+          {% endplaceholder %}
+       </div>
+       </div>
+    </div>
+
+{% endblock %}
