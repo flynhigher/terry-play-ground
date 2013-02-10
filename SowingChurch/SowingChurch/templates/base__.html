@@ -33,6 +33,26 @@
             footer {
                 margin-top: 66px;
             }
+            .topnav {
+                list-style: none;
+                margin: 0;
+            }
+            .topnav > li {
+                float: left;
+            }
+            .topnav .on {
+                position: absolute;
+                display: none;
+            }
+            .subnav {
+                display: none;
+            }
+            .subnav ul {
+                list-style: none;
+            }
+            .subnav ul > li {
+                float: left;
+            }
         </style>
         {% render_block "css" %}
         {% block css %}
@@ -46,10 +66,12 @@
                 <a class="brand" href="/"><img src="{{ STATIC_URL}}img/logo.gif" border="0" /></a>
                 <!--div class="btn-group pull-right">
                 </div-->
-                <div class="nav-collapse pull-right">
-                    <ul class="nav top-nav">
-                        {% show_menu 0 1 100 100 %}
+                <div class="pull-right">
+                        <div class="container" style="width:auto;">
+                    <ul class="topnav" role="navigation">
+                        {% show_menu 0 1 100 100 "menu/menu_custom.html" %}
                     </ul>
+                        </div>
                 </div>
             </div>
 
@@ -70,8 +92,61 @@
         <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
         <script type="text/javascript">
           $(function() {
-            $('.dropdown-toggle').dropdown();
-            $(".collapse").collapse()
+              $('.topnav li:not(.ancestor) a').hover(function() {
+                  var $img = $(this).find("img");
+                  var offImg = $img.attr("src");
+                  var onImg = offImg.replace("_off.gif", "_on.gif");
+                  //$(this).parent().css("background-image", "url(" + onImg + ")");
+                  $img.attr("src", onImg);
+                  $(this).siblings(".subnav").css("display", "inline-table");
+              },function(){
+                  $(this).siblings(".subnav").hide();
+                  var $img = $(this).find("img");
+                  var onImg = $img.attr("src");
+                  var offImg = onImg.replace("_on.gif", "_off.gif");
+                  //$img.fadeOut(function(){
+                  $img.attr("src", offImg);
+              });
+              /*
+              $('.topnav li:not(.ancestor) a').hover(function() {
+                  $(this).find("img:hidden").offset(function(index, currentOffset) {
+                      if(currentOffset.top == 0 || currentOffset.left == 0)
+                    return $(this).parent().find("img:visible").offset()
+                      else
+                      return currentOffset;
+                  });
+                  $(this).find("img").fadeToggle();
+              }, function() {
+                  $(this).find("img").fadeToggle();
+              });
+              */
+              /*
+               $(".topnav li a img.on").offset(function(index, currentOffset) {
+               return $(this).parent().find("img.off").offset()
+               });
+               */
+              /*
+               $('.topnav li a').hover(function() {
+               var $img = $(this).find("img");
+               var offImg = $img.attr("src");
+               //if(offImg.index)
+               var onImg = offImg.replace("_off.gif", "_on.gif");
+               $img.fadeOut(function(){
+               $img.attr("src", onImg);
+               $img.load(function() { $img.fadeIn(); });
+               });
+               },function(){
+               var $img = $(this).find("img");
+               var onImg = $img.attr("src");
+               var offImg = onImg.replace("_on.gif", "_off.gif");
+               $img.fadeOut(function(){
+               $img.attr("src", offImg);
+               $img.load(function() { $img.fadeIn(); });
+               });
+               });
+               */
+            //$('.dropdown-toggle').dropdown();
+            //$(".collapse").collapse()
           });
         </script>
         {% render_block "js" %}
