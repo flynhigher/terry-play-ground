@@ -1,11 +1,54 @@
-{% load menu_tags %}
+{% load menu_tags  %}
 {% for child in children %}
-<li class="{% if child.selected %}selected{% endif %}{% if child.ancestor %}ancestor{% endif %}{% if child.sibling %}sibling{% endif %}{% if child.descendant %}descendant{% endif %}">
-	<a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>
-    {% if menu_pool.get_nodes_by_attribute(nodes, "reverse_id", root_id) %}
-    <ul class="sub-menu">
-        {% show_menu_below_id child.url|cut:"/" 0 0 100 100 "menu/menu_nosub.html" %}
-    </ul>
-    {% endif %}
-</li>
+    <li class="{% if child.selected %}selected{% endif %}{% if child.ancestor %}ancestor{% endif %}{% if child.sibling %}sibling{% endif %}{% if child.descendant %}descendant{% endif %}">
+        <a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}"
+           id="menu{{ child.id }}">{% if child.ancestor %}
+            {% if child.get_absolute_url == "/welcome/" %}
+                <img src="{{ STATIC_URL }}img/m_1_on.gif" border="0" />
+            {% elif child.get_absolute_url == "/sermon/" %}
+                <img src="{{ STATIC_URL }}img/m_2_on.gif" border="0" />
+            {% elif child.get_absolute_url == "/vision-mission/" %}
+                <img src="{{ STATIC_URL }}img/m_3_on.gif" border="0" />
+            {% elif child.get_absolute_url == "/sowing/" %}
+                <img src="{{ STATIC_URL }}img/m_4_on.gif" border="0" />
+            {% elif child.get_absolute_url == "/growing/" %}
+                <img src="{{ STATIC_URL }}img/m_5_on.gif" border="0" />
+            {% elif child.get_absolute_url == "/reaping/" %}
+                <img src="{{ STATIC_URL }}img/m_6_on.gif" border="0" />
+            {% elif child.get_absolute_url == "/connection/" %}
+                <img src="{{ STATIC_URL }}img/m_7_on.gif" border="0" />
+            {% endif %}
+        {% else %}
+                {% if child.get_absolute_url == "/welcome/" %}
+                    <img src="{{ STATIC_URL }}img/m_1_off.gif" border="0" class="off" />
+                {% elif child.get_absolute_url == "/sermon/" %}
+                    <img src="{{ STATIC_URL }}img/m_2_off.gif" border="0" class="off" />
+                {% elif child.get_absolute_url == "/vision-mission/" %}
+                    <img src="{{ STATIC_URL }}img/m_3_off.gif" border="0" class="off" />
+                {% elif child.get_absolute_url == "/sowing/" %}
+                    <img src="{{ STATIC_URL }}img/m_4_off.gif" border="0" class="off" />
+                {% elif child.get_absolute_url == "/growing/" %}
+                    <img src="{{ STATIC_URL }}img/m_5_off.gif" border="0" class="off" />
+                {% elif child.get_absolute_url == "/reaping/" %}
+                    <img src="{{ STATIC_URL }}img/m_6_off.gif" border="0" class="off" />
+                {% elif child.get_absolute_url == "/connection/" %}
+                    <img src="{{ STATIC_URL }}img/m_7_off.gif" border="0" class="off" />
+                {% endif %}
+            {% endif %}</a>
+        {% if child.children %}
+            <div class="subnav navbar-inner" id="child{{ child.id }}" style="
+            position: absolute;
+            width: 200px;
+            ">
+            <div class="container" style="
+                 display: inline-table;
+            width: 200px;
+            ">
+            <ul class="">
+                {% show_menu from_level to_level extra_inactive extra_active "menu/menu.html" "" "" child %}
+            </ul>
+            </div>
+            </div>
+        {% endif %}
+    </li>
 {% endfor %}
