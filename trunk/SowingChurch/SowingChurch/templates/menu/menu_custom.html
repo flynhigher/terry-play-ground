@@ -36,18 +36,10 @@
                 {% endif %}
             {% endif %}</a>
         {% if child.children %}
-            <div class="subnav navbar-inner" id="child{{ child.id }}" style="
-            position: absolute;
-            width: 200px;
-            ">
-            <div class="container" style="
-                 display: inline-table;
-            width: 200px;
-            ">
+            <div class="subnav" id="child{{ child.id }}">
             <ul class="">
                 {% show_menu from_level to_level extra_inactive extra_active "menu/menu.html" "" "" child %}
             </ul>
-            </div>
             </div>
         {% endif %}
     </li>
