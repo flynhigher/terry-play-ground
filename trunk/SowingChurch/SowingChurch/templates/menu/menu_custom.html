@@ -36,7 +36,7 @@
                 {% endif %}
             {% endif %}</a>
         {% if child.children %}
-            <div class="subnav" id="child{{ child.id }}">
+            <div class="subnav {{ child.get_absolute_url|cut:'/' }}" id="child{{ child.id }}">
             <ul class="">
                 {% show_menu from_level to_level extra_inactive extra_active "menu/menu.html" "" "" child %}
             </ul>
