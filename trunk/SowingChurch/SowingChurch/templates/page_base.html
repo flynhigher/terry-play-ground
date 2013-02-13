@@ -22,7 +22,40 @@
     }
     .leading6 {
         line-height: 160%;
-    }  </style>
+    }
+    .left-nav-container {
+        margin-top: 54px;
+        font-weight: bold;
+    }
+    .left-nav {
+        list-style:none;
+        margin: 0;
+    }
+    .left-nav li {
+        line-height: 30px;
+    }
+    .left-nav > li {
+        line-height: 30px;
+        border-bottom: 1px;
+        border-bottom-style: solid;
+        padding-left: 3px;
+    }
+    .left-nav ul {
+        list-style-type:square;
+        margin-left: 20px;
+    }
+    .left-nav ul > li {
+        border-top: 1px;
+        border-top-color: lightgray;
+        border-top-style: solid;
+    }
+    .left-nav a {
+        color: #888888;
+    }
+    .left-nav a:hover, .left-nav .ancestor a, .left-nav .selected a {
+        color: black;
+    }
+  </style>
 {% endaddtoblock %}
 {% endblock %}
 {% block base_content %}
@@ -57,9 +90,9 @@
                         <img src="{{ STATIC_URL }}img/in_sec_line.gif" border="0" vspace="6">    </td>
                 </tr>
                 </tbody></table>
-        <div>
+        <div class="left-nav-container">
           {% block left-nav %}
-              <ul class="nav left-nav">
+              <ul class="left-nav" role="navigation">
                   {% page_attribute "slug" request.current_page.get_root as s %}
                   {% show_menu_below_id s 0 1 100 100 %}
               </ul>
