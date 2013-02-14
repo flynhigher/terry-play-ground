@@ -1,6 +1,20 @@
 {% extends "base__.html" %}
-{% load cms_tags %}
-
+{% load cms_tags sekizai_tags %}
+{% block css %}
+{% addtoblock "css" %}
+<style>
+    .theme-light {
+        padding: 10px 0px 10px 0px !important;
+    }
+    .home-links {
+        margin-top: 40px;
+    }
+    td {
+        line-height: 0px;
+    }
+</style>
+{% endaddtoblock %}
+{% endblock %}
 {% block base_content %}
     <div class="hero-unit">
         {% placeholder "home-hero" or %}`
@@ -10,13 +24,13 @@
     </div>
 
     <div class="row-fluid">
-        <div class="span6">
+        <div class="span7">
           {% placeholder 'home-col-1'  or %}
           <h2>Bottom Left Section</h2>
            <p>This is the bottom left section of the homepage. Please add content to this area.</p>
           {% endplaceholder %}
         </div>
-        <div class="span6">
+        <div class="span5">
             <div class="row-fluid">
                 <div class="span12">
                     {% placeholder 'home-col-2-1' or %}
