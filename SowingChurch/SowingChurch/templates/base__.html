@@ -19,7 +19,11 @@
                 line-height: 180%;
             }
             p strong {
-                letter-spacing: -1px;
+                letter-spacing: -1;
+                color: #333333;
+            }
+            .eng-strong {
+                letter-spacing: 0;
             }
             img {
                 max-width: none;
@@ -50,6 +54,9 @@
             .topnav .on {
                 position: absolute;
                 display: none;
+            }
+            .content_top_img {
+                margin-top: 14px;
             }
             .subnav.welcome {
                 background-color: #3D8D91;
@@ -104,6 +111,25 @@
                 padding-left: 6px;
                 padding-right: 0px;
                 /*line-height: 130%;*/
+            }
+            .time-location-table .td_apply {
+                vertical-align: middle;
+                padding: 5px 0px 2px 6px;
+            }
+            .location-contact-table {
+                line-height: 15px;
+            }
+            .minister-table .td_apply {
+                padding-top: 0;
+            }
+            .ministry-table p {
+                margin-bottom: 0;
+            }
+            .ministry-table .td_dept {
+                padding: 7px 0px 4px 0px;
+            }
+            .ministry-table .td_h {
+                padding: 15px 5px 20px 0px;
             }
         </style>
         {% render_block "css" %}
