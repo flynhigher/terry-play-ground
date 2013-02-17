@@ -21,6 +21,9 @@
             p strong {
                 letter-spacing: -1px;
             }
+            img {
+                max-width: none;
+            }
             .outer {
                 width: 915px;
                 margin-right: auto;
@@ -165,6 +168,17 @@
                       //$img.fadeOut(function(){
                       $img.attr("src", offImg);
                   }
+              });
+              $('.home-links a').hover(function() {
+                  var $img = $(this).find("img");
+                  var offImg = $img.attr("src");
+                  var onImg = offImg.replace("_off.gif", "_on.gif");
+                  $img.attr("src", onImg);
+              },function(){
+                  var $img = $(this).find("img");
+                  var onImg = $img.attr("src");
+                  var offImg = onImg.replace("_on.gif", "_off.gif");
+                  $img.attr("src", offImg);
               });
               /*
               $('.topnav li:not(.ancestor) a').hover(function() {
